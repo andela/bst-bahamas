@@ -1,0 +1,6 @@
+asset "angular", "~1.2.13"
+asset "angular-route", "1.2.13"
+asset "angular-resource", "1.2.13"
+asset "flowtype"
+asset "font-awesome", "4.0.3"
+asset "angular-bootstrap"
