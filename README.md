@@ -19,6 +19,11 @@ This project is a website for classified ads in the bahamas
 Add rails dependencies by updating the `Gemfile`
 Add front-end dependencies by updating the `Bowerfile`
 
+### Database migration
+```
+rake db:migrate
+```
+
 ### Run the Application
 ```
 rails s
