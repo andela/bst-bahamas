@@ -1,7 +1,5 @@
-<div class="home">
-	<div class="header">
-		<h4 class="title">Bahamas Classified Ads</h4>
-		<a href="#/sign_in">Sign In</a>
-		<a href="#/register">Register</a>
-	</div>
-</div>
+<ul ng-repeat="user in users">
+  <li>{{ user.email }}</li>
+</ul>
+
+<button ng-click="logout()">Log Out</button>

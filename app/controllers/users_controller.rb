@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    render json: @users, status: :ok
   end
 
   # GET /users/1
@@ -52,12 +53,26 @@ class UsersController < ApplicationController
 
   def log_in
     puts params
-    user = User.find_by_email(params[:user][:email])
-    if user != nil && user.valid_password?(params[:user][:password])
-      sign_in user, :bypass => true
-      render json: user, status: :ok
+    @user = User.find_by_email(params[:user][:email])
+    if @user != nil && @user.valid_password?(params[:user][:password])
+      sign_in @user, :bypass => true
+      render json: @user, status: :ok
     else
       render json: {}, status: 401
+    end
+  end
+
+  def register
+    puts params
+    @user = User.new()
+    @user.username
+
+    if @user.save
+      sign_in @user, :bypass => true
+      render json: @user, status: 201
+    else
+
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
