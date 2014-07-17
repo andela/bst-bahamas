@@ -1,4 +1,7 @@
-myApp.controller('IndexCtrl', ['$scope', function($scope) {
+myApp.controller('IndexCtrl', ['$scope','Categories', 'Suggestions', 'Locations', function($scope, Categories, Suggestions, Locations) {
+    $scope.categories = Categories;
+    $scope.suggestions = Suggestions;
+    $scope.locations = Locations;
 }]);
 
 myApp.controller('HomeCtrl', [
