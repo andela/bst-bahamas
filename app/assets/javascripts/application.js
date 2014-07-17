@@ -16,5 +16,8 @@
 //= require angular-resource/angular-resource.min
 //= require angular-route/angular-route.min
 //= require angular-devise/lib/devise-min
+//= require bootstrap/dist/js/bootstrap.min
+//= require angular-bootstrap/ui-bootstrap.min
+//= require angular-bootstrap/ui-bootstrap-tpls.min
 //= require main
 //= require_tree .
