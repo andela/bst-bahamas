@@ -7,8 +7,42 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="header fixed-top">
+    <div id="company">
+        <h2 id="name">BST Bahamas</h2>
+    </div>
+    <div class="nav-links">
+        <ul id="nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#login">Log In</a></li>
+            <li><a href="#sign_up">Sign Up</a></li>
+        </ul>
+    </div>
+</div>
+    
+<div class="searchbar" ng-controller="IndexCtrl">
+    <div id="container">
+        <div id="category">
+            <span id="categories">Categories</span>
+            <select ng-options = 'category.name for category in categories' ng-model="category.name">
+            </select>
+        </div>
+        <div id="search">
+            <span id="searchlabel">Search for: </span><input type="text" ng-model="item" typeahead="suggestion as suggestion for suggestion in suggestions|filter:$viewValue" placeholder="Enter search item"/>
+        </div>
+        <div id="search-sections">
+            <span id="sections">in: </span>
+            <input type="text" ng-model="sections.section" typeahead="category as category.name for category in categories" placeholder="Enter search category"/>
+        </div>
+        <div id="location">
+            <span id="locationlabel">Location: </span>
+            <input type='text' typeahead='location as location.name for location in locations|filter:$viewValue' ng-model="location.name" placeholder="Enter location in the Bahamas"/>
+        </div>
+    </div>
+</div>
+    
 
-<div ng-view>
+<div ng-view style="margin-top:80px;">
   <%= yield %>
 </div>
 
