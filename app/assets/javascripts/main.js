@@ -1,4 +1,4 @@
-myApp = angular.module('BstBahamas', ['ngRoute', 'ngResource', 'Devise']);
+myApp = angular.module('BstBahamas', ['ngRoute', 'ngResource', 'Devise','ui.bootstrap']);
 
 myApp.config([
   '$routeProvider', 'AuthProvider', function($routeProvider, AuthProvider) {
