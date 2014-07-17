@@ -28,11 +28,11 @@
             </select>
         </div>
         <div id="search">
-            <span id="searchlabel">Search for: </span><input type="text" ng-model="item" typeahead="suggestion as suggestion for suggestion in suggestions|filter:$viewValue" placeholder="Enter search item"/>
+            <span id="searchlabel">Search for: </span><input type="text" ng-model="suggestion" typeahead="suggestion as suggestion for suggestion in suggestions |filter:$viewValue" placeholder="Enter search item"/>
         </div>
         <div id="search-sections">
             <span id="sections">in: </span>
-            <input type="text" ng-model="sections.section" typeahead="category as category.name for category in categories" placeholder="Enter search category"/>
+            <input type="text" ng-model="category" typeahead="category as category.name for category in categories" placeholder="Enter search category"/>
         </div>
         <div id="location">
             <span id="locationlabel">Location: </span>
