@@ -46,3 +46,11 @@ gem 'angular_rails_csrf'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#tzinfo gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
+
+#angular-ui gem
+gem 'angular-ui-bootstrap-rails','~> 0.11.0'
+
+#bootstrap
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
