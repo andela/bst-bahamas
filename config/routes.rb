@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :users
+  resources :category,  :only => [:index]
+  resources :location,  :only => [:index]
 end
