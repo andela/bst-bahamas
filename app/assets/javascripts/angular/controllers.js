@@ -1,14 +1,49 @@
-myApp.controller('IndexCtrl', ['$scope','Categories', 'Suggestions', 'Locations', function($scope, Categories, Suggestions, Locations) {
-    $scope.categories = Categories;
-    $scope.suggestions = Suggestions;
-    $scope.locations = Locations;
+myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
+    
+    $scope.categories =  [];
+    $scope.suggestions = [];
+    //get categories
+    AppService.getCategories(
+        
+        function(data)
+        {
+            angular.copy(data,$scope.categories);
+            $scope.getSubCategories($scope.categories); //get subcategories for suggestions
+        }, 
+        function(error)
+        {
+            console.log(error);
+        });
+    
+    $scope.locations = [];
+    //get locations 
+    AppService.getLocations(
+        function(data)
+        {
+            angular.copy(data, $scope.locations);
+        },
+        function(error)
+        {
+            console.log(error);
+    });
+    
+    $scope.getSubCategories = function(categories)
+    {
+        categories.forEach(function(category){
+            category.sub_category.forEach(function(sub){
+                $scope.suggestions.push(sub.name);
+            });
+        });
+//        console.log($scope.suggestions);
+    }
+    
 }]);
 
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
     $scope.users = [];
     AppService.getUsers(function(data){
-    	$scope.users = data;
+    	$scope.users = data;a
     }, function(error){
     	console.log(error);
     });
