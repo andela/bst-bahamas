@@ -34,7 +34,6 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
                 $scope.suggestions.push(sub.name);
             });
         });
-//        console.log($scope.suggestions);
     }
     
 }]);
