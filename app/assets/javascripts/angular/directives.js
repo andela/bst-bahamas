@@ -5,7 +5,7 @@ myApp.directive('myAdSense', function() {
     restrict: 'A',
     transclude: true,
     replace: true,
-    template: '<div id="ads" ng-transclude></div>',
+    template: '<div ng-transclude></div>',
     link: function (scope, element, attrs) {}
   }
 })
