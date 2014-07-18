@@ -51,8 +51,4 @@ gem "paperclip", "~> 4.1"
 #tzinfo gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
-#angular-ui gem
-gem 'angular-ui-bootstrap-rails','~> 0.11.0'
-
-#bootstrap
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'rails_12factor', group: :production

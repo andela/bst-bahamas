@@ -35,5 +35,5 @@ test:
 production:
   <<: *default
   database: bst-bahamas_production
-  username: bst-bahamas
-  password: <%= ENV['BST-BAHAMAS_DATABASE_PASSWORD'] %>
+  # username: bst-bahamas
+  # password: <%= ENV['BST-BAHAMAS_DATABASE_PASSWORD'] %>
