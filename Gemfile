@@ -52,3 +52,5 @@ gem "paperclip", "~> 4.1"
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'rails_12factor', group: :production
+
+gem 'unicorn'

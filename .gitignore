@@ -16,4 +16,6 @@
 /tmp
 
 # Ignore all images uploaded to server
-/public/photo_attachment/
+/public/photo_attachment
+
+.env
