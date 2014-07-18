@@ -1,12 +1,12 @@
 /*Style for everything above the yield */
-
-
 .header.fixed-top
 {
     height:60px;
     width:100%;
     background:-webkit-linear-gradient(0deg, steelblue, yellow, #333);
     color:#fff;
+    position:fixed;
+    z-index:200;
 }
 
 #company
@@ -96,6 +96,7 @@
 
 .searchbar
 {
+    z-index:200;
     height:25px;
     padding:20px 0 40px 0;
     width:100%;
@@ -114,4 +115,18 @@
 ul
 {
     list-style:none;
+}
+
+#view
+{
+    float:left;
+    width:90%;
+    margin-top:110px;
+}
+
+#adsense
+{
+    float:right; 
+    width:10%;
+    height:760px;
 }
