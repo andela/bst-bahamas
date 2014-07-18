@@ -17,3 +17,6 @@
 
 # Ignore all bower components
 /vendor/assets/bower_components
+
+# Ignore all images uploaded to server
+/public/photo_attachment/

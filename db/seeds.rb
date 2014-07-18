@@ -7,11 +7,11 @@ Location.create([
 
 Category.create({ name: "Vehicles"}).sub_category.create([
   { name: "Boats" }, { name: "Cars/Trucks" }, { name: "Scooters" }, { name: "Motorcycles" },
-  { name: "eavy Equipment" }, { name: "Auto parts/Tires" }
+  { name: "Heavy Equipment" }, { name: "Auto parts/Tires" }
 ]);
 Category.create({ name: "Electronics"}).sub_category.create([
   { name: "Computers" }, { name: "Cameras" }, { name: "Phones" }, { name: "Video games" },
-  { name: "Ipod’s" }, { name: "Headphones," }, { name: "Wires" }, { name: "Chargers" },
+  { name: "Ipod’s" }, { name: "Headphones" }, { name: "Wires" }, { name: "Chargers" },
   { name: "Televisions" }
 ]);
 Category.create({ name: "Jewellery"}).sub_category.create([
@@ -30,5 +30,5 @@ Category.create({ name: "Miscellaneous"}).sub_category.create([
   { name: "Art" }, { name: "Books" }, { name: "Sporting goods" }, { name: "Musical instruments" },
   { name: "Furniture" }, { name: "Tools" }, { name: "Tickets" }, { name: "Health products" },
   { name: "Bikes" }, { name: "Clothing" }, { name: "Home appliances" }, { name: "Fishing equipment" },
-  { name: "farm/ garden" }, { name: "Toys" }, { name: "Clothes" }, { name: "Shoes" }
+  { name: "Farm/Garden" }, { name: "Toys" }, { name: "Clothes" }, { name: "Shoes" }
 ]);

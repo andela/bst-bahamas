@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717171507) do
+ActiveRecord::Schema.define(version: 20140718151508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,28 @@ ActiveRecord::Schema.define(version: 20140717171507) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "classified_ads", force: true do |t|
+    t.integer  "sub_category_id"
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.string   "description"
+    t.string   "keywords",            default: [], array: true
+    t.string   "poster_name"
+    t.string   "poster_phone_no"
+    t.datetime "expiry_date"
+    t.boolean  "is_featured"
+    t.datetime "feature_expiry_date"
+    t.string   "tag"
+    t.datetime "tag_expiry_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "poster_email"
   end
 
   create_table "locations", force: true do |t|

@@ -1,22 +1,22 @@
 myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
-    
+
     $scope.categories =  [];
     $scope.suggestions = [];
     //get categories
     AppService.getCategories(
-        
+
         function(data)
         {
             angular.copy(data,$scope.categories);
             $scope.getSubCategories($scope.categories); //get subcategories for suggestions
-        }, 
+        },
         function(error)
         {
             console.log(error);
         });
-    
+
     $scope.locations = [];
-    //get locations 
+    //get locations
     AppService.getLocations(
         function(data)
         {
@@ -26,7 +26,7 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
         {
             console.log(error);
     });
-    
+
     $scope.getSubCategories = function(categories)
     {
         categories.forEach(function(category){
@@ -36,14 +36,14 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
         });
 //        console.log($scope.suggestions);
     }
-    
+
 }]);
 
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
     $scope.users = [];
     AppService.getUsers(function(data){
-    	$scope.users = data;a
+    	$scope.users = data;
     }, function(error){
     	console.log(error);
     });

@@ -19,6 +19,17 @@ This project is a website for classified ads in the bahamas
 Add rails dependencies by updating the `Gemfile`
 Add front-end dependencies by updating the `Bowerfile`
 
+### Image Processor
+For image upload to work, you'll need to install and configure ImageMagick
+* `brew install ImageMagick`
+* `brew link ImageMagick`
+
+Then, in your environment config file, let Paperclip know to where ImageMagick is installed.
+In development mode, you might add this line to `config/environments/development.rb`:
+```
+Paperclip.options[:command_path] = "/usr/local/bin/"
+```
+
 ### Database migration
 ```
 rake db:migrate
