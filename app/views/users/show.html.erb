@@ -2,8 +2,9 @@
 
 <p>
   <strong>Username:</strong>
-  <%= @user.username %>
+  <%= @user.email %>
 </p>
 
+<%= render 'new_user_classified_ad' %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
