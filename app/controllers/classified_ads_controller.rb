@@ -17,4 +17,5 @@ class ClassifiedAdsController < ApplicationController
   private
     def classified_ad_params
         params.require(:classified_ad).permit(:poster_name, :poster_email, :photo)
+    end
 end
