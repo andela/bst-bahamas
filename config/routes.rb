@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
 
-  resources :users
+  resources :users do
+      resources :classified_ads
+    end
   resources :category,  :only => [:index]
   resources :location,  :only => [:index]
 end
