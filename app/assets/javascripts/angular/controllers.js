@@ -37,7 +37,7 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
         });
     }
     
-    $scope.getClassifiedAds(function(data){
+    AppService.getClassifiedAds(function(data){
         angular.copy(data, $scope.classifiedAds);    
     }
     );
