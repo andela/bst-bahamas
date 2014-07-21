@@ -13,7 +13,7 @@ class CreateClassifiedAds < ActiveRecord::Migration
       t.datetime :feature_expiry_date
       t.string :tag
       t.datetime :tag_expiry_date
-
+      t.references :user, index: true
       t.timestamps
     end
   end
