@@ -2,6 +2,7 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
 
     $scope.categories =  [];
     $scope.suggestions = [];
+    $scope.classifiedAds = [];
     //get categories
     AppService.getCategories(
 
@@ -35,7 +36,11 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
             });
         });
     }
-
+    
+    AppService.getClassifiedAds(function(data){
+        angular.copy(data, $scope.classifiedAds);    
+    }
+    );
 }]);
 
 myApp.controller('HomeCtrl', [
