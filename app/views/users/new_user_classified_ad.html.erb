@@ -1,0 +1,6 @@
+<%= form_for([@user, @user.classified_ads.build]), url: user_classified_ads_path do |f|%>
+<p>
+    <%= f.label :sub_category_id %>
+    <%= f.text_field :sub_category_id %>
+</p>
+<% end %>
