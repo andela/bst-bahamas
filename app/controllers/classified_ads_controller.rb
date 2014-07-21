@@ -7,7 +7,7 @@ class ClassifiedAdsController < ApplicationController
   def create
       @user = User.find(params[:user_id])
       @classified_ad = @user.classified_ad.create(classified_ad_params)
-      redirect_to 'user', :notice => "Successful upload"
+      redirect_to '/users', :notice => "Successful upload"
   end
     
   private
