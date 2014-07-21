@@ -3,11 +3,7 @@ class ClassifiedAdsController < ApplicationController
       @classified_ads = ClassifiedAd.all
       render json: @classified_ads, status: :ok
   end
-    
-  def new
-      @classified_ad = ClassifiedAd.new
-  end
-    
+  
   def create
       @user = User.find(params[:user_id])
       @classified_ad = @user.classified_ad.create(classified_ad_params)
