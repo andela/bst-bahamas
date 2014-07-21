@@ -30,6 +30,9 @@ GEM
     angular_rails_csrf (1.0.1)
       rails (>= 3, < 5)
     arel (5.0.1.20140414130214)
+    aws-sdk (1.48.1)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
     bcrypt (3.1.7-x86-mingw32)
     bower-rails (0.7.3)
@@ -186,6 +189,7 @@ PLATFORMS
 
 DEPENDENCIES
   angular_rails_csrf
+  aws-sdk
   bower-rails
   coffee-rails (~> 4.0.0)
   devise
