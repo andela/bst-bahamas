@@ -1,4 +1,4 @@
-<%= form_for([@user, @user.classified_ad.build]), url: user_classified_ads_path do |f|%>
+<%= form_for([@user, @user.classified_ad.build]) do |f|%>
 <p>
     <%= f.label :poster_name %>
     <%= f.text_field :poster_name %>
@@ -10,4 +10,6 @@
 <p>
     <%= f.file_field :photo %>
 </p>
+
+<%= f.submit %>
 <% end %>
