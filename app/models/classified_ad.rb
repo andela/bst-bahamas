@@ -3,10 +3,6 @@ class ClassifiedAd < ActiveRecord::Base
 	belongs_to :sub_category
 	belongs_to :location
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-					# :storage => :s3,
-					# :s3_credentials => "#{Rails.root}/config/s3.yml",
-					# :path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"
-					# :url => "/photo_attachment/:id/:style/:basename.:extension"
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment :photo, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"] }
 	validates :poster_name, :presence => true
