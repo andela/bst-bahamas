@@ -36,11 +36,6 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
             });
         });
     }
-    
-    AppService.getClassifiedAds(function(data){
-        angular.copy(data, $scope.classifiedAds);    
-    }
-    );
 }]);
 
 myApp.controller('HomeCtrl', [
@@ -99,5 +94,27 @@ myApp.controller('SignUpCtrl', [
           $scope.errorMessage = "Password " + error.data.errors.password[0];
   		});
   	}
+  }
+]);
+
+myApp.controller('CreateAdCtrl', [
+  '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
+    $scope.onFileSelect = function($files) {
+      Auth.currentUser().then(function(user) {
+        $scope.upload = $upload.upload({
+          url: 'http://localhost:3000/users/'+user.id+'/classified_ads',
+          method: 'POST',
+          data: {poster_name: $scope.name, poster_email: $scope.email, photo: $files[0]},
+          photo: $files[0] // or list of files ($files) for html5 only
+        }).success(function(data, status, headers, config) {
+          console.log(status);
+        }).error(function(error){
+          console.log(error);
+        });
+      }, function(error) {
+          // unauthenticated error
+          console.log(error);
+      });
+    };
   }
 ]);

@@ -7,4 +7,12 @@ class ClassifiedAd < ActiveRecord::Base
 	validates_attachment :photo, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"] }
 	validates :poster_name, :presence => true
 	validates :poster_email, :presence => true, :format => { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+
+	def photo_thumb_url
+	   photo.url(:thumb)
+	end
+
+	def photo_medium_url
+	   photo.url(:medium)
+	end
 end

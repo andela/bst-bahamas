@@ -8,6 +8,7 @@
     "font-awesome": "4.0.3",
     "angular-bootstrap": "latest",
     "angular-devise": "latest",
-    "bootstrap": "latest"
+    "bootstrap": "latest",
+    "ng-file-upload": "latest"
   }
 }

@@ -1,4 +1,4 @@
-myApp = angular.module('BstBahamas', ['ngRoute', 'ngResource', 'Devise','ui.bootstrap']);
+myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap']);
 
 myApp.config([
   '$routeProvider', 'AuthProvider', function($routeProvider, AuthProvider) {
@@ -15,6 +15,10 @@ myApp.config([
     when('/sign_up', {
       templateUrl: '../templates/account/sign_up.html',
       controller: 'SignUpCtrl'
+    }).
+    when('/create_ad', {
+      templateUrl: '../templates/account/create_ad.html',
+      controller: 'CreateAdCtrl'
     }).
     otherwise({
       templateUrl: '../templates/index.html',

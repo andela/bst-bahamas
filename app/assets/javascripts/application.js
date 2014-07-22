@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ng-file-upload/angular-file-upload-shim.min
 //= require angular/angular.min
+//= require ng-file-upload/angular-file-upload.min
 //= require angular-resource/angular-resource.min
 //= require angular-route/angular-route.min
 //= require angular-devise/lib/devise-min
