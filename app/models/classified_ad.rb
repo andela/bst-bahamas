@@ -10,7 +10,7 @@ class ClassifiedAd < ActiveRecord::Base
 	validates :poster_name, :presence => true
 	validates :poster_email, :presence => true, :format => { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-	def as_json(options)
+	def as_json(options={})
 	  super(:except => [:created_at, :updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
 	      :methods => [:photo_thumb_url, :photo_medium_url])
 	end
