@@ -4,21 +4,17 @@ class ClassifiedAdsController < ApplicationController
 
   def index
       @classified_ads = ClassifiedAd.all
-      render json: @classified_ads.to_json(
-        :except => [:created_at, :updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
-        :methods => [:photo_thumb_url, :photo_medium_url]), status: :ok
+      render json: @classified_ads.to_json, status: :ok
   end
 
   def create
       @classified_ad = @user.classified_ad.create(classified_ad_params)
-      render json: @classified_ad.to_json(
-        :except => [:created_at, :updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
-        :methods => [:photo_thumb_url, :photo_medium_url]), status: :ok
+      render json: @classified_ad.to_json, status: :ok
   end
 
   def update
     if @classified_ad.update(classified_ad_params)
-      render json: @classified_ad, status: :ok
+      render json: @classified_ad.to_json, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -27,6 +23,15 @@ class ClassifiedAdsController < ApplicationController
   def destroy
     @classified_ad.destroy
     render json: {}, status: :ok
+  end
+
+  def search
+    if params.has_key?("q")
+      results = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :sub_category_id))
+    else
+      results = ClassifiedAd.where(params.slice(:location_id, :sub_category_id))
+    end
+    render json: results.to_json, status: :ok
   end
 
   private
