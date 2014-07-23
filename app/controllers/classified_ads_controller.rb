@@ -1,5 +1,4 @@
 class ClassifiedAdsController < ApplicationController
-  # skip_before_filter :verify_authenticity_token, :only => [:update]
   before_action :set_user, only: [:create, :update]
   before_action :set_classified_ad, only: [:update, :destroy]
 
