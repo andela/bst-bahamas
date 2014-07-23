@@ -14,25 +14,24 @@ myApp.factory('AppService', ['$resource', '$http',
     });
 
     var categories = $resource( HOST+'category',{},{
-        get:{
-            method:'GET',
-            isArray:true
-        }
+      get:{
+        method:'GET',
+        isArray:true
+      }
     });
 
-
     var location = $resource( HOST+'location',{},{
-        get:{
-            method:'GET',
-            isArray:true
-        }
+      get:{
+        method:'GET',
+        isArray:true
+      }
     });
 
     var classifiedAds = $resource(HOST+'users/:id/classified_ads', {}, {
-        get:{
-            method:'GET',
-            isArray:true
-        }
+      get:{
+        method:'GET',
+        isArray:true
+      }
     });
 
     return {
@@ -48,8 +47,11 @@ myApp.factory('AppService', ['$resource', '$http',
         var locationArray = location.get(successCallback, errorCallback);
           return locationArray;
       },
-      getClassifiedAds: function(successCallback, errorCallback){
+      getClassifiedAds: function(successCallback, errorCallback) {
         var classifiedAdsArray = classifiedAds.get(successCallback, errorCallback);
+      },
+      createClassifiedAd: function(successCallback, errorCallback) {
+
       }
     }
   }]);

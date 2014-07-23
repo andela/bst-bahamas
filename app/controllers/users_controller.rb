@@ -53,7 +53,6 @@ class UsersController < ApplicationController
   end
 
   def log_in
-    puts params
     @user = User.find_by_email(params[:user][:email])
     if @user != nil && @user.valid_password?(params[:user][:password])
       sign_in @user, :bypass => true
@@ -64,7 +63,6 @@ class UsersController < ApplicationController
   end
 
   def register
-    puts params
     @user = User.new()
     @user.username
 
