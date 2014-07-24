@@ -2,6 +2,7 @@ class ClassifiedAd < ActiveRecord::Base
 	include PgSearch
 	pg_search_scope :search_by_text, :against => [:title, :description, :keywords], :using => {:tsearch => {:any_word => true}}
 	belongs_to :user
+	belongs_to :category
 	belongs_to :sub_category
 	belongs_to :location
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
