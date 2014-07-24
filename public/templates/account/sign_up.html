@@ -1,6 +1,7 @@
-<div class="signup-form">
-	<input ng-model="email" type="email" placeholder="email">
-	<input ng-model="password" type="password" placeholder="password">
+<div class="form">
+    <div class="header"><h3 id="signup">Sign Up</h3></div>
+	<input ng-model="email" type="email" placeholder="email" id='mail'>
+	<input ng-model="password" type="password" placeholder="password" id='pwd'>
 	<input ng-model="passwordConfirmation" type="password" placeholder="confirm password">
 	<button ng-click="signUp()">Register</button>
 	<div>{{errorMessage}}</div>
