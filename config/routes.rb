@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'classified_ads/index'
   get 'classified_ads/search'
+  get 'classified_ads/random_pics'
 
   resources :category,  :only => [:index]
   resources :location,  :only => [:index]

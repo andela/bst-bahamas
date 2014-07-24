@@ -51,6 +51,15 @@ class ClassifiedAdsController < ApplicationController
     render json: {:page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
   end
 
+  def random_pics
+    max_id = ClassifiedAd.maximum("id")
+    min_id = ClassifiedAd.minimum("id")
+    id_range = max_id - min_id + 1
+    random_id = min_id + rand(id_range).to_i
+    result = ClassifiedAd.where("id >= ?", random_id).limit(10)#.sort("id")
+    render json: result, status: :ok
+  end
+
   private
     def classified_ad_params
         params.permit(:poster_name, :poster_email, :photo, :user_id, :location_id, :sub_category_id, :id)
