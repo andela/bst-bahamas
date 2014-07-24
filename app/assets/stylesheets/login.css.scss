@@ -1,6 +1,6 @@
 @import url('http://fonts.googleapis.com/css?family=Karla');
 
-.login-form
+.form
 {
     height:275px;
     width:300px;
@@ -13,7 +13,7 @@
     position:relative;
     top:100px;
     
-    #welcomeCont
+    .header
     {
         height:60px;
         #welcome
@@ -35,7 +35,7 @@
         background-size:5%;
     }
     
-    input#mail, input#pwd
+    input,input#mail, input#pwd
     {
         height:30px;
         width:80%;
