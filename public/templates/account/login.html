@@ -1,6 +1,8 @@
 <div class="login-form">
-	<input ng-model="email" type="email" placeholder="email">
-	<input ng-model="password" type="password" placeholder="password">
-	<button ng-click="login()">Login</button>
+    <div id="welcomeCont"><h3 id="welcome">Welcome Back!</h3></div>
+	<input ng-model="email" type="email" placeholder="Email" id='mail'><br/>
+	<input ng-model="password" type="password" placeholder="Password" id='pwd'><br/>
+	<button ng-click="login()">Sign In</button>
 	<div>{{errorMessage}}</div>
+    <div id="forgotPwd"><a href='#'>Forgot your password?</a></div>
 </div>
