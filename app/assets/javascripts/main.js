@@ -3,7 +3,7 @@ myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResourc
 myApp.config([
   '$routeProvider', '$locationProvider', 'AuthProvider', function($routeProvider, $locationProvider, AuthProvider) {
 
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 
     return $routeProvider.
     when('/', {
@@ -22,7 +22,7 @@ myApp.config([
       templateUrl: '../templates/account/sign_up.html',
       controller: 'SignUpCtrl'
     }).
-    when('/create_ad', {
+    when('/post_ad', {
       templateUrl: '../templates/account/create_ad.html',
       controller: 'CreateAdCtrl'
     }).

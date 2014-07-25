@@ -1,7 +1,5 @@
 class ClassifiedAdsController < ApplicationController
-  # before_action :set_user, only: [:create, :update]
   before_action :set_classified_ad, only: [:update, :destroy]
-  skip_before_filter :authenticate_user!
 
   def index
       @classified_ads = ClassifiedAd.all
@@ -9,12 +7,12 @@ class ClassifiedAdsController < ApplicationController
   end
 
   def create
-    p current_user
     @user = current_user
     if @user
       @classified_ad = current_user.classified_ad.create(classified_ad_params)
     else
-      @user = User.new({:email => classified_ad_params[:poster_email]})
+      @user = User.new(:email => classified_ad_params[:poster_email],
+                      :password => 'fesP4G7f', :password_confirmation => 'fesP4G7f')
       @user.save
       @classified_ad = @user.classified_ad.create(classified_ad_params)
     end
