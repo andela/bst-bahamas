@@ -4,6 +4,6 @@ class AddPosterEmailToClassifiedAd < ActiveRecord::Migration
     end
 
     def self.down
-      add_column :classified_ads, :poster_email, :string
+      remove_column :classified_ads, :poster_email, :string
     end
 end
