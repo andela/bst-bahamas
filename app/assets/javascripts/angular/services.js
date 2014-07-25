@@ -28,10 +28,13 @@ myApp.factory('AppService', ['$resource', '$http',
       }
     });
 
-    var classifiedAds = $resource(HOST+'users/:id/classified_ads', {}, {
+    var classifiedAds = $resource(HOST+'classified_ads/:id', {}, {
       get:{
         method:'GET',
         isArray:true
+      },
+      show: {
+        method: 'GET'
       }
     });
 
@@ -51,8 +54,8 @@ myApp.factory('AppService', ['$resource', '$http',
       getClassifiedAds: function(successCallback, errorCallback) {
         var classifiedAdsArray = classifiedAds.get(successCallback, errorCallback);
       },
-      createClassifiedAd: function(successCallback, errorCallback) {
-
+      getClassifiedAd: function(params, successCallback, errorCallback) {
+        classifiedAds.show(params, successCallback, errorCallback)
       }
     }
   }]);

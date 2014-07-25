@@ -23,8 +23,12 @@ myApp.config([
       controller: 'SignUpCtrl'
     }).
     when('/post_ad', {
-      templateUrl: '../templates/account/create_ad.html',
-      controller: 'CreateAdCtrl'
+      templateUrl: '../templates/account/post_ad.html',
+      controller: 'PostAdCtrl'
+    }).
+    when('/manage_ad', {
+      templateUrl: '../templates/account/manage_ad.html',
+      controller: 'ManageAdCtrl'
     }).
     otherwise({
       redirectTo: '/'

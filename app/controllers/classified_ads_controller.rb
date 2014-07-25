@@ -1,9 +1,13 @@
 class ClassifiedAdsController < ApplicationController
-  before_action :set_classified_ad, only: [:update, :destroy]
+  before_action :set_classified_ad, only: [:show, :update, :destroy]
 
   def index
       @classified_ads = ClassifiedAd.all
       render json: @classified_ads, status: :ok
+  end
+
+  def show
+    render json: @classified_ad
   end
 
   def create
@@ -11,12 +15,9 @@ class ClassifiedAdsController < ApplicationController
     if @user
       @classified_ad = current_user.classified_ad.create(classified_ad_params)
     else
-      @user = User.new(:email => classified_ad_params[:poster_email],
-                      :password => 'fesP4G7f', :password_confirmation => 'fesP4G7f')
-      @user.save
-      @classified_ad = @user.classified_ad.create(classified_ad_params)
+      @classified_ad = ClassifiedAd.create(classified_ad_params)
     end
-    ClassifiedAdNotifier.send_active_ad_email(@user, @classified_ad).deliver
+    ClassifiedAdNotifier.send_active_ad_email(@classified_ad).deliver
     render json: @classified_ad, status: :ok
   end
 

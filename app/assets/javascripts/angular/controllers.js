@@ -100,8 +100,8 @@ myApp.controller('SignUpCtrl', [
   }
 ]);
 
-myApp.controller('CreateAdCtrl', [
-  '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
+myApp.controller('PostAdCtrl', [
+  '$scope', '$location', '$upload', function($scope, $location, $upload) {
     $scope.onFileSelect = function($files) {
       $scope.upload = $upload.upload({
         url: 'http://localhost:3000/classified_ads',
@@ -114,5 +114,16 @@ myApp.controller('CreateAdCtrl', [
         console.log(error);
       });
     };
+  }
+]);
+
+myApp.controller('ManageAdCtrl', [
+  '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
+    var params = {id: $location.search()['id']}
+    AppService.getClassifiedAd(params, function(data){
+      $scope.classifiedAd = data;
+    }, function(error){
+      console.log(error);
+    })
   }
 ]);
