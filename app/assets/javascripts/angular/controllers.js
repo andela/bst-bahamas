@@ -1,59 +1,27 @@
 myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
     $scope.model = {'category':'All Categories','location':'All Locations'};
     $scope.sidePanelContent = [];
-    
+
     AppService.getClassifiedAds(function(data){
         $scope.items = data.ads;
         }, function(err){
             console.log(err);
         });
 
-   
+
     $scope.getSidePanelContent = function(){
         if($scope.category === null)return;
         $scope.model.category = $scope.category.name;
         angular.element('#sidePanelTitle').html($scope.model.category);
-        
+
     };
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     var obj = document.querySelector('#category');
     //obj.children[0].innerHTML = $scope.model.category;
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
-    
+
     //get categories
     AppService.getCategories(
 

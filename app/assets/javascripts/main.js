@@ -8,7 +8,6 @@ myApp.config([
     return $routeProvider.
     when('/', {
       templateUrl: '../templates/index.html',
-      controller: 'IndexCtrl'
     }).
     when('/home', {
       templateUrl: '../templates/home.html',
