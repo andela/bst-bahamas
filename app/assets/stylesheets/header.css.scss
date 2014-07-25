@@ -82,6 +82,7 @@
                 -webkit-appearance:none;
                 -moz-appearance:none;
                 -ms-appearance:none;
+                cursor:pointer;
             }
         }
         #search
@@ -91,6 +92,7 @@
                 width:80%;
                 float:left;
                 height:30px;
+                padding-left:15px;
             }
             button
             {
