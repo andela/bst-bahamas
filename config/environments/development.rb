@@ -44,4 +44,15 @@ Rails.application.configure do
       :secret_access_key => "6JekARf3wrcZUHYO7m0gVNIIAG6t6Gcpz6HgvUR5"
     }
   }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'baci.lindsaar.net',
+    :user_name            => 'bst.bahamas@gmail.com',
+    :password             => 'bstbahamas',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
+  }
 end

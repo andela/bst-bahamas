@@ -1,6 +1,7 @@
 class ClassifiedAdsController < ApplicationController
-  before_action :set_user, only: [:create, :update]
+  # before_action :set_user, only: [:create, :update]
   before_action :set_classified_ad, only: [:update, :destroy]
+  skip_before_filter :authenticate_user!
 
   def index
       @classified_ads = ClassifiedAd.all
@@ -8,8 +9,17 @@ class ClassifiedAdsController < ApplicationController
   end
 
   def create
+    p current_user
+    @user = current_user
+    if @user
+      @classified_ad = current_user.classified_ad.create(classified_ad_params)
+    else
+      @user = User.new({:email => classified_ad_params[:poster_email]})
+      @user.save
       @classified_ad = @user.classified_ad.create(classified_ad_params)
-      render json: @classified_ad, status: :ok
+    end
+    ClassifiedAdNotifier.send_active_ad_email(@user, @classified_ad).deliver
+    render json: @classified_ad, status: :ok
   end
 
   def update
@@ -63,7 +73,7 @@ class ClassifiedAdsController < ApplicationController
 
   private
     def classified_ad_params
-        params.permit(:poster_name, :poster_email, :photo, :user_id, :location_id, :sub_category_id, :id)
+        params.permit(:poster_name, :poster_email, :photo, :location_id, :sub_category_id, :id)
     end
 
     def set_user
