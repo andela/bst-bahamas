@@ -34,7 +34,7 @@
             <button class="btn btn-primary btn-md"><span class="glyphicon glyphicon-search"></span></button>
         </div>
         <div class="col-md-3 customSel" >
-            <select ng-options='category.name for category in categories' ng-model="model.category" id="category">
+            <select ng-options='category.name for category in categories' ng-model="category" id="category" ng-change="getSidePanelContent()">
                 <option value="" selected>Select A Category</option>
             </select>
         </div>
@@ -46,8 +46,11 @@
     </div>
 </div>
 <br>
-<div class="row" id="mainCnt">
-    <div id="view" class="col-md-10" ng-view>
+<div class="row" id="mainCnt" ng-controller="IndexCtrl">
+    <div class="col-md-2">
+        <featured-ads></featured-ads>
+    </div>
+    <div id="view" class="col-md-8" ng-view>
       <%= yield %>
     </div>
     <div id="adsense" class="col-md-2" my-ad-sense>
