@@ -4,8 +4,8 @@
 myApp.factory('AppService', ['$resource', '$http',
 
   function($resource, $http){
-    var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
-    // var HOST = 'http://localhost:3000/'; /* DO NOT COMMIT THIS LINE */
+    //var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
+    var HOST = 'http://localhost:3000/'; /* DO NOT COMMIT THIS LINE */
 
     var users = $resource(HOST+'users', {}, {
       get: {
@@ -28,10 +28,10 @@ myApp.factory('AppService', ['$resource', '$http',
       }
     });
 
-    var classifiedAds = $resource(HOST+'classified_ads/:id', {}, {
+    var classifiedAds = $resource(HOST+'classified_ads/search?', {}, {
       get:{
-        method:'GET',
-        isArray:true
+        method:'GET'
+        //isArray:true
       },
       show: {
         method: 'GET'
@@ -41,7 +41,7 @@ myApp.factory('AppService', ['$resource', '$http',
     return {
       getUsers: function(successCallback, errorCallback) {
         var userArray = users.get(successCallback, errorCallback);
-          return userArray;
+        return userArray;
       },
       getCategories: function(successCallback, errorCallback) {
         var categoriesArray = categories.get(successCallback, errorCallback);
@@ -49,10 +49,11 @@ myApp.factory('AppService', ['$resource', '$http',
       },
       getLocations: function(successCallback, errorCallback) {
         var locationArray = location.get(successCallback, errorCallback);
-          return locationArray;
+        return locationArray;
       },
       getClassifiedAds: function(successCallback, errorCallback) {
         var classifiedAdsArray = classifiedAds.get(successCallback, errorCallback);
+        return classifiedAdsArray;
       },
       getClassifiedAd: function(params, successCallback, errorCallback) {
         classifiedAds.show(params, successCallback, errorCallback)
