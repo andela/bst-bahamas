@@ -1,5 +1,18 @@
 <div class="post-ad-form">
-	<input type="text" ng-model="name" placeholder="Poster's Name">
-	<input type="email" ng-model="email" placeholder="Poster's Email">
+	<div>
+		<input type="text" ng-model="title" placeholder="Title">
+	</div>
+	<div>
+		<input type="number" ng-model="price" placeholder="Price($)">
+	</div>
+	<div>
+		<input type="text" ng-model="name" placeholder="Poster's Name">
+	</div>
+	<div>
+		<input type="email" ng-model="email" placeholder="Poster's Email">
+	</div>
+	<div>
+		<input type="text" ng-model="description" placeholder="Description">
+	</div>
 	<input type="file" ng-file-select="onFileSelect($files)" >
 </div>
