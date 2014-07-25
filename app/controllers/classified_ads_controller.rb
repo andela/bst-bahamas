@@ -72,7 +72,7 @@ class ClassifiedAdsController < ApplicationController
 
   private
     def classified_ad_params
-        params.permit(:poster_name, :poster_email, :photo, :location_id, :sub_category_id, :id)
+        params.permit(:title, :price, :description, :poster_name, :poster_email, :photo, :location_id, :sub_category_id, :id)
     end
 
     def set_user

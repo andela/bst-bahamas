@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>Hi, <%= @classified_ad.poster_name %>!</h1>
-    <p>Thanks for posting your "<a href=""><%= @classified_ad.title %></a>" Ad with BST-Bahamas</p>
+    <p>Thanks for posting your <a href="http://bst-bahamas.herokuapp.com/#/manage_ad?id=<%= @classified_ad.id %>"><%= @classified_ad.title %></a> Ad with BST-Bahamas</p>
     <br>
     <p>We hope your Ad generates the response you're looking for.</p>
     <br>
