@@ -104,7 +104,7 @@ myApp.controller('PostAdCtrl', [
   '$scope', '$location', '$upload', function($scope, $location, $upload) {
     $scope.onFileSelect = function($files) {
       $scope.upload = $upload.upload({
-        url: 'http://localhost:3000/classified_ads',
+        url: 'http://bst-bahamas.herokuapp.com/classified_ads',
         method: 'POST',
         data: {location_id: 1,
           sub_category_id: 1,
