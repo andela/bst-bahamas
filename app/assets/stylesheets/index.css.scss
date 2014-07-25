@@ -1,0 +1,32 @@
+#mainCnt
+{
+    position:relative;
+    top:120px;
+    
+    .featured
+    {
+        width:inherit;
+        position:fixed;
+        overflow-y:scroll;
+        top:138px;
+        background-color:#f0f0f0;
+        font-family:Karla;
+        padding-left:10px;
+        height:760px;
+        .sidePanelTitle
+        {
+            text-transform:uppercase;
+        }
+        
+        ul
+        {
+            padding:0 !important;
+            list-style:none;
+        }
+        
+        hr
+        {
+            border-color:#555;
+        }
+    }
+}
