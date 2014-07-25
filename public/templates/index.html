@@ -1,8 +1,17 @@
-<div ng-repeat="subCategory in category.sub_category">
-	<div>{{subCategory.name}} ({{subCategory.num_ads}})</div>
-</div>
-<div ng-if="category==null">
-	<div ng-repeat="_category in categories">
-		<div>{{_category.name}}</div>
-	</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="featured">
+            <h4 class="sidePanelTitle">{{category.name}}</h4>
+            <div ng-repeat="subCategory in category.sub_category">
+                <div>{{subCategory.name}} ({{subCategory.num_ads}})</div>
+            </div>
+            <div ng-if="category==null">
+                <h4 class="sidePanelTitle">All Categories</h4>
+                <div ng-repeat="_category in categories">
+                    <div>{{_category.name}}</div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
 </div>
