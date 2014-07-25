@@ -1,5 +1,8 @@
-myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
+myApp.controller('IndexCtrl', ['$scope', 'AppService','$compile',function($scope, AppService,$compile) {
 
+    $scope.model = {'category':'All Categories','location':'All Locations'};
+    var obj = document.querySelector('#category');
+    //obj.children[0].innerHTML = $scope.model.category;
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
