@@ -1,60 +1,30 @@
 myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
     $scope.model = {'category':'All Categories','location':'All Locations'};
     $scope.sidePanelContent = [];
-
-    AppService.getClassifiedAds(function(data){
-        $scope.items = data.ads;
-        }, function(err){
-            console.log(err);
-        });
-
-
-    $scope.getSidePanelContent = function(){
-        if($scope.category === null)return;
-        $scope.model.category = $scope.category.name;
-        angular.element('#sidePanelTitle').html($scope.model.category);
-
-    };
-
-    var obj = document.querySelector('#category');
-    //obj.children[0].innerHTML = $scope.model.category;
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
-
-    //get categories
-    AppService.getCategories(
-
-        function(data)
-        {
-            angular.copy(data,$scope.categories);
-            $scope.getSubCategories($scope.categories); //get subcategories for suggestions
-        },
-        function(error)
-        {
-            console.log(error);
-        });
-
     $scope.locations = [];
-    //get locations
-    AppService.getLocations(
-        function(data)
-        {
-            angular.copy(data, $scope.locations);
-        },
-        function(error)
-        {
-            console.log(error);
+
+    AppService.getClassifiedAds(function(data){
+        $scope.classifiedAds = data;
+    }, function(err){
+        console.log(err);
     });
 
-    $scope.getSubCategories = function(categories)
-    {
-        categories.forEach(function(category){
-            category.sub_category.forEach(function(sub){
-                $scope.suggestions.push(sub.name);
-            });
-        });
-    }
+    //get categories
+    AppService.getCategories(function(data) {
+      angular.copy(data, $scope.categories);
+    },function(error) {
+      console.log(error);
+    });
+
+    //get locations
+    AppService.getLocations(function(data) {
+      angular.copy(data, $scope.locations);
+    },function(error) {
+      console.log(error);
+    });
 }]);
 
 myApp.controller('HomeCtrl', [
