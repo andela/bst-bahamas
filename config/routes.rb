@@ -15,4 +15,6 @@ Rails.application.routes.draw do
 
   resources :category,  :only => [:index]
   resources :location,  :only => [:index]
+
+  match "/*path" => redirect("/"), via: :all
 end
