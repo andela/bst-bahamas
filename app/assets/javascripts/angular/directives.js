@@ -8,4 +8,13 @@ myApp.directive('myAdSense', function() {
     template: '<div ng-transclude></div>',
     link: function (scope, element, attrs) {}
   }
-})
+}).directive('featuredAds',function(){
+    return {
+        restrict:'EAC',
+        replace:true,
+        template:"<div class='featured'><h4 id='sidePanelTitle'>{{model.category}}</h4><ul><li ng-repeat='item in items'>{{item.description}}</li></ul><hr></div>",
+        link:function(scope,element,attrs){
+         
+        }
+    };
+});
