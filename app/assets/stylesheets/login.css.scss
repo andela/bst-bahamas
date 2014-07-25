@@ -12,11 +12,10 @@
     border-radius:7px;
     position:relative;
     top:100px;
-    
     .header
     {
         height:60px;
-        #welcome
+        .headerText
         {
             text-transform:uppercase;
             font-weight:bold;
@@ -46,7 +45,7 @@
         background-size:8%;
         background-repeat:no-repeat;
         background-position:5px;
-        background-color:#fbfbfb;
+        background-color:#FAFAFA;
     } 
     
     button

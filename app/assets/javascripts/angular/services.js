@@ -6,6 +6,7 @@ myApp.factory('AppService', ['$resource', '$http',
   function($resource, $http){
     // var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
     var HOST = 'http://localhost:3000/'; /* DO NOT COMMIT THIS LINE */
+
     var users = $resource(HOST+'users', {}, {
       get: {
         method:'GET',
