@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="header fixed-top">
+<<<<<<< HEAD
     <div class="row">
         <div id="company" class="col-md-4 col-xs-12">
             <h2 id="name">BST Bahamas</h2>
@@ -16,6 +17,27 @@
             <div id="banner">
                 <h4>Create Free Local Classified Ads</h4>
             </div>
+=======
+    <div id="company">
+        <h2 id="name">BST Bahamas</h2>
+    </div>
+    <div class="nav-links">
+        <ul id="nav">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/sign_up">Sign Up</a></li>
+            <li><a href="/create_ad">Post Ad</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="searchbar" ng-controller="IndexCtrl">
+    <div id="container">
+        <div id="category">
+            <span id="categories">Categories</span>
+            <select ng-options = 'category.name for category in categories' ng-model="category.name">
+            </select>
+>>>>>>> bf690d4fa08ae2ce0ac71e2893a23f86e18eab20
         </div>
         <div id="accNav" class="col-md-3 col-md-offset-1 col-xs-12">
             <div class="nav-links">

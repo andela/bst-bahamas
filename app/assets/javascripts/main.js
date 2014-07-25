@@ -1,9 +1,15 @@
 myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap']);
 
 myApp.config([
-  '$routeProvider', 'AuthProvider', function($routeProvider, AuthProvider) {
+  '$routeProvider', '$locationProvider', 'AuthProvider', function($routeProvider, $locationProvider, AuthProvider) {
+
+    $locationProvider.html5Mode(true);
 
     return $routeProvider.
+    when('/', {
+      templateUrl: '../templates/index.html',
+      controller: 'IndexCtrl'
+    }).
     when('/home', {
       templateUrl: '../templates/home.html',
       controller: 'HomeCtrl'
@@ -21,8 +27,7 @@ myApp.config([
       controller: 'CreateAdCtrl'
     }).
     otherwise({
-      templateUrl: '../templates/index.html',
-      controller: 'IndexCtrl'
+      redirectTo: '/'
     });
   }
 ]);

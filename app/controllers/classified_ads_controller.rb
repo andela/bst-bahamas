@@ -29,7 +29,8 @@ class ClassifiedAdsController < ApplicationController
   # Params
   #  q                 - query string for full text search
   #  location_id       - filter by location
-  #  sub_category_id   - filter by category
+  #  category_id       - filter by category
+  #  sub_category_id   - filter by sub category
   #  page              - page number for pagination
   #  per               - num results per page for pagination (default 25)
   def search
@@ -39,13 +40,13 @@ class ClassifiedAdsController < ApplicationController
     totalPages = 0
 
     if params.has_key?("q")
-      numResults = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
     else
-      numResults = ClassifiedAd.where(params.slice(:location_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.where(params.slice(:location_id, :category_id, :sub_category_id)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.where(params.slice(:location_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
     end
     page = page + 1
     render json: {:page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
