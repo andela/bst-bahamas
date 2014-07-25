@@ -1,5 +1,11 @@
 @import url('http://fonts.googleapis.com/css?family=Karla');
 
+body
+{
+    max-width:100%;
+    overflow-x:hidden;
+}
+
 .form
 {
     height:275px;
