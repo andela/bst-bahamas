@@ -33,12 +33,12 @@
             <input type="text" typeahead="suggestion as suggestion for suggestion in suggestions|filter:$viewValue" ng-model="suggestion.name"/> 
             <button class="btn btn-primary btn-md"><span class="glyphicon glyphicon-search"></span></button>
         </div>
-        <div class="col-md-2 customSel" >
+        <div class="col-md-3 customSel" >
             <select ng-options='category.name for category in categories' ng-model="model.category" id="category">
                 <option value="" selected>Select A Category</option>
             </select>
         </div>
-        <div class="col-md-offset-1 col-md-3 customSel">
+        <div class="col-md-3 customSel">
             <select ng-options="location.name for location in locations" ng-model="location.name">
                 <option value="" selected>Select A Location</option>
             </select>
