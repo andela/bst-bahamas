@@ -137,6 +137,12 @@ myApp.controller('EditAdCtrl', [
   }
 ]);
 
+myApp.controller('MyAdsCtrl', [
+  '$scope', '$location', 'AppService', function($scope, $location, AppService) {
+
+  }
+]);
+
 myApp.controller('PaymentCtrl', [
   '$scope', '$location', function($scope, $location) {
     $scope.handleStripe = function(status, response) {
