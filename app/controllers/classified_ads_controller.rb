@@ -17,7 +17,10 @@ class ClassifiedAdsController < ApplicationController
     else
       @classified_ad = ClassifiedAd.create(classified_ad_params)
     end
-    ClassifiedAdNotifier.send_active_ad_email(@classified_ad).deliver
+    Rails.logger.info(@classified_ad.errors.inspect)
+    if @classified_ad.id
+      ClassifiedAdNotifier.send_active_ad_email(@classified_ad).deliver
+    end
     render json: @classified_ad, status: :ok
   end
 
@@ -72,7 +75,7 @@ class ClassifiedAdsController < ApplicationController
 
   private
     def classified_ad_params
-        params.permit(:title, :price, :description, :poster_name, :poster_email, :photo, :location_id, :sub_category_id, :id)
+        params.permit(:title, :price, :description, :poster_name, :poster_email, :poster_phone_no, :photo, :tag, :location_id, :category_id, :sub_category_id, :user_id, :id)
     end
 
     def set_user

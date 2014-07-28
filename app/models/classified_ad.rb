@@ -8,7 +8,7 @@ class ClassifiedAd < ActiveRecord::Base
 	has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment :photo, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"] }
-	validates :poster_name, :presence => true
+	validates :location_id, :category_id, :sub_category_id, :title, :description, :price, :poster_name, :presence => true
 	validates :poster_email, :presence => true, :format => { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
 	def as_json(options={})
