@@ -30,6 +30,10 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
         $scope.loggedIn = true;
     });
     
+    $scope.$on('logout',function(){
+        $scope.loggedIn = false;
+    });
+    
     $scope.$watch('loggedIn', function(newValue, oldValue){
         console.log(newValue);
     });
@@ -46,6 +50,7 @@ myApp.controller('HomeCtrl', [
       
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
+        $scope.$emit('logout');
         if (oldUser) console.log(oldUser.email + " you're signed out.");
         $location.path('/index');
       }, function(error) {
