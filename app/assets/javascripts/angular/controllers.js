@@ -91,6 +91,7 @@ myApp.controller('SignUpCtrl', [
 
   		Auth.register(credentials).then(function(registeredUser) {
   		    console.log(registeredUser);
+            $scope.$emit('login');
   		    $location.path('/home');
   		}, function(error) {
   		    console.log(error);
