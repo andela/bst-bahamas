@@ -4,6 +4,7 @@
   <title>BstBahamas</title>
   <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Karla' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -57,9 +58,7 @@
 </div>
 <br>
 <div class="row" id="mainCnt">
-    <!-- <div class="col-md-2">
-        <featured-ads></featured-ads>
-    </div> -->
+    
     <div id="view" class="col-md-10" ng-view>
       <%= yield %>
     </div>
