@@ -14,4 +14,32 @@
             <hr>
         </div>
     </div>
+    
+    <div class="col-md-9 col-md-offset-1">
+        <featured-ads></featured-ads>
+    </div>
+    
+    <script type="text/ng-template" id="classified_ad">
+        <div id="adCont">
+            <div class="adInfo">
+                <div ng-repeat="ad in classifiedAds">
+                    <div id="adDesc">
+                        <h5>{{ad.description}}</h5>
+                        <div id="blurb">
+                            <p>Be silent in that solitude,
+Which is not loneliness- for then
+The spirits of the dead, who stood
+In life before thee, are again
+In death around thee, and their will
+Shall overshadow thee; be still.</p>
+                            <span id="price">{{ad.price|currency}}</span>
+                        </div>
+                    </div>
+                    <div id="adImg">
+                        <img src={{ad.photo_medium_url}}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 </div>
