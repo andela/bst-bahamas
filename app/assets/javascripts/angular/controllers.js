@@ -1,5 +1,5 @@
 myApp.controller('IndexCtrl', [
-  '$scope', 'AppService', 'Auth', function($scope, AppService, Auth) {
+  '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
@@ -13,8 +13,8 @@ myApp.controller('IndexCtrl', [
       $scope.loggedIn = false;
     });
 
-    AppService.getClassifiedAds(function(data){
-        $scope.classifiedAds = data;
+    AppService.searchClassifiedAds(function(data){
+        $scope.classifiedAds = data.ads;
     }, function(err){
         console.log(err);
     });
@@ -33,6 +33,15 @@ myApp.controller('IndexCtrl', [
       console.log(error);
     });
 
+    $scope.logout = function() {
+      Auth.logout().then(function(oldUser) {
+        $scope.loggedIn = false;
+        $location.path('/index');
+      }, function(error) {
+        console.log(error);
+      });
+    };
+
     $scope.$on('login', function(){
         $scope.loggedIn = true;
     });
@@ -48,16 +57,6 @@ myApp.controller('IndexCtrl', [
 
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
-
-    $scope.logout = function() {
-      Auth.logout().then(function(oldUser) {
-        $scope.$emit('logout');
-        if (oldUser) console.log(oldUser.email + " you're signed out.");
-        $location.path('/index');
-      }, function(error) {
-        console.log(error);
-      });
-    };
   }
 ]);
 
@@ -139,7 +138,13 @@ myApp.controller('EditAdCtrl', [
 
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
+    $scope.myAds = [];
 
+    AppService.myAds(function(data){
+      console.log(data);
+    }, function(error){
+      console.log(error);
+    })
   }
 ]);
 

@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'classified_ads/search'
   get 'classified_ads/random_pics'
 
+  resources :users do
+    resources :classified_ads
+  end
+
   resources :classified_ads
 
   resources :category,  :only => [:index]

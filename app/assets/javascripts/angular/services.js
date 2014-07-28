@@ -1,9 +1,9 @@
 'use strict';
 
 /* Services */
-myApp.factory('AppService', ['$resource', '$http',
+myApp.factory('AppService', ['$resource', '$http', 'Auth',
 
-  function($resource, $http){
+  function($resource, $http, Auth){
     // var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
     var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
 
@@ -22,6 +22,16 @@ myApp.factory('AppService', ['$resource', '$http',
     });
 
     var classifiedAds = $resource(HOST+'classified_ads/:id', {}, {
+      index:{
+        method:'GET',
+        isArray:true
+      },
+      show: {
+        method: 'GET'
+      }
+    });
+
+    var myAds = $resource(HOST+'users/:user_id/classified_ads/:id', {}, {
       index:{
         method:'GET',
         isArray:true
@@ -55,6 +65,14 @@ myApp.factory('AppService', ['$resource', '$http',
       },
       searchClassifiedAds: function(params, successCallback, errorCallback) {
         searchClassifiedAds.get(params, successCallback, errorCallback);
+      },
+      myAds: function(successCallback, errorCallback) {
+        Auth.currentUser().then(function(user) {
+          var params = {user_id: user.id};
+          myAds.index(params, successCallback, errorCallback);
+        }, function(error) {
+          errorCallback(error);
+        });
       }
     }
   }]);
