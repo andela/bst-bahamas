@@ -5,10 +5,10 @@
     "angular-route": "1.2.13",
     "angular-resource": "1.2.13",
     "flowtype": "latest",
-    "font-awesome": "4.0.3",
     "angular-bootstrap": "latest",
     "angular-devise": "latest",
     "bootstrap": "latest",
-    "ng-file-upload": "latest"
+    "ng-file-upload": "latest",
+    "angular-payments": "latest"
   }
 }

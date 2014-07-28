@@ -120,3 +120,18 @@ myApp.controller('ManageAdCtrl', [
     })
   }
 ]);
+
+myApp.controller('PaymentCtrl', [
+  '$scope', '$location', function($scope, $location) {
+    $scope.handleStripe = function(status, response) {
+      console.log('got here')
+      console.log(response);
+      if(response.error) {
+        // there was an error. Fix it.
+      } else {
+        // got stripe token, now charge it or smt
+        token = response.id
+      }
+    }
+  }
+]);

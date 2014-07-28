@@ -20,5 +20,6 @@
 //= require angular-devise/lib/devise-min
 //= require angular-bootstrap/ui-bootstrap.min
 //= require angular-bootstrap/ui-bootstrap-tpls.min
+//= require angular-payments/lib/angular-payments.min
 //= require main
 //= require_tree .

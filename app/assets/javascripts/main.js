@@ -1,5 +1,6 @@
-myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap']);
+Stripe.setPublishableKey('pk_test_4UDyZ8tCUJ5UbHZOSbikbToA');
 
+myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap', 'angularPayments']);
 myApp.config([
   '$routeProvider', '$locationProvider', 'AuthProvider', function($routeProvider, $locationProvider, AuthProvider) {
 
@@ -28,6 +29,10 @@ myApp.config([
     when('/manage_ad', {
       templateUrl: '../templates/account/manage_ad.html',
       controller: 'ManageAdCtrl'
+    }).
+    when('/payment_form', {
+      templateUrl: '../templates/stripe/payment_form.html',
+      controller: 'PaymentCtrl'
     }).
     otherwise({
       redirectTo: '/'
