@@ -12,7 +12,7 @@ myApp.directive('myAdSense', function() {
     return {
         restrict:'EAC',
         replace:true,
-        template:"<div class='featured'><h4 id='sidePanelTitle'>{{model.category}}</h4><ul><li ng-repeat='item in items'>{{item.description}}</li></ul><hr></div>",
+        templateUrl:'classified_ad',
         link:function(scope,element,attrs){
          
         }
