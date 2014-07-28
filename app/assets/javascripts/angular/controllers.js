@@ -112,25 +112,49 @@ myApp.controller('SignUpCtrl', [
 ]);
 
 myApp.controller('PostAdCtrl', [
-  '$scope', '$location', '$upload', function($scope, $location, $upload) {
+  '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
+    $scope.tags = [
+      {name: 'New Item', days: 7, price: 2, selected: false},
+      {name: 'Need to sell', days: 7, price: 2, selected: false},
+      {name: 'Urgent', days: 7, price: 2, selected: false},
+      {name: 'Reduced Price', days: 7, price: 2, selected: false},
+      {name: 'Sale', days: 7, price: 2, selected: false}
+    ];
+    $scope.success = false;
+    $scope.selectedTag = null;
+    $scope.email = Auth._currentUser ? Auth._currentUser.email : null;
+    var params = {};
+
+    $scope.submitForm = function(isValid) {
+      if (isValid) {
+        if (Auth._currentUser) params.user_id = Auth._currentUser.id;
+        params.location_id = $scope.location.id;
+        params.category_id = $scope.category.id;
+        params.sub_category_id = $scope.subCat.id;
+        params.price = $scope.price;
+        params.title = $scope.title;
+        params.description = $scope.description;
+        params.address = $scope.address;
+        params.poster_name = $scope.name;
+        params.poster_email = $scope.email;
+        params.poster_phone_no = $scope.phoneno;
+        $upload.upload({
+          url: 'http://bst-bahamas.herokuapp.com/classified_ads',
+          method: 'POST',
+          data: params,
+          photo: params.photo // or list of files ($files) for html5 only
+        }).success(function(data, status, headers, config) {
+          console.log(status);
+          $scope.success = true;
+        }).error(function(error){
+          console.log(error);
+          $scope.success = false;
+        });
+      }
+    };
+
     $scope.onFileSelect = function($files) {
-      $scope.upload = $upload.upload({
-        url: 'http://bst-bahamas.herokuapp.com/classified_ads',
-        method: 'POST',
-        data: {location_id: 1,
-          sub_category_id: 1,
-          title: $scope.title,
-          price: $scope.price,
-          description: $scope.description,
-          poster_name: $scope.name,
-          poster_email: $scope.email,
-          photo: $files[0]},
-        photo: $files[0] // or list of files ($files) for html5 only
-      }).success(function(data, status, headers, config) {
-        console.log(status);
-      }).error(function(error){
-        console.log(error);
-      });
+      params.photo = $files[0];
     };
   }
 ]);
