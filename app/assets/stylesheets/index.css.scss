@@ -9,13 +9,17 @@
         position:fixed;
         overflow-y:scroll;
         top:138px;
+        padding-top:20px;
         background-color:#f0f0f0;
         font-family:Karla;
         padding-left:10px;
         height:760px;
+        
+        
         .sidePanelTitle
         {
             text-transform:uppercase;
+            text-decoration:underline;
         }
         
         ul
@@ -26,7 +30,7 @@
         
         hr
         {
-            border-color:#555;
+            border-color:#999;
         }
     }
 }
