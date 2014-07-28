@@ -1,3 +1,8 @@
+*
+{
+    font-family:Karla;
+}
+
 #mainCnt
 {
     position:relative;
@@ -31,6 +36,71 @@
         hr
         {
             border-color:#999;
+        }
+    }
+}
+
+#adCont
+{
+    height:760px;
+    width:100%;
+    
+    .adInfo
+    {
+        height:100%;
+        width:100%;
+
+        &>div
+        {
+            float:left;
+            height:35%;
+            width:30%;
+            text-align:center;
+            margin: 10px 10px 10px 0;
+            border:1px solid #cecece;
+            border-radius:7px;
+                #adDesc
+                {
+                    height:57%;
+                    width:100%;
+                    text-align:left;
+                    padding:5px 0 0 10px;
+                    h5
+                    {
+                        text-transform:uppercase;
+                    }
+                    
+                    #blurb
+                    {
+                        width:90%;
+                        
+                        p 
+                        {
+                            text-align:justify;
+                            font-size:12px;
+                        }
+                    }
+                    
+                    #price
+                    {
+                        float:right;
+                        color:#22A7F0;
+                    }
+                }        
+                
+                #adImg
+                {
+                    height:43%;
+                    width:100%;
+
+                    img
+                    {
+                        width:100%;
+                        height:100%;
+                        border-bottom-left-radius:5px;
+                        border-bottom-right-radius:5px;
+                    }
+                }
         }
     }
 }
