@@ -8,8 +8,8 @@ body
 
 .form
 {
-    height:275px;
-    width:300px;
+    height:20%;
+    width:25%;
     margin:auto;
     border:4px solid #cecece;
     padding:10px;
@@ -28,32 +28,32 @@ body
             color:#444;
         }
     }
-    
+
     input#mail
     {
         background:url('ficons/user.png');
     }
-    
+
     input#pwd
     {
         background:url('ficons/lock.png');
         background-size:5%;
     }
-    
+
     input,input#mail, input#pwd
     {
         height:30px;
         width:80%;
         border-radius:5px;
         border:none;
-        margin-bottom:15px;
-        padding-left:30px;
+        margin-bottom:5%;
+        padding-left:10%;
         background-size:8%;
         background-repeat:no-repeat;
         background-position:5px;
         background-color:#FAFAFA;
-    } 
-    
+    }
+
     button
     {
         border:none;
@@ -71,7 +71,7 @@ body
             background-color:#26A65B;
         }
     }
-    
+
     #forgotPwd
     {
         height:40px;
@@ -80,18 +80,24 @@ body
         margin:auto;
         padding:10px 0;
     }
-    
+
     a
     {
         text-decoration:none;
         color:#000;
         cursor:pointer;
-        
+
         &:hover
         {
             text-decoration:underline;
             color:#000;
             background-color:#fff;
         }
+    }
+
+    .login-error {
+        color: red;
+        text-align: left;
+        padding-left: 10%;
     }
 }

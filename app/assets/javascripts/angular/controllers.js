@@ -1,11 +1,12 @@
-myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
-//    $scope.model = {'category':'All Categories','location':'All Locations'};
+myApp.controller('IndexCtrl', [
+  '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
     $scope.locations = [];
     $scope.loggedIn = false;
 
+<<<<<<< HEAD
     //get classified ads
     AppService.getClassifiedAds(function(data){
         $scope.classifiedAds = Array.prototype.slice.call(data);
@@ -13,6 +14,21 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
         function(error){
             console.error(error);
         });
+=======
+    Auth.currentUser().then(function(user) {
+      console.log('currentUser found');
+      $scope.loggedIn = true;
+    }, function(error) {
+      $scope.loggedIn = false;
+    });
+
+    AppService.searchClassifiedAds(function(data){
+        $scope.classifiedAds = data.ads;
+    }, function(err){
+        console.log(err);
+    });
+
+>>>>>>> 7c890e8897637f0e767e882c861a3c8453ad8846
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
@@ -26,6 +42,15 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
     },function(error) {
       console.log(error);
     });
+
+    $scope.logout = function() {
+      Auth.logout().then(function(oldUser) {
+        $scope.loggedIn = false;
+        $location.path('/index');
+      }, function(error) {
+        console.log(error);
+      });
+    };
 
     $scope.$on('login', function(){
         $scope.loggedIn = true;
@@ -42,16 +67,6 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
 
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
-
-    $scope.logout = function() {
-      Auth.logout().then(function(oldUser) {
-        $scope.$emit('logout');
-        if (oldUser) console.log(oldUser.email + " you're signed out.");
-        $location.path('/index');
-      }, function(error) {
-        console.log(error);
-      });
-    };
   }
 ]);
 
@@ -63,13 +78,17 @@ myApp.controller('LoginCtrl', [
           password: $scope.password
       };
 
+      $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
+        $scope.showError = true;
+      });
+
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
           console.log(user);
           $location.path('/home');
       }, function(error) {
           console.log(error);
-          $scope.errorMessage = "Password " + error.data.errors.password[0];
+          $scope.showError = true;
       });
     }
   }
@@ -90,7 +109,7 @@ myApp.controller('SignUpCtrl', [
   		    $location.path('/home');
   		}, function(error) {
   		    console.log(error);
-          $scope.errorMessage = "Password " + error.data.errors.password[0];
+          $scope.errors = error.data.errors;
   		});
   	}
   }
@@ -120,11 +139,23 @@ myApp.controller('PostAdCtrl', [
   }
 ]);
 
-myApp.controller('ManageAdCtrl', [
+myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     var params = {id: $location.search()['id']}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
+    }, function(error){
+      console.log(error);
+    })
+  }
+]);
+
+myApp.controller('MyAdsCtrl', [
+  '$scope', '$location', 'AppService', function($scope, $location, AppService) {
+    $scope.myAds = [];
+
+    AppService.myAds(function(data){
+      console.log(data);
     }, function(error){
       console.log(error);
     })
