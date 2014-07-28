@@ -64,16 +64,21 @@
                     height:57%;
                     width:100%;
                     text-align:left;
-                    padding:5px 0 0 10px;
-                    h5
+                    padding:5px 5px 0 10px;
+                    
+                    #header
                     {
-                        text-transform:uppercase;
+                        height:20%;
+                        h5
+                        {
+                            text-transform:uppercase;
+                        }
                     }
                     
                     #blurb
                     {
                         width:90%;
-                        
+                        height:70%;
                         p 
                         {
                             text-align:justify;

@@ -2,16 +2,9 @@
 
 /* Services */
 myApp.factory('AppService', ['$resource', '$http', 'Auth',
-
-<<<<<<< HEAD
-  function($resource, $http){
-    var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
-    // var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
-=======
   function($resource, $http, Auth){
-    // var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
-    var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
->>>>>>> 7c890e8897637f0e767e882c861a3c8453ad8846
+    var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
+    //var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
 
     var categories = $resource( HOST+'category',{},{
       get:{

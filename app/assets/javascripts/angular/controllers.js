@@ -6,7 +6,6 @@ myApp.controller('IndexCtrl', [
     $scope.locations = [];
     $scope.loggedIn = false;
 
-<<<<<<< HEAD
     //get classified ads
     AppService.getClassifiedAds(function(data){
         $scope.classifiedAds = Array.prototype.slice.call(data);
@@ -14,7 +13,6 @@ myApp.controller('IndexCtrl', [
         function(error){
             console.error(error);
         });
-=======
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
@@ -27,8 +25,6 @@ myApp.controller('IndexCtrl', [
     }, function(err){
         console.log(err);
     });
-
->>>>>>> 7c890e8897637f0e767e882c861a3c8453ad8846
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
