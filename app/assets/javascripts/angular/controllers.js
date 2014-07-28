@@ -6,12 +6,13 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
     $scope.locations = [];
     $scope.loggedIn = false;
 
+    //get classified ads
     AppService.getClassifiedAds(function(data){
-        $scope.classifiedAds = data;
-    }, function(err){
-        console.log(err);
-    });
-
+        $scope.classifiedAds = Array.prototype.slice.call(data);
+    },
+        function(error){
+            console.error(error);
+        });
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
