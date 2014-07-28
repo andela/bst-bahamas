@@ -4,8 +4,8 @@
 myApp.factory('AppService', ['$resource', '$http',
 
   function($resource, $http){
-    // var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
-    var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
+    var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
+    // var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
 
     var categories = $resource( HOST+'category',{},{
       get:{
