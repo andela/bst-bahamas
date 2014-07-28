@@ -33,4 +33,6 @@ myApp.config([
       redirectTo: '/'
     });
   }
-]);
+]).run(['$rootScope',function($rootScope){
+    $rootScope.loggedIn = false;
+}])
