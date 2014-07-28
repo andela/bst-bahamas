@@ -1,11 +1,11 @@
 myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
-    $scope.model = {'category':'All Categories','location':'All Locations'};
-    $scope.sidePanelContent = [];
+//    $scope.model = {'category':'All Categories','location':'All Locations'};
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
     $scope.locations = [];
-
+    $scope.loggedIn = false;
+    
     AppService.getClassifiedAds(function(data){
         $scope.classifiedAds = data;
     }, function(err){
@@ -25,6 +25,14 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
     },function(error) {
       console.log(error);
     });
+    
+    $scope.$on('login', function(){
+        $scope.loggedIn = true;
+    });
+    
+    $scope.$watch('loggedIn', function(newValue, oldValue){
+        console.log(newValue);
+    });
 }]);
 
 myApp.controller('HomeCtrl', [
@@ -35,7 +43,7 @@ myApp.controller('HomeCtrl', [
     }, function(error){
     	console.log(error);
     });
-
+      
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
         if (oldUser) console.log(oldUser.email + " you're signed out.");
@@ -54,8 +62,9 @@ myApp.controller('LoginCtrl', [
           email: $scope.email,
           password: $scope.password
       };
-
+        
       Auth.login(credentials).then(function(user) {
+          $scope.$emit('login');
           console.log(user);
           $location.path('/home');
       }, function(error) {
