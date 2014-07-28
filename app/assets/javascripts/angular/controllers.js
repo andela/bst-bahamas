@@ -68,13 +68,17 @@ myApp.controller('LoginCtrl', [
           password: $scope.password
       };
 
+      $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
+        $scope.showError = true;
+      });
+
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
           console.log(user);
           $location.path('/home');
       }, function(error) {
           console.log(error);
-          $scope.errorMessage = "Password " + error.data.errors.password[0];
+          $scope.showError = true;
       });
     }
   }
@@ -95,7 +99,7 @@ myApp.controller('SignUpCtrl', [
   		    $location.path('/home');
   		}, function(error) {
   		    console.log(error);
-          $scope.errorMessage = "Password " + error.data.errors.password[0];
+          $scope.errors = error.data.errors;
   		});
   	}
   }

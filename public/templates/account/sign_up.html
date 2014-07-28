@@ -1,8 +1,10 @@
 <div class="form">
     <div class="header"><h3 id="signup" class="headerText">Sign Up</h3></div>
 	<input ng-model="email" type="email" placeholder="Email" id='mail'>
+	<div class="login-error" ng-repeat="error in errors.email">Email {{error}}</div>
 	<input ng-model="password" type="password" placeholder="Password" id='pwd'>
+	<div class="login-error" ng-repeat="error in errors.password">Password {{error}}</div>
 	<input ng-model="passwordConfirmation" type="password" placeholder="Confirm Password">
+	<div class="login-error" ng-repeat="error in errors.password_confirmation">Confirmation {{error}}</div>
 	<button ng-click="signUp()">Register</button>
-	<div>{{errorMessage}}</div>
 </div>
