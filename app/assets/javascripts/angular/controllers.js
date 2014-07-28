@@ -1,10 +1,17 @@
-myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppService) {
-//    $scope.model = {'category':'All Categories','location':'All Locations'};
+myApp.controller('IndexCtrl', [
+  '$scope', 'AppService', 'Auth', function($scope, AppService, Auth) {
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
     $scope.locations = [];
     $scope.loggedIn = false;
+
+    Auth.currentUser().then(function(user) {
+      console.log('currentUser found');
+      $scope.loggedIn = true;
+    }, function(error) {
+      $scope.loggedIn = false;
+    });
 
     AppService.getClassifiedAds(function(data){
         $scope.classifiedAds = data;
@@ -119,7 +126,7 @@ myApp.controller('PostAdCtrl', [
   }
 ]);
 
-myApp.controller('ManageAdCtrl', [
+myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     var params = {id: $location.search()['id']}
     AppService.getClassifiedAd(params, function(data){

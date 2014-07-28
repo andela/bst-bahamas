@@ -26,9 +26,13 @@ myApp.config([
       templateUrl: '../templates/account/post_ad.html',
       controller: 'PostAdCtrl'
     }).
-    when('/manage_ad', {
-      templateUrl: '../templates/account/manage_ad.html',
-      controller: 'ManageAdCtrl'
+    when('/edit_ad', {
+      templateUrl: '../templates/account/edit_ad.html',
+      controller: 'EditAdCtrl'
+    }).
+    when('/my_ads', {
+      templateUrl: '../templates/account/my_ads.html',
+      controller: 'MyAdsCtrl'
     }).
     when('/payment_form', {
       templateUrl: '../templates/stripe/payment_form.html',
