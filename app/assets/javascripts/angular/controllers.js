@@ -5,7 +5,7 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
     $scope.classifiedAds = [];
     $scope.locations = [];
     $scope.loggedIn = false;
-    
+
     AppService.getClassifiedAds(function(data){
         $scope.classifiedAds = data;
     }, function(err){
@@ -25,15 +25,15 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
     },function(error) {
       console.log(error);
     });
-    
+
     $scope.$on('login', function(){
         $scope.loggedIn = true;
     });
-    
+
     $scope.$on('logout',function(){
         $scope.loggedIn = false;
     });
-    
+
     $scope.$watch('loggedIn', function(newValue, oldValue){
         console.log(newValue);
     });
@@ -41,13 +41,7 @@ myApp.controller('IndexCtrl', ['$scope', 'AppService',function($scope, AppServic
 
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
-    $scope.users = [];
-    AppService.getUsers(function(data){
-    	$scope.users = data;
-    }, function(error){
-    	console.log(error);
-    });
-      
+
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
         $scope.$emit('logout');
@@ -67,7 +61,7 @@ myApp.controller('LoginCtrl', [
           email: $scope.email,
           password: $scope.password
       };
-        
+
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
           console.log(user);

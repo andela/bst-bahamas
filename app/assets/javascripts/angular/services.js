@@ -7,13 +7,6 @@ myApp.factory('AppService', ['$resource', '$http',
     // var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
     var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
 
-    var users = $resource(HOST+'users', {}, {
-      get: {
-        method:'GET',
-        isArray: true
-      }
-    });
-
     var categories = $resource( HOST+'category',{},{
       get:{
         method:'GET',
@@ -45,10 +38,6 @@ myApp.factory('AppService', ['$resource', '$http',
     });
 
     return {
-      getUsers: function(successCallback, errorCallback) {
-        var userArray = users.get(successCallback, errorCallback);
-        return userArray;
-      },
       getCategories: function(successCallback, errorCallback) {
         var categoriesArray = categories.get(successCallback, errorCallback);
         return categoriesArray;
