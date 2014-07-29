@@ -17,4 +17,14 @@ myApp.directive('myAdSense', function() {
          
         }
     };
+})
+.directive('selectedAd', function(){
+    return {
+        restrict:'EAC',
+        replace:true,
+        templateUrl:'selected_ad',
+        link:function(scope,element,attrs)
+        {
+        }
+    };
 });
