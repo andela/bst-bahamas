@@ -53,22 +53,31 @@
         &>div
         {
             float:left;
-            height:35%;
+            height:40%;
             width:30%;
             text-align:center;
             margin: 10px 10px 10px 0;
             border:1px solid #cecece;
             border-radius:7px;
+            cursor:pointer;
+            
+            &:hover
+            {
+                box-shadow:5px 5px 10px #555;
+                border-right:none;
+                border-bottom:none;
+            }
+            
                 #adDesc
                 {
                     height:57%;
                     width:100%;
                     text-align:left;
                     padding:5px 5px 0 10px;
-
+        
                     #header
                     {
-                        height:20%;
+                        height:15%;
                         h5
                         {
                             text-transform:uppercase;
@@ -77,11 +86,11 @@
 
                     #blurb
                     {
-                        width:90%;
-                        height:70%;
+                        width:95%;
+                        height:65%;
                         p
                         {
-                            text-align:justify;
+                            text-align:left;
                             font-size:12px;
                         }
                     }
@@ -95,7 +104,7 @@
 
                 #adImg
                 {
-                    height:43%;
+                    height: 43%;
                     width:100%;
 
                     img
@@ -106,6 +115,72 @@
                         border-bottom-right-radius:5px;
                     }
                 }
+        }
+    }
+}
+
+/* when specific ad is selected */
+#container
+{
+    width:85%;
+    height:auto;
+    
+    #infoCont
+    {
+        width:40%;
+        float:left;
+        
+        #itemImg
+        {
+            height:65%;
+            width:100%;
+            margin-bottom:4%;
+            img 
+            {
+                height:25%;
+                width:100%;
+                border-radius:5px;
+            }
+        }
+        
+        #contactInfo
+        {
+            width:100%;
+            &>div
+            {
+                border-bottom:1px dashed #cccccc;
+                width:100%;
+                padding:2%;
+                font-size:14px;
+                p 
+                {
+                    display:inline;
+                }
+            }
+        }
+    }
+    
+    #descrCont
+    {
+        width:50%;
+        padding-left:3%;
+        float:left;
+        height:300px;
+        #title
+        {
+            text-transform:uppercase;
+        }
+        
+        #price
+        {
+            color:#22A7F0;
+        }
+        
+        #back
+        {
+            color:#22A7F0;
+            cursor:pointer;
+            text-decoration:underline;
         }
     }
 }
