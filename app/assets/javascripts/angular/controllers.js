@@ -69,23 +69,27 @@ myApp.controller('IndexCtrl', [
       $scope.subCategory = null;
       $scope.search();
       $scope.selectedAd = null;
+      $scope.selected = "";
     };
 
     $scope.selectLocation = function() {
       $scope.search();
       $scope.selectedAd = null;
+      $scope.selected = "";
     };
 
     $scope.clickCategory = function(category) {
       $scope.category = category;
       $scope.search();
       $scope.selectedAd = null;
+      $scope.selected = "";
     };
 
     $scope.clickSubCategory = function(subCategory) {
       $scope.subCategory = subCategory;
       $scope.search();
       $scope.selectedAd = null;
+      $scope.selected = "";
     };
 
     $scope.pageChanged = function() {
@@ -111,6 +115,7 @@ myApp.controller('IndexCtrl', [
       AppService.getClassifiedAd({'id':id}, function(data){
         $scope.selectedAd = data;
         $scope.showSpinner = false;
+        $scope.selected = "selected"
       }, function(error){
         console.error(error);
         $scope.showSpinner = false;
@@ -121,6 +126,7 @@ myApp.controller('IndexCtrl', [
     $scope.backToAds = function()
     {
       $scope.selectedAd = null;
+      $scope.selected = "";
     }
 }]);
 

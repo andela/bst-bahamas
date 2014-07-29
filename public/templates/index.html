@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-md-offset-1">
+    <div class="col-md-9 col-md-offset-1" ng-switch on='selected'>
         <div class="breadcrumb">
             <a ng-if="category == null && selectedAd != null">All Categories</a>
             <a>{{category.name}}</a>
@@ -24,20 +24,58 @@
             <span ng-if="selectedAd != null">></span>
             <a>{{selectedAd.title}}</a>
         </div>
-        <div ng-if="selectedAd == null">
-            <div ng-include="'templates/ads.html'"></div>
-            <div class="spinner" ng-if="showSpinner">
-                <i class="fa fa-spinner fa-spin fa-3x"></i>
-            </div>
-            <div class="spinner" ng-show="!showSpinner && classifiedAds.length == 0">
-                <div>No Results Found.</div>
-            </div>
+        <selected-ad ng-switch-when="selected"></selected-ad>
+        <featured-ads ng-hide="showSpinner || classifiedAds.length == 0" ng-switch-default></featured-ads>
+        <div class="spinner" ng-if="showSpinner">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
         </div>
-        <div ng-if="selectedAd != null">
-            <div ng-include="'templates/ad_detail.html'"></div>
-            <div class="spinner" ng-if="showSpinner">
-                <i class="fa fa-spinner fa-spin fa-3x"></i>
-            </div>
+        <div class="spinner" ng-show="classifiedAds.length == 0">
+            <div>No Results Found.</div>
         </div>
     </div>
+
+    <script type="text/ng-template" id="classified_ad">
+            <div id="adCont">
+                <div class="adInfo">
+                    <div ng-repeat="ad in classifiedAds" ng-click="showAd(ad.id)" >
+                        <div id="adDesc">
+                            <div id="header">
+                                <h5>{{ad.title}}</h5>
+                            </div>
+                            <div id="blurb">
+                                <p>{{ad.description}}</p>
+
+                            </div>
+                            <span id="price">{{ad.price|currency}}</span>
+                        </div>
+                        <div id="adImg">
+                            <img src={{ad.photo_medium_url}}/>
+                        </div>
+                    </div>
+                </div>
+                <pagination ng-show="classifiedAds.length > 0" total-items="totalItems" ng-model="pagination.currentPage" ng-change="pageChanged()" items-per-page="$scope.pagination.per"></pagination>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="selected_ad">
+            <div id="container" ng-model="selectedAd">
+                <div id="infoCont">
+                    <div id="itemImg">
+                        <img src={{selectedAd.photo_medium_url}}/>
+                    </div>
+                    <div id="contactInfo">
+                        <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
+                        <div><span class="fa fa-phone"> <p>{{selectedAd.phone_no}}</p></span></div>
+                        <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
+                        <div><span class="fa fa-globe"> <p ng-model="locations"></p></span></div>
+                    </div>
+                </div>
+                <div id="descrCont">
+                    <h4 id="title">{{selectedAd.title}}</h4>
+                    <span id="price">{{selectedAd.price|currency}}</span>
+                    <p>{{selectedAd.description}}</p>
+                    <span ng-click="backToAds()" ng-model="selected" id="back">Back To Listings</span>
+                </div>
+            </div>
+        </script>
 </div>
