@@ -15,8 +15,9 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-md-offset-1">
-        <featured-ads ng-hide="showSpinner || classifiedAds.length == 0"></featured-ads>
+    <div class="col-md-9 col-md-offset-1" ng-switch on='selected'>
+        <selected-ad ng-switch-when="selected"></selected-ad>
+        <featured-ads ng-hide="showSpinner || classifiedAds.length == 0" ng-switch-default></featured-ads>
         <div class="spinner" ng-if="showSpinner">
             <i class="fa fa-spinner fa-spin fa-3x"></i>
         </div>
@@ -28,7 +29,7 @@
     <script type="text/ng-template" id="classified_ad">
         <div id="adCont">
             <div class="adInfo">
-                <div ng-repeat="ad in classifiedAds">
+                <div ng-repeat="ad in classifiedAds" ng-click="showAd(ad.id)" >
                     <div id="adDesc">
                         <div id="header">
                             <h5>{{ad.title}}</h5>
@@ -43,6 +44,28 @@
                         <img src={{ad.photo_medium_url}}/>
                     </div>
                 </div>
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="selected_ad">
+        <div id="container" ng-model="selectedAd">
+            <div id="infoCont">
+                <div id="itemImg">
+                    <img src={{selectedAd.photo_medium_url}}/>
+                </div>
+                <div id="contactInfo">
+                    <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
+                    <div><span class="fa fa-phone"> <p>{{selectedAd.phone_no}}</p></span></div>
+                    <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
+                    <div><span class="fa fa-globe"> <p ng-model="locations"></p></span></div>
+                </div>
+            </div>
+            <div id="descrCont">
+                <h4 id="title">{{selectedAd.title}}</h4>
+                <span id="price">{{selectedAd.price|currency}}</span>
+                <p>{{selectedAd.description}}</p>
+                <span ng-click="backToAds()" ng-model="selected" id="back">Back To Listings</span>
             </div>
         </div>
     </script>
