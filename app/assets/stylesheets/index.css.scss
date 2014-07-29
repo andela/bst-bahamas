@@ -7,7 +7,7 @@
 {
     position:relative;
     top:120px;
-    
+
     .featured
     {
         width:inherit;
@@ -19,20 +19,20 @@
         font-family:Karla;
         padding-left:10px;
         height:760px;
-        
-        
+
+
         .sidePanelTitle
         {
             text-transform:uppercase;
             text-decoration:underline;
         }
-        
+
         ul
         {
             padding:0 !important;
             list-style:none;
         }
-        
+
         hr
         {
             border-color:#999;
@@ -44,7 +44,7 @@
 {
     height:760px;
     width:100%;
-    
+
     .adInfo
     {
         height:100%;
@@ -65,7 +65,7 @@
                     width:100%;
                     text-align:left;
                     padding:5px 5px 0 10px;
-                    
+
                     #header
                     {
                         height:20%;
@@ -74,25 +74,25 @@
                             text-transform:uppercase;
                         }
                     }
-                    
+
                     #blurb
                     {
                         width:90%;
                         height:70%;
-                        p 
+                        p
                         {
                             text-align:justify;
                             font-size:12px;
                         }
                     }
-                    
+
                     #price
                     {
                         float:right;
                         color:#22A7F0;
                     }
-                }        
-                
+                }
+
                 #adImg
                 {
                     height:43%;
@@ -108,4 +108,23 @@
                 }
         }
     }
+}
+
+.spinner {
+    text-align: center;
+    margin-top: 25%;
+}
+
+a {
+  color: #414A54;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  background-color: transparent
+}
+
+a.selected {
+    color: #1C9CBA;
 }

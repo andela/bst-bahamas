@@ -5,14 +5,8 @@ myApp.controller('IndexCtrl', [
     $scope.classifiedAds = [];
     $scope.locations = [];
     $scope.loggedIn = false;
+    $scope.showSpinner = true;
 
-    //get classified ads
-    AppService.getClassifiedAds(function(data){
-        $scope.classifiedAds = Array.prototype.slice.call(data);
-    },
-        function(error){
-            console.error(error);
-        });
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
@@ -21,9 +15,11 @@ myApp.controller('IndexCtrl', [
     });
 
     AppService.searchClassifiedAds(function(data){
-        $scope.classifiedAds = data.ads;
+      $scope.classifiedAds = data.ads;
+      $scope.showSpinner = false;
     }, function(err){
-        console.log(err);
+      console.log(err);
+      $scope.showSpinner = false;
     });
     //get categories
     AppService.getCategories(function(data) {
@@ -39,6 +35,24 @@ myApp.controller('IndexCtrl', [
       console.log(error);
     });
 
+    $scope.search = function() {
+      var params = {};
+      if ($scope.query) params.q = $scope.query;
+      if ($scope.location) params.location_id = $scope.location.id;
+      if ($scope.category) params.category_id = $scope.category.id;
+      if ($scope.subCategory) params.sub_category_id = $scope.subCategory.id;
+      console.log(params);
+
+      $scope.showSpinner = true;
+      AppService.searchClassifiedAds(params, function(data){
+        $scope.classifiedAds = data.ads;
+        $scope.showSpinner = false;
+      }, function(err){
+        console.log(err);
+        $scope.showSpinner = false;
+      });
+    }
+
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
         $scope.loggedIn = false;
@@ -47,6 +61,21 @@ myApp.controller('IndexCtrl', [
         console.log(error);
       });
     };
+
+    $scope.selectCategory = function() {
+      $scope.subCategory = null;
+      $scope.search();
+    }
+
+    $scope.clickCategory = function(category) {
+      $scope.category = category;
+      $scope.search();
+    };
+
+    $scope.clickSubCategory = function(subCategory) {
+      $scope.subCategory = subCategory;
+      $scope.search();
+    }
 
     $scope.$on('login', function(){
         $scope.loggedIn = true;

@@ -2,23 +2,29 @@
     <div class="col-md-2">
         <div class="featured">
             <h4 class="sidePanelTitle">{{category.name}}</h4>
-            <div ng-repeat="subCategory in category.sub_category">
-                <div>{{subCategory.name}} ({{subCategory.num_ads}})</div>
+            <div ng-repeat="_subCategory in category.sub_category">
+                <a ng-click="clickSubCategory(_subCategory)" ng-class="{selected: _subCategory.id == subCategory.id}">{{_subCategory.name}} ({{_subCategory.num_ads}})</a>
             </div>
             <div ng-if="category==null">
                 <h4 class="sidePanelTitle">All Categories</h4>
                 <div ng-repeat="_category in categories">
-                    <div>{{_category.name}}</div>
+                    <a ng-click="clickCategory(_category)">{{_category.name}}</a>
                 </div>
             </div>
             <hr>
         </div>
     </div>
-    
+
     <div class="col-md-9 col-md-offset-1">
-        <featured-ads></featured-ads>
+        <featured-ads ng-hide="showSpinner || classifiedAds.length == 0"></featured-ads>
+        <div class="spinner" ng-if="showSpinner">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+        <div class="spinner" ng-show="classifiedAds.length == 0">
+            <div>No Results Found.</div>
+        </div>
     </div>
-    
+
     <script type="text/ng-template" id="classified_ad">
         <div id="adCont">
             <div class="adInfo">
@@ -29,7 +35,7 @@
                         </div>
                         <div id="blurb">
                             <p>{{ad.description}}</p>
-                            
+
                         </div>
                         <span id="price">{{ad.price|currency}}</span>
                     </div>
