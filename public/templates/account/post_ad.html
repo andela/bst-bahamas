@@ -5,7 +5,7 @@
 		<span>BST Bahamas is absolutely <span class="free">FREE</span> to user</span>
 	</div>
 	<section class="ad-detail">
-		<div><span>1</span> <span><b>Ad Details</b></span></div>
+		<div><span class="badge">1</span> <span><b>Ad Details</b></span></div>
 		<div class="attr">
 			<div class="text"><b>Location:</b></div>
 			<div class="input">
@@ -26,7 +26,7 @@
 		</div>
 		<div class="attr">
 			<div class="text"><b>Price:</b></div>
-			<div class="input">$ <input type="number" ng-model="price" required></div>
+			<div class="input">$ <input type="number" ng-model="price" min='0' required></div>
 		</div>
 		<div class="attr">
 			<div class="text"><b>Title:</b></div>
@@ -42,14 +42,14 @@
 		</div>
 	</section>
 	<section class="images">
-		<div><span>2</span> <span><b>Media</b></span></div>
+		<div><span class="badge">2</span> <span><b>Media</b></span></div>
 		<div class="attr">
 			<div class="text"><b>Image:</b></div>
 			<div class="input"><input type="file" ng-file-select="onFileSelect($files)" required></div>
 		</div>
 	</section>
 	<section class="contact-info">
-		<div><span>3</span> <span><b>Contact Information</b></span></div>
+		<div><span class="badge">3</span> <span><b>Contact Information</b></span></div>
 		<div class="attr">
 			<div class="text"><b>Name:</b></div>
 			<div class="input"><input type="text" ng-model="name" required></div>
@@ -64,8 +64,8 @@
 		</div>
 	</section>
 	<section class="promote-ad">
-		<div><span>4</span> <span><b>Promote My Ad (optional)</b></span></div>
-		<table>
+		<div><span class="badge">4</span> <span><b>Promote My Ad (optional)</b></span></div>
+		<table class="table">
 			<tr>
 				<th>Features</th>
 				<th>Days</th>
