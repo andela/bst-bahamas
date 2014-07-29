@@ -61,7 +61,7 @@ class ClassifiedAdsController < ApplicationController
       results = ClassifiedAd.where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
     end
     page = page + 1
-    render json: {:page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
+    render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
   end
 
   def random_pics

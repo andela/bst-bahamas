@@ -6,6 +6,10 @@ myApp.controller('IndexCtrl', [
     $scope.locations = [];
     $scope.loggedIn = false;
     $scope.showSpinner = true;
+    $scope.pagination = {};
+    $scope.pagination.currentPage = 1;
+    $scope.pagination.per = 25;
+    $scope.totalItems = 25;
 
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
@@ -14,13 +18,6 @@ myApp.controller('IndexCtrl', [
       $scope.loggedIn = false;
     });
 
-    AppService.searchClassifiedAds(function(data){
-      $scope.classifiedAds = data.ads;
-      $scope.showSpinner = false;
-    }, function(err){
-      console.log(err);
-      $scope.showSpinner = false;
-    });
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
@@ -37,6 +34,7 @@ myApp.controller('IndexCtrl', [
 
     $scope.search = function() {
       var params = {};
+      params.page = $scope.pagination.currentPage;
       if ($scope.query) params.q = $scope.query;
       if ($scope.location) params.location_id = $scope.location.id;
       if ($scope.category) params.category_id = $scope.category.id;
@@ -47,11 +45,16 @@ myApp.controller('IndexCtrl', [
       AppService.searchClassifiedAds(params, function(data){
         $scope.classifiedAds = data.ads;
         $scope.showSpinner = false;
+        $scope.totalItems = data.numResults;
+        $scope.pagination.per = data.per;
       }, function(err){
         console.log(err);
         $scope.showSpinner = false;
       });
     }
+
+    //get classified ads on first page load
+    $scope.search();
 
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
@@ -75,7 +78,11 @@ myApp.controller('IndexCtrl', [
     $scope.clickSubCategory = function(subCategory) {
       $scope.subCategory = subCategory;
       $scope.search();
-    }
+    };
+
+    $scope.pageChanged = function() {
+      $scope.search();
+    };
 
     $scope.$on('login', function(){
         $scope.loggedIn = true;

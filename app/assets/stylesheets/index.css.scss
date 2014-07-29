@@ -7,6 +7,7 @@
 {
     position:relative;
     top:120px;
+    width: 100%;
 
     .featured
     {
@@ -18,7 +19,7 @@
         background-color:#f0f0f0;
         font-family:Karla;
         padding-left:10px;
-        height:760px;
+        height: 100%;
 
 
         .sidePanelTitle
@@ -71,7 +72,7 @@
                         height:20%;
                         h5
                         {
-                            text-transform:uppercase;
+                            /*text-transform:uppercase;*/
                         }
                     }
 
@@ -79,6 +80,7 @@
                     {
                         width:90%;
                         height:70%;
+                        overflow: hidden;
                         p
                         {
                             text-align:justify;

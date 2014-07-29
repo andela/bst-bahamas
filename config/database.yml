@@ -25,7 +25,7 @@ development:
   <<: *default
   database: bst-bahamas_development
   username: postgres
-  password: elow1994
+  password: password
   host: 127.0.0.1
 
 test:
