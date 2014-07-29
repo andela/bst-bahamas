@@ -88,8 +88,27 @@ myApp.controller('IndexCtrl', [
     $scope.$watch('loggedIn', function(newValue, oldValue){
         console.log(newValue);
     });
+      
+    
+    $scope.showAd = function(id)
+    {
+        AppService.getClassifiedAd({'id':id}, function(data){
+            $scope.selectedAd = data;
+            //manage switching of template. Look at index.html line #18
+            $scope.selected = "selected";
+        }, function(error){
+            console.error(error);
+        });
+    }
+    
+    //returns to default view
+    $scope.backToAds = function()
+    {
+        $scope.selected = '';
+    }
 }]);
 
+//HOMECTRL
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
   }
@@ -119,6 +138,7 @@ myApp.controller('LoginCtrl', [
   }
 ]);
 
+//SIGNUPCTRL
 myApp.controller('SignUpCtrl', [
   '$scope', '$location', 'Auth', function($scope, $location, Auth) {
   	$scope.signUp = function() {
@@ -140,6 +160,7 @@ myApp.controller('SignUpCtrl', [
   }
 ]);
 
+//POSTADCTRL
 myApp.controller('PostAdCtrl', [
   '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
     $scope.tags = [
@@ -188,6 +209,8 @@ myApp.controller('PostAdCtrl', [
   }
 ]);
 
+
+//EDITCTRL
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     var params = {id: $location.search()['id']}
@@ -199,6 +222,8 @@ myApp.controller('EditAdCtrl', [
   }
 ]);
 
+
+//MYADSCTRL
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
@@ -211,6 +236,7 @@ myApp.controller('MyAdsCtrl', [
   }
 ]);
 
+//PAYMENTCTRL
 myApp.controller('PaymentCtrl', [
   '$scope', '$location', function($scope, $location) {
     $scope.handleStripe = function(status, response) {
