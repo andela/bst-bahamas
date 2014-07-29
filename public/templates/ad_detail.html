@@ -1,0 +1,19 @@
+<div id="container" ng-model="selectedAd" ng-hide="showSpinner">
+    <div id="infoCont">
+        <div id="itemImg">
+            <img src={{selectedAd.photo_medium_url}}/>
+        </div>
+        <div id="contactInfo">
+            <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
+            <div><span class="fa fa-phone"> <p>{{selectedAd.poster_phone_no}}</p></span></div>
+            <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
+            <div><span class="fa fa-globe"> <p>{{selectedAd.address}}</p></span></div>
+        </div>
+    </div>
+    <div id="descrCont">
+        <h4 id="title">{{selectedAd.title}}</h4>
+        <span id="price">{{selectedAd.price|currency}}</span>
+        <p>{{selectedAd.description}}</p>
+        <span ng-click="backToAds()" ng-model="selected" id="back">Back To Listings</span>
+    </div>
+</div>

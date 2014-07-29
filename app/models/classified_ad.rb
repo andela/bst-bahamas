@@ -13,7 +13,7 @@ class ClassifiedAd < ActiveRecord::Base
 
 	def as_json(options={})
 	  super(:except => [:created_at, :updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
-	      :methods => [:photo_thumb_url, :photo_medium_url])
+	      :methods => [:photo_thumb_url, :photo_medium_url, :photo_original_url])
 	end
 
 	def photo_thumb_url
@@ -22,5 +22,9 @@ class ClassifiedAd < ActiveRecord::Base
 
 	def photo_medium_url
 	   photo.url(:medium)
+	end
+
+	def photo_original_url
+	   photo.url(:original)
 	end
 end

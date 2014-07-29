@@ -38,6 +38,10 @@ myApp.config([
       templateUrl: '../templates/stripe/payment_form.html',
       controller: 'PaymentCtrl'
     }).
+    when('/classified_ad/:id',{
+        templateUrl:'selected_ad',
+        controller:'IndexCtrl'
+    })
     otherwise({
       redirectTo: '/'
     });

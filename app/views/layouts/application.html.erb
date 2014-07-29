@@ -51,7 +51,7 @@
             </select>
         </div>
         <div class="col-md-3 customSel">
-            <select ng-options="location.name for location in locations" ng-model="location" ng-change="search()">
+            <select ng-options="location.name for location in locations" ng-model="location" ng-change="selectLocation()">
                 <option value="" selected>All Locations</option>
             </select>
         </div>

@@ -68,16 +68,24 @@ myApp.controller('IndexCtrl', [
     $scope.selectCategory = function() {
       $scope.subCategory = null;
       $scope.search();
-    }
+      $scope.selectedAd = null;
+    };
+
+    $scope.selectLocation = function() {
+      $scope.search();
+      $scope.selectedAd = null;
+    };
 
     $scope.clickCategory = function(category) {
       $scope.category = category;
       $scope.search();
+      $scope.selectedAd = null;
     };
 
     $scope.clickSubCategory = function(subCategory) {
       $scope.subCategory = subCategory;
       $scope.search();
+      $scope.selectedAd = null;
     };
 
     $scope.pageChanged = function() {
@@ -95,8 +103,28 @@ myApp.controller('IndexCtrl', [
     $scope.$watch('loggedIn', function(newValue, oldValue){
         console.log(newValue);
     });
+
+
+    $scope.showAd = function(id)
+    {
+      $scope.showSpinner = true;
+      AppService.getClassifiedAd({'id':id}, function(data){
+        $scope.selectedAd = data;
+        $scope.showSpinner = false;
+      }, function(error){
+        console.error(error);
+        $scope.showSpinner = false;
+      });
+    }
+
+    //returns to default view
+    $scope.backToAds = function()
+    {
+      $scope.selectedAd = null;
+    }
 }]);
 
+//HOMECTRL
 myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
   }
@@ -126,6 +154,7 @@ myApp.controller('LoginCtrl', [
   }
 ]);
 
+//SIGNUPCTRL
 myApp.controller('SignUpCtrl', [
   '$scope', '$location', 'Auth', function($scope, $location, Auth) {
   	$scope.signUp = function() {
@@ -147,6 +176,7 @@ myApp.controller('SignUpCtrl', [
   }
 ]);
 
+//POSTADCTRL
 myApp.controller('PostAdCtrl', [
   '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
     $scope.tags = [
@@ -195,6 +225,8 @@ myApp.controller('PostAdCtrl', [
   }
 ]);
 
+
+//EDITCTRL
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     var params = {id: $location.search()['id']}
@@ -206,6 +238,8 @@ myApp.controller('EditAdCtrl', [
   }
 ]);
 
+
+//MYADSCTRL
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
@@ -218,6 +252,7 @@ myApp.controller('MyAdsCtrl', [
   }
 ]);
 
+//PAYMENTCTRL
 myApp.controller('PaymentCtrl', [
   '$scope', '$location', function($scope, $location) {
     $scope.handleStripe = function(status, response) {

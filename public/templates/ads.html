@@ -1,6 +1,6 @@
 <div id="adCont" ng-hide="showSpinner || classifiedAds.length == 0">
     <div class="adInfo">
-        <div ng-repeat="ad in classifiedAds">
+        <div ng-repeat="ad in classifiedAds" ng-click="showAd(ad.id)">
             <div id="adDesc">
                 <div id="header">
                     <h5>{{ad.title}}</h5>
