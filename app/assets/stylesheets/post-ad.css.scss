@@ -3,6 +3,7 @@
 	margin-top: 10%;
 	padding: 2%;
 	width: 60%;
+<<<<<<< HEAD
 	border: 2px solid #cccccc !important;
 	border-radius: 5px;
 
@@ -27,9 +28,42 @@
 			width:70%;
             float:right;
 		}
+=======
+	border: 2px solid #cfcccc !important;
+	border-radius: 5px;
+    
+    .badge
+    {
+        background-color:#1C9CBA;
+    }
+    
+	.attr {
+        width:55%;
+        padding:2%;
+        margin-bottom:10px;
+        
+        .text
+        {
+            width:40%;
+            float:left;
+            text-align:right;
+            padding-right:4%;
+        }
+        
+        .input
+        {
+            width:60%;
+            float:right;
+        }
+        
+        
+//		.text, .input {
+//			display: inline-block;
+//		}
+>>>>>>> ef4408ecad6e3eb123e32ca2014bd3652642e3bb
 	}
     
 	section{
-		margin-bottom: 2%;
+		margin-top:3%;
 	}
 }
