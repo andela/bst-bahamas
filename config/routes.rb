@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
 
-  get 'classified_ads/index'
   get 'classified_ads/search'
   get 'classified_ads/random_pics'
 
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :category,  :only => [:index]
   resources :location,  :only => [:index]
+  resources :tags,  :only => [:index]
 
   # match "/*path" => redirect("/%{path}"), via: :all
 end

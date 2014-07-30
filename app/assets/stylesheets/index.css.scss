@@ -40,8 +40,12 @@
         background-color:#f0f0f0;
         padding-top:20px;
         font-family:Karla;
-        padding:0 10px 0 10px;
-        
+//        padding:0 10px 0 10px;
+        padding-left:10px;
+        /* temporary fix*/
+        height: 700px;
+        background: #F0F0F0;
+
         .sidePanelTitle
         {
             text-transform:uppercase;
@@ -148,7 +152,7 @@
 {
     width:85%;
     height:auto;
-    
+
     #infoCont
     {
         width:40%;
@@ -201,7 +205,7 @@
         padding-left:3%;
         float:left;
         height:300px;
-        
+
         #title
         {
             text-transform:uppercase;
@@ -244,10 +248,13 @@ a.selected {
 .breadcrumb {
     background-color: transparent;
     border-radius: 0px;
+    padding: 0;
+    margin-top: 40px;
+    margin-bottom: 0;
 }
 
- 
-@media (max-width:768px),(max-width:1024px)
+
+@media (max-width:768px)
 {
     #veil
     {
@@ -259,59 +266,59 @@ a.selected {
     {
         padding:0;
         text-align:center;
-        
+
         #banner
         {
             padding:0 !important;
         }
-        
-        #accNav //hidden from view 
+
+        #accNav //hidden from view
         {
             width:100%;
             display:none;
-            
+
             .nav-links
             {
                 width:inherit;
-                
+
                 #nav
                 {
                     display:inline-block;
                     width:inherit;
                     padding:0 !important;
-                    
+
                     #postAd
                     {
                         width:0 !important;
                         float:none !important;
                     }
-                    
-                    li 
+
+                    li
                     {
                         display:inline-block !important;
                     }
-                
-                    p 
+
+                    p
                     {
                         display:inline;
                         width:0;
                     }
-                    
+
                 }
             }
         }
     }
-    
+
     #searchbar
     {
         display:none; //don't want to see on page. Put on side bar
     }
-    
+
     #mainCnt
     {
         margin: 0 !important; //center the ads
     }
-    
+
     #sideMenu
     {
         display:inline-block !important;
@@ -324,7 +331,7 @@ a.selected {
         z-index:400;
         left:-60%;
         padding:4px 10px 0 10px;
-        
+
         #trigger
         {
             height:30px;
@@ -346,22 +353,22 @@ a.selected {
                 color:#fff;
             }
         }
-        
+
         .sm-nav
         {
             width:100%;
-    
+
             .sm-navbar
             {
                 list-style:none;
                 display:inline-block;
                 width:100%;
                 padding:0 !important;
-                
+
                 .sm-actions
                 {
                     text-transform:uppercase;
-                    a 
+                    a
                     {
                         color:#fff;
                         font-weight:bold;
@@ -369,7 +376,7 @@ a.selected {
                 }
             }
         }
-        
+
         .sm-categories
         {
             & *
