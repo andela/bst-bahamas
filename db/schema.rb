@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724175913) do
+ActiveRecord::Schema.define(version: 20140730150028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20140724175913) do
     t.string   "keywords",            default: [], array: true
     t.string   "poster_name"
     t.string   "poster_phone_no"
-    t.datetime "expiry_date"
+    t.date     "expiry_date"
     t.boolean  "is_featured"
-    t.datetime "feature_expiry_date"
+    t.date     "feature_expiry_date"
     t.string   "tag"
-    t.datetime "tag_expiry_date"
+    t.date     "tag_expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"

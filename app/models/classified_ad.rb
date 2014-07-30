@@ -1,4 +1,5 @@
 class ClassifiedAd < ActiveRecord::Base
+	before_create :set_expiry_date
 	include PgSearch
 	pg_search_scope :search_by_text, :against => [:title, :description, :keywords], :using => {:tsearch => {:any_word => true}}
 	belongs_to :user
@@ -12,7 +13,7 @@ class ClassifiedAd < ActiveRecord::Base
 	validates :poster_email, :presence => true, :format => { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
 	def as_json(options={})
-	  super(:except => [:created_at, :updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
+	  super(:except => [:updated_at, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at],
 	      :methods => [:photo_thumb_url, :photo_medium_url, :photo_original_url])
 	end
 
@@ -26,5 +27,9 @@ class ClassifiedAd < ActiveRecord::Base
 
 	def photo_original_url
 	   photo.url(:original)
+	end
+
+	def set_expiry_date
+	  self.expiry_date = Date.today + 30
 	end
 end
