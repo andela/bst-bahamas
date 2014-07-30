@@ -66,7 +66,19 @@
             {
                 width:80%;
                 float:left;
+                
+                textarea
+                {
+                    width:100%;
+                    display:block;
+                }
+                
             }
+        }
+        
+        .attr:nth-of-type(7)
+        {
+            height:120px;
         }
     }
     
