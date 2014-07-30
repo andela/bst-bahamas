@@ -10,7 +10,13 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.currentPage = 1;
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
-
+    $scope.menuOpened = false;
+      
+    $scope.toggle = function()
+    {
+        $scope.menuOpened = !$scope.menuOpened;
+    }
+    
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
@@ -187,18 +193,18 @@ myApp.controller('SignUpCtrl', [
 
 //POSTADCTRL
 myApp.controller('PostAdCtrl', [
-  '$scope', '$location', '$upload', 'Auth', function($scope, $location, $upload, Auth) {
-    $scope.tags = [
-      {name: 'New Item', days: 7, price: 2, selected: false},
-      {name: 'Need to sell', days: 7, price: 2, selected: false},
-      {name: 'Urgent', days: 7, price: 2, selected: false},
-      {name: 'Reduced Price', days: 7, price: 2, selected: false},
-      {name: 'Sale', days: 7, price: 2, selected: false}
-    ];
+  '$scope', '$location', '$upload', 'Auth', 'AppService', function($scope, $location, $upload, Auth, AppService) {
+    $scope.tags = [];
     $scope.success = false;
     $scope.selectedTag = null;
     $scope.email = Auth._currentUser ? Auth._currentUser.email : null;
     var params = {};
+
+    AppService.getTags(function(data){
+      $scope.tags = data;
+    }, function(error){
+      console.log(error);
+    });
 
     $scope.submitForm = function(isValid) {
       if (isValid) {

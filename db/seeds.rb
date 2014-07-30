@@ -32,3 +32,11 @@ Category.create({ name: "Miscellaneous"}).sub_category.create([
   { name: "Bikes" }, { name: "Clothing" }, { name: "Home appliances" }, { name: "Fishing equipment" },
   { name: "Farm/Garden" }, { name: "Toys" }, { name: "Clothes" }, { name: "Shoes" }
 ]);
+
+Tag.create([
+  { name: "Urgent", duration_in_days: 7, price: 2 },
+  { name: "New Item", duration_in_days: 7, price: 2 },
+  { name: "Need to sell", duration_in_days: 7, price: 2 },
+  { name: "Reduced Price", duration_in_days: 7, price: 2 },
+  { name: "Sale", duration_in_days: 7, price: 2 }
+]);

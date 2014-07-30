@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2 hidden-xs">
         <div class="featured">
             <h4 class="sidePanelTitle">{{category.name}}</h4>
             <div ng-repeat="_subCategory in category.sub_category">
@@ -67,7 +67,7 @@
                         <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
                         <div><span class="fa fa-phone"> <p>{{selectedAd.poster_phone_no}}</p></span></div>
                         <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
-                        <div><span class="fa fa-globe"> <p></p></span></div>
+                        <!--<div><span class="fa fa-globe"> <p></p></span></div>-->
                         <div><span class="fa fa-calendar"> <p>{{selectedAd.created_at | date : 'mediumDate'}}</p></span></div>
                     </div>
                 </div>

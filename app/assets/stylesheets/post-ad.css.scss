@@ -38,3 +38,40 @@
         padding-bottom: 12%;
     }
 }
+
+@media (max-width:768px), (max-width:1024px)
+{
+    #view
+    {
+        padding:0 !important;
+    }
+    
+    .post-ad-form
+    {
+        width:100%;
+        margin: 10% auto !important;
+        
+        .attr
+        {
+            width:100%;
+            height:40px;
+            .text
+            {
+                text-align:left;
+                font-size:12px;
+                display:inline-block;
+            }
+            
+            .input
+            {
+                width:80%;
+                float:left;
+            }
+        }
+    }
+    
+    section 
+    {
+        margin-bottom:8%;
+    }
+}

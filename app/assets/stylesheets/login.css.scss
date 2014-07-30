@@ -101,3 +101,12 @@ body
         padding-left: 10%;
     }
 }
+
+
+@media (max-width:768px), (max-width:1024px)
+{
+    .form
+    {
+        width:80%;
+    }
+}

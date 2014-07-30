@@ -2,7 +2,9 @@
 
 .header.fixed-top
 {
-    position:fixed;
+    position:absolute;
+    top:0;
+    height:auto;
     width:100%;
     background-color:#f0f0f0;
     font-family:Karla;
@@ -17,7 +19,6 @@
         #accNav
         {
             position:relative;
-            padding-top:30px;
             .nav-links
             {
                 #nav
@@ -115,4 +116,9 @@
 
 .ng-invalid {
     border-color: #f00 !important;
+}
+
+#sideMenu
+{
+    display:none; //sideMenu shows on pc if this is not there.
 }
