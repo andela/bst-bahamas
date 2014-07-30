@@ -29,17 +29,18 @@ myApp.directive('myAdSense', function() {
             var veil = document.querySelector('#veil');
             
             adImg.addEventListener('click', function(event){
-                adImg.setAttribute('class','zoomed');
+                adImg.classList.add('zoomed');
                 veil.style.display = 'block';
             });
             
             veil.addEventListener('click', function(event){
+                adImg.classList.remove('zoomed');
+                
                 if(veil.style.display !== 'none')
                 {
                     veil.style.display = 'none';
-                    adImg.removeAttribute('class');
                 }
-            },true);
+            });
         }
     };
 });

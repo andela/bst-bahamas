@@ -2,7 +2,7 @@ class ClassifiedAdsController < ApplicationController
   before_action :set_classified_ad, only: [:show, :update, :destroy]
 
   def index
-      @classified_ads = ClassifiedAd.all
+      @classified_ads = ClassifiedAd.where("expiry_date > ?", Date.today)
       render json: @classified_ads, status: :ok
   end
 
@@ -52,13 +52,13 @@ class ClassifiedAdsController < ApplicationController
     totalPages = 0
 
     if params.has_key?("q")
-      numResults = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.search_by_text(params[:q]).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
     else
-      numResults = ClassifiedAd.where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
     end
     page = page + 1
     render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
@@ -69,19 +69,13 @@ class ClassifiedAdsController < ApplicationController
     min_id = ClassifiedAd.minimum("id")
     id_range = max_id - min_id + 1
     random_id = min_id + rand(id_range).to_i
-    result = ClassifiedAd.where("id >= ?", random_id).limit(10)#.sort("id")
+    result = ClassifiedAd.where("expiry_date > ?", Date.today).where("id >= ?", random_id).limit(10)
     render json: result, status: :ok
   end
 
   private
     def classified_ad_params
         params.permit(:title, :price, :description, :poster_name, :poster_email, :poster_phone_no, :photo, :tag, :location_id, :category_id, :sub_category_id, :user_id, :id)
-    end
-
-    def set_user
-      @user = User.find(params[:user_id])
-      rescue ActiveRecord::RecordNotFound
-        render json: {message: "User not found"}, status: 404
     end
 
     def set_classified_ad
