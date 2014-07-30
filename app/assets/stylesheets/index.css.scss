@@ -5,7 +5,7 @@
 
 .row
 {
-    margin:0 !important; //stop scrolling on x 
+    margin:0 !important; //stop scrolling on x
 }
 
  #view
@@ -39,12 +39,13 @@
         left:0;
         background-color:#f0f0f0;
         padding-top:20px;
+        border-right:#E0E1E4;
         font-family:Karla;
-//        padding:0 10px 0 10px;
+        /*padding:0 10px 0 10px;*/
         padding-left:10px;
         /* temporary fix*/
         height: 700px;
-        background: #F0F0F0;
+        background: #E0E1E4;
 
         .sidePanelTitle
         {
@@ -261,7 +262,7 @@ a.selected {
         height:100%;
         width:100%;
     }
-    
+
     .header.fixed-top
     {
         padding:0;
@@ -392,28 +393,28 @@ a.selected {
         width:80%;
         margin:auto;
     }
-    
+
     .pagination
     {
         display:none;
     }
-    
+
     #container
     {
         width:95%;
-        
+
         #infoCont
         {
             display:block;
             width:100%;
-            
+
             #itemImg
             {
-                & img 
+                & img
                 {
                     height:225px;
                 }
-                
+
                 .zoomed
                 {
                     height:300px;
@@ -423,7 +424,7 @@ a.selected {
                 }
             }
         }
-        
+
         #descrCont
         {
             width:100%;
