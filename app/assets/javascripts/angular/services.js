@@ -4,7 +4,7 @@
 myApp.factory('AppService', ['$resource', '$http', 'Auth',
   function($resource, $http, Auth){
     var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
-    //var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
+    // var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
 
     var categories = $resource( HOST+'category',{},{
       get:{
@@ -46,6 +46,13 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       }
     });
 
+    var Tags = $resource(HOST+'tags', {}, {
+      index:{
+        method: 'GET',
+        isArray: true
+      }
+    });
+
     return {
       getCategories: function(successCallback, errorCallback) {
         var categoriesArray = categories.get(successCallback, errorCallback);
@@ -72,6 +79,9 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
         }, function(error) {
           errorCallback(error);
         });
+      },
+      getTags: function(successCallback, errorCallback) {
+        Tags.index(successCallback, errorCallback);
       }
     }
   }]);
