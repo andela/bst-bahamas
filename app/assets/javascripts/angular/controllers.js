@@ -45,7 +45,6 @@ myApp.controller('IndexCtrl', [
       if ($scope.location) params.location_id = $scope.location.id;
       if ($scope.category) params.category_id = $scope.category.id;
       if ($scope.subCategory) params.sub_category_id = $scope.subCategory.id;
-      console.log(params);
 
       $scope.showSpinner = true;
       AppService.searchClassifiedAds(params, function(data){
@@ -134,6 +133,10 @@ myApp.controller('IndexCtrl', [
       $scope.selectedAd = null;
       $scope.selected = "";
     }
+
+    $scope.goToIndex = function() {
+      $location.path('/index');
+    };
 }]);
 
 //HOMECTRL
