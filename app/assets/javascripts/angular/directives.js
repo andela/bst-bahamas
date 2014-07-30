@@ -43,4 +43,37 @@ myApp.directive('myAdSense', function() {
             });
         }
     };
+})
+.directive('sideMenu',function(){
+    
+    return {
+        restrict:'EAC',
+        templateUrl:'sideMenuDir',
+        replace:true,
+        link:function(scope,element,attrs){
+            var trigger = document.querySelector('#trigger');
+            var sideMenu = document.querySelector('#sideMenu');
+            trigger.addEventListener('click', function(event){
+                event.stopPropagation();
+                if(scope.menuOpened === true)
+                {
+                    $(this).animate({left:'60%'},500);
+                    $(sideMenu).animate({left:'0'},500);
+                }
+                
+                if(scope.menuOpened === false)
+                {
+                    $(this).animate({left:'0'},500);
+                    $(sideMenu).animate({left:'-60%'},500);
+                }
+            });
+            
+            document.addEventListener('click', function(event){
+                scope.menuOpened = false;
+                $(trigger).animate({left:'0'},500);
+                $(sideMenu).animate({left:'-60%'},500);
+
+            });
+        }
+    }
 });

@@ -10,7 +10,13 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.currentPage = 1;
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
-
+    $scope.menuOpened = false;
+      
+    $scope.toggle = function()
+    {
+        $scope.menuOpened = !$scope.menuOpened;
+    }
+    
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
@@ -39,7 +45,6 @@ myApp.controller('IndexCtrl', [
       if ($scope.location) params.location_id = $scope.location.id;
       if ($scope.category) params.category_id = $scope.category.id;
       if ($scope.subCategory) params.sub_category_id = $scope.subCategory.id;
-      console.log(params);
 
       $scope.showSpinner = true;
       AppService.searchClassifiedAds(params, function(data){
@@ -128,6 +133,10 @@ myApp.controller('IndexCtrl', [
       $scope.selectedAd = null;
       $scope.selected = "";
     }
+
+    $scope.goToIndex = function() {
+      $location.path('/index');
+    };
 }]);
 
 //HOMECTRL
