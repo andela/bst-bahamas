@@ -29,7 +29,9 @@
         border-right:#f0f0f0;
         font-family:Karla;
         padding-left:10px;
-        height: inherit;
+        /* temporary fix*/
+        height: 700px;
+        background: #F0F0F0;
 
 
         .sidePanelTitle
