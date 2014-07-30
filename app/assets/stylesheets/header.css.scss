@@ -27,7 +27,6 @@
                     li
                     {
                         display:inline !important;
-                        margin:10px;
 
                         a
                         {
@@ -54,6 +53,9 @@
                     #postAd
                     {
                         background-color:#455266;
+                        float:right;  
+                        width:100%;
+                        text-align:center;
                     }
                 }
             }
