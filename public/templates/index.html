@@ -29,7 +29,7 @@
         <div class="spinner" ng-if="showSpinner">
             <i class="fa fa-spinner fa-spin fa-3x"></i>
         </div>
-        <div class="spinner" ng-show="classifiedAds.length == 0">
+        <div class="spinner" ng-show="!showSpinner && classifiedAds.length == 0">
             <div>No Results Found.</div>
         </div>
     </div>
