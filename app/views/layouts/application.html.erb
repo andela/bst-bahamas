@@ -14,6 +14,7 @@
 </head>
 <body ng-controller="IndexCtrl">
 <div id="veil"></div>
+<side-menu></side-menu>
 <div class="header fixed-top">
     <div class="row">
         <div id="company" class="col-md-4 col-xs-12">
@@ -57,13 +58,12 @@
         </div>
     </div>
 </div>
-<br>
 <div class="row" id="mainCnt">
 
-    <div id="view" class="col-md-10" ng-view>
+    <div id="view" class="col-md-10 col-xs-12" ng-view>
       <%= yield %>
     </div>
-    <div id="adsense" class="col-md-2" my-ad-sense>
+    <div id="adsense" class="col-md-2 hidden-xs" my-ad-sense>
   <!-- Google AdSense -->
       <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"
@@ -76,6 +76,39 @@
     </div>
 </div>
 
-
+    <script type="text/ng-template" id="sideMenuDir">
+        <div id="sideMenu">
+            <div id="trigger" ng-click="toggle()"></div>
+                <!--sm == sideMenu-->
+                    <div class="sm-nav">
+                        <ul class="sm-navbar">
+                        <span ng-show="loggedIn === false">
+                            <li class="sm-actions"><a href="#login">Login</a></li>
+                            <li class="sm-actions"><a href="#sign_up">Sign Up</a></li>
+                        </span>
+                        <span ng-show="loggedIn === true">
+                            <li class="sm-actions"><a href="#my_ads">My Ads</a></li>
+                            <li class="sm-actions" ng-click="logout()"><a href="#">Logout</a></li>
+                        </span>
+                            <li class="sm-actions"><a href="#post_ad">Post Ad Free</a></li>
+                        </ul>
+                    </div> 
+            <div class="sm-categories">
+                <div class="sm-featured">
+                    <h4 class="sm-category-title">{{category.name}}</h4>
+                    <div ng-repeat="_subCategory in category.sub_category">
+                        <a ng-click="clickSubCategory(_subCategory)" ng-class="{selected: _subCategory.id == subCategory.id}">{{_subCategory.name}} ({{_subCategory.num_ads}})</a>
+                    </div>
+                    <div ng-if="category==null">
+                        <h4 class="sm-category-title">All Categories</h4>
+                        <div ng-repeat="_category in categories">
+                            <a ng-click="clickCategory(_category)">{{_category.name}}</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </script>
 </body>
 </html>

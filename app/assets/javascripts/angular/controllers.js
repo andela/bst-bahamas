@@ -10,7 +10,13 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.currentPage = 1;
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
-
+    $scope.menuOpened = false;
+      
+    $scope.toggle = function()
+    {
+        $scope.menuOpened = !$scope.menuOpened;
+    }
+    
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
