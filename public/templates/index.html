@@ -17,10 +17,10 @@
 
     <div class="col-md-9 col-md-offset-1" ng-switch on='selected' style="position:relative; top:35px;">
         <div class="breadcrumb">
-            <a ng-if="category == null && selectedAd != null">All Categories</a>
-            <a>{{category.name}}</a>
+            <a ng-if="category == null && selectedAd != null" ng-click="clickCategory(null)">All Categories</a>
+            <a ng-click="clickCategory(category)">{{category.name}}</a>
             <span ng-if="subCategory != null">></span>
-            <a>{{subCategory.name}}</a>
+            <a ng-click="clickSubCategory(subCategory)">{{subCategory.name}}</a>
             <span ng-if="selectedAd != null">></span>
             <a>{{selectedAd.title}}</a>
         </div>
