@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-md-offset-1" ng-switch on='selected' style="position:relative; top:35px;">
+    <div class="col-md-9 col-md-offset-1" ng-switch on='selected'>
         <div class="breadcrumb">
             <a ng-if="category == null && selectedAd != null" ng-click="clickCategory(null)">All Categories</a>
             <a ng-click="clickCategory(category)">{{category.name}}</a>

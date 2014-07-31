@@ -13,13 +13,13 @@ myApp.controller('IndexCtrl', [
     $scope.menuOpened = false;
 
     $scope.locationHash = {}
-
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
     }
 
     Auth.currentUser().then(function(user) {
+      $scope.currentUser = user;
       console.log('currentUser found');
       $scope.loggedIn = true;
     }, function(error) {
@@ -36,9 +36,11 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
+      
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
       });
+    
     },function(error) {
       console.log(error);
     });
@@ -250,9 +252,11 @@ myApp.controller('PostAdCtrl', [
 //EDITCTRL
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
-    var params = {id: $location.search()['id']}
+    //var params = {id: $location.search()['id']}
+    var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
+      console.log($scope.classifiedAd);
     }, function(error){
       console.log(error);
     })
@@ -264,12 +268,21 @@ myApp.controller('EditAdCtrl', [
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
-
+    $scope.selectedID = null;
     AppService.myAds(function(data){
-      console.log(data);
+      angular.copy(data, $scope.myAds) 
     }, function(error){
       console.log(error);
     })
+    
+    $scope.getID = function(id)
+    {
+        $scope.selectedID = id;
+    }
+    
+    $scope.$watch('selectedID', function(newValue, oldValue){
+        AppService.setSelectedAdID($scope.selectedID);
+    });
   }
 ]);
 

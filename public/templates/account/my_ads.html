@@ -1,1 +1,18 @@
-<div>My ads go here!</div>
+<div id='myadsCont'>
+    <table class="table">
+<!--Image-->
+        <th></th>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Price</th>
+<!--Edit Delete-->
+        <th></th> 
+        <tr ng-repeat="ad in myAds" ng-model="ad">
+            <td><img src={{ad.photo_thumb_url}}/></td>
+            <td>{{ad.title}}</td>
+            <td>{{locationHash[ad.location_id]}}</td>
+            <td>{{ad.price|currency}}</td>
+            <td><span style="margin-right:10px;" class="action" id="edit"><a ng-click = "getID(ad.id)" href="#edit_ad">Edit</a></span><span class="action" id="del"><a href="">Delete</a></span></td>
+        </tr>
+    </table>
+</div>

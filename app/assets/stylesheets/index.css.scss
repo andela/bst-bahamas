@@ -11,6 +11,8 @@
  #view
 {
     padding:0 !important;
+    position:relative;
+    top:120px;
 }
 
 #veil
@@ -27,7 +29,6 @@
 #mainCnt
 {
     position:relative;
-    top:80px;
     width: 100%;
     height:inherit;
     .featured
@@ -35,7 +36,6 @@
         width:100%;
         height:796px;
         position:absolute;
-        top:30px;
         left:0;
         background-color:#f0f0f0;
         padding-top:20px;
@@ -255,7 +255,8 @@ a.selected {
 #adsense
 {
     position:relative;
-    top:50px;
+    top:100px;
+    padding:0 !important;
 }
 
 @media (max-width:768px)
