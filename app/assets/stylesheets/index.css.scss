@@ -75,12 +75,11 @@
     {
         height:100%;
         width:100%;
-
         &>div
         {
             float:left;
-            height:40%;
-            width:30%;
+            height:30%;
+            width:22%;
             text-align:center;
             margin: 10px 10px 10px 0;
             border:1px solid #cecece;
@@ -96,15 +95,14 @@
 
                 #adDesc
                 {
-                    height:57%;
+                    height:47%;
                     width:100%;
                     text-align:left;
-                    text-overflow:ellipsis;
                     padding:5px 5px 0 10px;
 
                     #header
                     {
-                        height:15%;
+                        height:25%;
                         overflow: hidden;
                         h5
                         {
@@ -115,7 +113,7 @@
                     #blurb
                     {
                         width:95%;
-                        height:65%;
+                        height:80%;
                         overflow: hidden;
                         p
                         {
@@ -254,67 +252,14 @@ a.selected {
     margin-bottom: 0;
 }
 
+#adsense
+{
+    position:relative;
+    top:50px;
+}
 
 @media (max-width:768px)
 {
-    #veil
-    {
-        height:100%;
-        width:100%;
-    }
-
-    .header.fixed-top
-    {
-        padding:0;
-        text-align:center;
-
-        #banner
-        {
-            padding:0 !important;
-        }
-
-        #accNav //hidden from view
-        {
-            width:100%;
-            display:none;
-
-            .nav-links
-            {
-                width:inherit;
-
-                #nav
-                {
-                    display:inline-block;
-                    width:inherit;
-                    padding:0 !important;
-
-                    #postAd
-                    {
-                        width:0 !important;
-                        float:none !important;
-                    }
-
-                    li
-                    {
-                        display:inline-block !important;
-                    }
-
-                    p
-                    {
-                        display:inline;
-                        width:0;
-                    }
-
-                }
-            }
-        }
-    }
-
-    #searchbar
-    {
-        display:none; //don't want to see on page. Put on side bar
-    }
-
     #mainCnt
     {
         margin: 0 !important; //center the ads
@@ -392,6 +337,7 @@ a.selected {
         float:none;
         width:80%;
         margin:auto;
+        margin-bottom:10px;
     }
 
     .pagination
