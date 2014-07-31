@@ -67,7 +67,7 @@
                         <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
                         <div><span class="fa fa-phone"> <p>{{selectedAd.poster_phone_no}}</p></span></div>
                         <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
-                        <!--<div><span class="fa fa-globe"> <p></p></span></div>-->
+                        <div><span class="fa fa-globe"> <p>{{locationHash[selectedAd.location_id]}}</p></span></div>
                         <div><span class="fa fa-calendar"> <p>{{selectedAd.created_at | date : 'mediumDate'}}</p></span></div>
                     </div>
                 </div>
