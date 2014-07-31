@@ -16,3 +16,38 @@ html, body {
 		margin-right: 50%;
 	}
 }
+
+.home-page {
+	margin-top: 5%;
+	margin-left: 2%;
+	width: 100%;
+	.slider {
+		width: 100%;
+		text-align: center;
+	}
+	.categories {
+		width: 100%;
+		.category {
+			width: 25%;
+			margin-bottom: 5%;
+			display: inline-block;
+			vertical-align: top;
+			text-decoration: underline;
+			cursor: pointer;
+			.sub-category {
+				text-decoration: underline;
+				cursor: pointer;
+				width: 40%;
+			}
+			.sub-category:hover {
+				background-color: #1C9CBA;
+			}
+			.category-name {
+				width: 40%;
+			}
+			.category-name:hover {
+				background-color: #1C9CBA;
+			}
+		}
+	}
+}

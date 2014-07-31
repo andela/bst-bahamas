@@ -7,10 +7,10 @@ myApp.config([
     // $locationProvider.html5Mode(true);
 
     return $routeProvider.
-    when('/', {
+    when('/index', {
       templateUrl: '../templates/index.html',
     }).
-    when('/home', {
+    when('/', {
       templateUrl: '../templates/home.html',
       controller: 'HomeCtrl'
     }).
