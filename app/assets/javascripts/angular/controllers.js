@@ -11,13 +11,14 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
+
     $scope.locationHash = {}
-    
+
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
     }
-    
+
     Auth.currentUser().then(function(user) {
       console.log('currentUser found');
       $scope.loggedIn = true;
@@ -89,6 +90,7 @@ myApp.controller('IndexCtrl', [
 
     $scope.clickCategory = function(category) {
       $scope.category = category;
+      $scope.subCategory = null;
       $scope.search();
       $scope.selectedAd = null;
       $scope.selected = "";
