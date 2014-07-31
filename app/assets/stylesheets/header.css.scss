@@ -1,6 +1,6 @@
 /*Style for everything above the yield */
 
-.header.fixed-top
+.header
 {
     position:absolute;
     top:0;
@@ -122,4 +122,67 @@
 #sideMenu
 {
     display:none; //sideMenu shows on pc if this is not there.
+}
+
+
+@media (max-width:768px)
+{
+    #veil
+    {
+        height:100%;
+        width:60px;
+    }
+
+    .header
+    {
+        padding:0;
+        text-align:center;
+
+        #banner
+        {
+            padding:0 !important;
+        }
+
+        #accNav //hidden from view
+        {
+            width:100%;
+            display:none;
+
+            .nav-links
+            {
+                width:inherit;
+
+                #nav
+                {
+                    display:inline-block;
+                    width:inherit;
+                    padding:0 !important;
+
+                    #postAd
+                    {
+                        width:0 !important;
+                        float:none !important;
+                    }
+
+                    li
+                    {
+                        display:inline-block !important;
+                    }
+
+                    p
+                    {
+                        display:inline;
+                        width:0;
+                    }
+
+                }
+            }
+        }
+    }
+
+    #searchbar
+    {
+        display:none; //don't want to see on page. Put on side bar
+    }
+
 }
