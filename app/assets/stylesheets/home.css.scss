@@ -21,9 +21,24 @@ html, body {
 	margin-top: 5%;
 	margin-left: 2%;
 	width: 100%;
-	.slider {
-		width: 100%;
-		text-align: center;
+	.rn-carousel-slide {
+		display: inline-flex;
+		padding-left: 5%;
+		padding-right: 5%;
+		.item {
+			margin-right: 2%;
+		}
+		.item:hover {
+			text-decoration: underline;
+			color: #1C9CBA;
+		}
+		img {
+			width: 100px;
+			height: 100px;
+		}
+		.title {
+			width: 100px;
+		}
 	}
 	.categories {
 		width: 100%;

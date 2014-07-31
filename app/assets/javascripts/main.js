@@ -1,6 +1,7 @@
 Stripe.setPublishableKey('pk_test_4UDyZ8tCUJ5UbHZOSbikbToA');
 
-myApp = angular.module('BstBahamas', ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap', 'angularPayments']);
+myApp = angular.module('BstBahamas',
+  ['angularFileUpload', 'ngRoute', 'ngResource', 'Devise','ui.bootstrap', 'angularPayments', 'angular-carousel']);
 myApp.config([
   '$routeProvider', '$locationProvider', 'AuthProvider', function($routeProvider, $locationProvider, AuthProvider) {
 

@@ -1,7 +1,18 @@
 <div class="home-page">
-	<div class="slider">
-		Featured ads slider goes here
-	</div>
+	<ul rn-carousel rn-carousel-control="true" class="hidden-xs">
+	  <li>
+	    <div ng-repeat="ad in featuredAds track by $index" ng-if="$index <= 10" class="item">
+	    	<img ng-src="{{featuredAds[$index].photo_thumb_url}}">
+	    	<div class="title">{{featuredAds[$index].title}}</div>
+	    </div>
+	  </li>
+	  <li>
+	    <div ng-repeat="ad in featuredAds track by $index" ng-if="$index > 10 && $index <= 20" class="item">
+	    	<img ng-src="{{featuredAds[$index].photo_thumb_url}}">
+	    	<div>{{featuredAds[$index].title}}</div>
+	    </div>
+	  </li>
+	</ul>
 	<div class="categories">
 		<div class="category" ng-repeat="category in categories">
 			<div class="category-name" ng-click="clickCategory(category)"><b>{{category.name}}</b></div>
