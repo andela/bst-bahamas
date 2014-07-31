@@ -43,6 +43,7 @@ class ClassifiedAdsController < ApplicationController
   #  location_id       - filter by location
   #  category_id       - filter by category
   #  sub_category_id   - filter by sub category
+  #  is_featured       - filter featured ads
   #  page              - page number for pagination
   #  per               - num results per page for pagination (default 25)
   def search
@@ -52,13 +53,13 @@ class ClassifiedAdsController < ApplicationController
     totalPages = 0
 
     if params.has_key?("q")
-      numResults = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).order('created_at DESC').offset(page*per).limit(per)
     else
-      numResults = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).order('created_at DESC').offset(page*per).limit(per)
     end
     page = page + 1
     render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok

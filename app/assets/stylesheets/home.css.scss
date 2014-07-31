@@ -16,3 +16,59 @@ html, body {
 		margin-right: 50%;
 	}
 }
+
+.disclaimer {
+	margin-top: 5%;
+	margin-left: 2%;
+	width: 100%;
+}
+.home-page {
+	margin-top: 2%;
+	margin-left: 2%;
+	width: 100%;
+	.rn-carousel-slide {
+		display: inline-flex;
+		padding-left: 5%;
+		padding-right: 5%;
+		.item {
+			margin-right: 2%;
+			cursor: pointer;
+		}
+		.item:hover {
+			text-decoration: underline;
+			color: #1C9CBA;
+		}
+		img {
+			width: 100px;
+			height: 100px;
+		}
+		.title {
+			width: 100px;
+		}
+	}
+	.categories {
+		width: 100%;
+		.category {
+			width: 25%;
+			margin-bottom: 5%;
+			display: inline-block;
+			vertical-align: top;
+			text-decoration: underline;
+			cursor: pointer;
+			.sub-category {
+				text-decoration: underline;
+				cursor: pointer;
+				width: 40%;
+			}
+			.sub-category:hover {
+				background-color: #1C9CBA;
+			}
+			.category-name {
+				width: 40%;
+			}
+			.category-name:hover {
+				background-color: #1C9CBA;
+			}
+		}
+	}
+}

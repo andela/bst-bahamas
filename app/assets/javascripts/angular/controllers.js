@@ -6,6 +6,7 @@ myApp.controller('IndexCtrl', [
     $scope.locations = [];
     $scope.loggedIn = false;
     $scope.showSpinner = true;
+    $scope.showGoogleAds = true;
     $scope.pagination = {};
     $scope.pagination.currentPage = 1;
     $scope.pagination.per = 25;
@@ -117,11 +118,6 @@ myApp.controller('IndexCtrl', [
         $scope.loggedIn = false;
     });
 
-    $scope.$watch('loggedIn', function(newValue, oldValue){
-        console.log(newValue);
-    });
-
-
     $scope.showAd = function(id)
     {
       $scope.showSpinner = true;
@@ -143,13 +139,68 @@ myApp.controller('IndexCtrl', [
     }
 
     $scope.goToIndex = function() {
-      $location.path('/index');
+      $location.path('/');
     };
 }]);
 
 //HOMECTRL
 myApp.controller('HomeCtrl', [
-  '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
+  '$scope', '$location', 'AppService', function($scope, $location, AppService) {
+    $scope.featuredAds = [];
+    $scope.currentPage = 1;
+    $scope.$parent.showGoogleAds = false;
+    $scope.numSlides = 0;
+    $scope.loading = true;
+
+    var getFeaturedAds = function() {
+      var params = {
+        page: $scope.currentPage,
+        is_featured: true
+      };
+      AppService.searchClassifiedAds(params, function(data){
+        $scope.numSlides = Math.ceil(data.numResults / 10);
+        $scope.featuredAds = data.ads;
+        $scope.loading = false;
+      }, function(err){
+        console.log(err);
+        $scope.loading = false;
+      });
+    }
+
+    getFeaturedAds();
+
+    $scope.clickCategory = function(category) {
+      $scope.$parent.category = category;
+      $scope.$parent.subCategory = null;
+      $scope.$parent.search();
+      $scope.$parent.selectedAd = null;
+      $scope.$parent.selected = "";
+      $scope.$parent.showGoogleAds = true;
+      $location.path('/index');
+    };
+
+    $scope.clickSubCategory = function(category, subCategory) {
+      $scope.$parent.category = category;
+      $scope.$parent.subCategory = subCategory;
+      $scope.$parent.search();
+      $scope.$parent.selectedAd = null;
+      $scope.$parent.selected = "";
+      $scope.$parent.showGoogleAds = true;
+      $location.path('/index');
+    };
+
+    $scope.showAd = function(id) {
+      $scope.$parent.showAd(id);
+      $scope.$parent.showGoogleAds = true;
+      $location.path('/index');
+    }
+
+    $scope.range = function(max) {
+      console.log('range');
+      var input = [];
+      for (var i = 0; i < max; i += 1) input.push(i);
+      return input;
+    };
   }
 ]);
 
@@ -168,7 +219,7 @@ myApp.controller('LoginCtrl', [
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
           console.log(user);
-          $location.path('/home');
+          $location.path('/index');
       }, function(error) {
           console.log(error);
           $scope.showError = true;
@@ -190,7 +241,7 @@ myApp.controller('SignUpCtrl', [
   		Auth.register(credentials).then(function(registeredUser) {
   		    console.log(registeredUser);
             $scope.$emit('login');
-  		    $location.path('/home');
+  		    $location.path('/index');
   		}, function(error) {
   		    console.log(error);
           $scope.errors = error.data.errors;
