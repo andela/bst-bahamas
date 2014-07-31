@@ -11,7 +11,8 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
-      
+    $scope.locationHash = {}
+    
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
@@ -34,6 +35,9 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
+      angular.forEach($scope.locations, function(location){
+        $scope.locationHash[location.id] = location.name;
+      });
     },function(error) {
       console.log(error);
     });
