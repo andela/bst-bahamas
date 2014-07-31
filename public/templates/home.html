@@ -1,7 +1,11 @@
+<div class="disclaimer">
+	<span><b>DISCLAIMER: </b></span>
+	BSTBahamas is not responsible for any item bought or sold from the site
+</div>
 <div class="home-page" ng-if="!loading">
 	<ul rn-carousel rn-carousel-control="true" class="hidden-xs">
 	  <li ng-repeat="x in range(numSlides)">
-	  	<div ng-repeat="y in range(10) track by $index" class="item" ng-if="featuredAds[x+y] != null">
+	  	<div ng-repeat="y in range(10) track by $index" class="item" ng-if="featuredAds[x+y] != null" ng-click="showAd(featuredAds[x+y].id)">
 	  		<img ng-src="{{featuredAds[x+y].photo_thumb_url}}">
 	  		<div class="title">{{featuredAds[x+y].title}}</div>
 	  	</div>

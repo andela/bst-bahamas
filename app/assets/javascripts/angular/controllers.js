@@ -6,7 +6,7 @@ myApp.controller('IndexCtrl', [
     $scope.locations = [];
     $scope.loggedIn = false;
     $scope.showSpinner = true;
-    $scope.showAds = true;
+    $scope.showGoogleAds = true;
     $scope.pagination = {};
     $scope.pagination.currentPage = 1;
     $scope.pagination.per = 25;
@@ -146,7 +146,7 @@ myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.featuredAds = [];
     $scope.currentPage = 1;
-    $scope.$parent.showAds = false;
+    $scope.$parent.showGoogleAds = false;
     $scope.numSlides = 0;
     $scope.loading = true;
 
@@ -171,7 +171,9 @@ myApp.controller('HomeCtrl', [
       $scope.$parent.category = category;
       $scope.$parent.subCategory = null;
       $scope.$parent.search();
-      $scope.$parent.showAds = true;
+      $scope.$parent.selectedAd = null;
+      $scope.$parent.selected = "";
+      $scope.$parent.showGoogleAds = true;
       $location.path('/index');
     };
 
@@ -179,9 +181,17 @@ myApp.controller('HomeCtrl', [
       $scope.$parent.category = category;
       $scope.$parent.subCategory = subCategory;
       $scope.$parent.search();
-      $scope.$parent.showAds = true;
+      $scope.$parent.selectedAd = null;
+      $scope.$parent.selected = "";
+      $scope.$parent.showGoogleAds = true;
       $location.path('/index');
     };
+
+    $scope.showAd = function(id) {
+      $scope.$parent.showAd(id);
+      $scope.$parent.showGoogleAds = true;
+      $location.path('/index');
+    }
 
     $scope.range = function(max) {
       console.log('range');
