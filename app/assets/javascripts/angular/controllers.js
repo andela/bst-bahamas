@@ -147,6 +147,8 @@ myApp.controller('HomeCtrl', [
     $scope.featuredAds = [];
     $scope.currentPage = 1;
     $scope.$parent.showAds = false;
+    $scope.numSlides = 0;
+    $scope.loading = true;
 
     var getFeaturedAds = function() {
       var params = {
@@ -154,9 +156,12 @@ myApp.controller('HomeCtrl', [
         is_featured: true
       };
       AppService.searchClassifiedAds(params, function(data){
+        $scope.numSlides = Math.ceil(data.numResults / 10);
         $scope.featuredAds = data.ads;
+        $scope.loading = false;
       }, function(err){
         console.log(err);
+        $scope.loading = false;
       });
     }
 
@@ -176,6 +181,13 @@ myApp.controller('HomeCtrl', [
       $scope.$parent.search();
       $scope.$parent.showAds = true;
       $location.path('/index');
+    };
+
+    $scope.range = function(max) {
+      console.log('range');
+      var input = [];
+      for (var i = 0; i < max; i += 1) input.push(i);
+      return input;
     };
   }
 ]);
