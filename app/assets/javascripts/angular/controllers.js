@@ -29,10 +29,14 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
-      $scope.categoryNames = [];
+      $scope.categories.sort(function(a,b){
+          return a.id - b.id;
+      });
       angular.forEach($scope.categories, function(category){
+        category.sub_category.sort(function(a,b){
+            return a.id - b.id;
+        });
         $scope.categoryHash[category.id] = category.name;
-        $scope.categoryNames.push(category.name);
       });
     },function(error) {
       console.log(error);
@@ -41,14 +45,11 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
-<<<<<<< HEAD
-      $scope.locationNames = [];
-=======
-
->>>>>>> c9cb35d7bf7eb8c04a32b5da7717516fc95143e2
+      $scope.locations.sort(function(a,b){
+        return a.id - b.id;
+      });
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
-        $scope.locationNames.push(location.name);
       });
 
     },function(error) {
@@ -267,6 +268,7 @@ myApp.controller('EditAdCtrl', [
     var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
+        console.log($scope.classifiedAd);
     }, function(error){
       console.log(error);
     })
@@ -289,7 +291,6 @@ myApp.controller('MyAdsCtrl', [
     {
       AppService.setSelectedAdID(id);
     }
-<<<<<<< HEAD
     
     $scope.$watch('selectedID', function(newValue, oldValue){
         AppService.setSelectedAdID($scope.selectedID);
@@ -299,8 +300,6 @@ myApp.controller('MyAdsCtrl', [
     {
         ad.$delete();
     }
-=======
->>>>>>> c9cb35d7bf7eb8c04a32b5da7717516fc95143e2
   }
 ]);
 
