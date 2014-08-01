@@ -1,0 +1,50 @@
+.payment-form {
+	width: 60%;
+	display: inline-block;
+	margin-top: 2%;
+	margin-left: 2%;
+	padding: 2%;
+	border: solid 1px;
+	border-radius: 5px;
+	.attr {
+        width:80%;
+        padding:1%;
+        .text
+        {
+            width:40%;
+            display: inline-block;
+            text-align:right;
+            padding-right:4%;
+        }
+
+        .input
+        {
+            width:55%;
+            display: inline-block;
+        }
+        .cvc {
+        	width: 12%;
+        	display: inline-block;
+        }
+    }
+    .submit {
+    	width: 50%;
+    	text-align: center;
+    }
+}
+
+.charge-info {
+	width: 35%;
+	margin-top: 2%;
+	padding: 2%;
+	border: solid 1px;
+	border-radius: 5px;
+	display: inline-block;
+	vertical-align: top;
+	.dotted-border {
+		border-bottom: dotted 1px #E4E4E4;
+	}
+	.right {
+		float: right;
+	}
+}

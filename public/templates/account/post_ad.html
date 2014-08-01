@@ -32,6 +32,14 @@
 			<div class="text"><b>Title:</b></div>
 			<div class="input"><input type="text" ng-model="title" required></div>
 		</div>
+		<div class="attr">
+			<label class="input">
+			    <input type="checkbox" ng-model="isFeatured" />
+			    <span class="red"><b>FEATURED</b></span>
+			    <span> 7 days</span>
+			    <span> - $5.00</span>
+			</label>
+		</div>
 		<div class="attr descr">
 			<div class="text"><b>Description:</b></div>
 			<div class="input"><textarea rows="5" cols="50" maxlength="255" ng-model="description" required></textarea></div>
@@ -60,7 +68,7 @@
 		</div>
 		<div class="attr">
 			<div class="text"><b>Email:</b></div>
-			<div class="input"><input type="email" ng-model="email" ng-disabled="email != null" required></div>
+			<div class="input"><input type="email" ng-model="email" required></div>
 		</div>
 	</section>
 	<section class="promote-ad">
@@ -74,12 +82,18 @@
 			<tr ng-repeat="tag in tags">
 				<td>
 					<label>
-					    <input type="radio" ng-model="$parent.selectedTag" value="{{tag}}" />
+					    <input type="radio" ng-model="$parent.selectedTag" ng-value="tag" />
 					    {{tag.name}}
 					</label>
 				</td>
 				<td>{{tag.duration_in_days}} days</td>
 				<td>{{tag.price | currency}}</td>
+			</tr>
+			<tr col-span="3">
+				<td>
+					<span ng-if="isFeatured">Total Price: {{selectedTag.price+5 | currency}}</span>
+					<span ng-if="!isFeatured">Total Price: {{(selectedTag.price || 0) | currency}}</span>
+				</td>
 			</tr>
 		</table>
 	</section>
