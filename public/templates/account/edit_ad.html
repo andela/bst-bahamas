@@ -9,20 +9,20 @@
 		<div class="attr">
 			<div class="text"><b>Location:</b></div>
 			<div class="input">
-				<select name="location" ng-options="location.name for location in locations" ng-model="locations[locations.indexOf({classifiedAd.location_id:locationHash[classifiedAd.location_id]})]" required>
+				<select name="location" ng-options="location for location in locationNames" ng-model="locationHash[classifiedAd.location_id]" required>
                 </select>
 			</div>
 		</div>
 		<div class="attr">
 			<div class="text"><b>Category:</b></div>
 			<div class="input">
-				<select ng-options='category.name for category in categories' ng-model="category" required></select>
+				<select ng-options='category for category in categoryNames' ng-model="categoryHash[classifiedAd.category_id]" required></select>
 			</div>
 		</div>
 		<div class="attr">
 			<div class="text"><b>Sub-Category:</b></div>
 			<div class="input">
-				<select ng-options='subCat.name for subCat in category.sub_category' ng-model="subCat" required></select>
+				<select ng-options='subCat.name for subCat in category.sub_category' ng-model="category.sub_category" required></select>
 			</div>
 		</div>
 		<div class="attr">
