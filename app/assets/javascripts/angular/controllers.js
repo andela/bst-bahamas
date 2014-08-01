@@ -12,8 +12,10 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
+    $scope.locationNames = [];
 
-    $scope.locationHash = {}
+    $scope.locationHash = {};
+    $scope.categoryHash = {};
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
@@ -29,6 +31,11 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
+      $scope.categoryNames = [];
+      angular.forEach($scope.categories, function(category){
+        $scope.categoryHash[category.id] = category.name;
+        $scope.categoryNames.push(category.name);
+      });
     },function(error) {
       console.log(error);
     });
@@ -36,9 +43,9 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
-
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
+        $scope.locationNames.push(location.name);
       });
 
     },function(error) {
@@ -117,6 +124,11 @@ myApp.controller('IndexCtrl', [
         $scope.loggedIn = false;
     });
 
+    $scope.$watch('loggedIn', function(newValue, oldValue){
+        console.log(newValue);
+    });
+
+
     $scope.showAd = function(id)
     {
       $scope.showSpinner = true;
@@ -137,7 +149,7 @@ myApp.controller('IndexCtrl', [
       $scope.selected = "";
     }
 
-    $scope.goToIndex = function() {
+    $scope.goToHome = function() {
       $location.path('/');
     };
 }]);
@@ -218,7 +230,7 @@ myApp.controller('LoginCtrl', [
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
           console.log(user);
-          $location.path('/index');
+          $location.path('/home');
       }, function(error) {
           console.log(error);
           $scope.showError = true;
@@ -230,22 +242,22 @@ myApp.controller('LoginCtrl', [
 //SIGNUPCTRL
 myApp.controller('SignUpCtrl', [
   '$scope', '$location', 'Auth', function($scope, $location, Auth) {
-  	$scope.signUp = function() {
-  		var credentials = {
-  		    email: $scope.email,
-  		    password: $scope.password,
-  		    password_confirmation: $scope.passwordConfirmation
-  		};
+    $scope.signUp = function() {
+      var credentials = {
+          email: $scope.email,
+          password: $scope.password,
+          password_confirmation: $scope.passwordConfirmation
+      };
 
-  		Auth.register(credentials).then(function(registeredUser) {
-  		    console.log(registeredUser);
+      Auth.register(credentials).then(function(registeredUser) {
+          console.log(registeredUser);
             $scope.$emit('login');
-  		    $location.path('/index');
-  		}, function(error) {
-  		    console.log(error);
+          $location.path('/home');
+      }, function(error) {
+          console.log(error);
           $scope.errors = error.data.errors;
-  		});
-  	}
+      });
+    }
   }
 ]);
 
@@ -255,6 +267,8 @@ myApp.controller('PostAdCtrl', [
     $scope.tags = [];
     $scope.success = false;
     $scope.selectedTag = null;
+    $scope.isFeatured = false;
+    $scope.totalPrice = 0;
     $scope.email = Auth._currentUser ? Auth._currentUser.email : null;
     var params = {};
 
@@ -277,18 +291,39 @@ myApp.controller('PostAdCtrl', [
         params.poster_name = $scope.name;
         params.poster_email = $scope.email;
         params.poster_phone_no = $scope.phoneno;
-        $upload.upload({
-          url: 'http://bst-bahamas.herokuapp.com/classified_ads',
-          method: 'POST',
-          data: params,
-          photo: params.photo // or list of files ($files) for html5 only
-        }).success(function(data, status, headers, config) {
-          console.log(status);
-          $scope.success = true;
-        }).error(function(error){
-          console.log(error);
-          $scope.success = false;
-        });
+        params.is_featured = $scope.isFeatured;
+        if ($scope.selectedTag) params.tag = $scope.selectedTag.name;
+
+        if ($scope.isFeatured || $scope.selectedTag) {
+          var price = 0;
+          var charges = [];
+          if ($scope.isFeatured) {
+            price = price + 5;
+            charges.push({name: 'Featured', cost: 5});
+          }
+          if ($scope.selectedTag) {
+            price = price + $scope.selectedTag.price;
+            charges.push({name: $scope.selectedTag.name, cost: $scope.selectedTag.price});
+          }
+          var paymentParams = {
+            classifiedAd: params,
+            charges: charges,
+            amount: price
+          }
+          AppService.setPaymentParams(paymentParams);
+          $location.path('/payment_form');
+        } else {
+          $upload.upload({
+            url: 'http://bst-bahamas.herokuapp.com/classified_ads',
+            method: 'POST',
+            data: params,
+            photo: params.photo // or list of files ($files) for html5 only
+          }).success(function(data, status, headers, config) {
+            $scope.success = true;
+          }).error(function(error){
+            $scope.success = false;
+          });
+        }
       }
     };
 
@@ -303,10 +338,10 @@ myApp.controller('PostAdCtrl', [
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     //var params = {id: $location.search()['id']}
+
     var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
-      console.log($scope.classifiedAd);
     }, function(error){
       console.log(error);
     })
@@ -329,20 +364,48 @@ myApp.controller('MyAdsCtrl', [
     {
       AppService.setSelectedAdID(id);
     }
+
+    $scope.$watch('selectedID', function(newValue, oldValue){
+        AppService.setSelectedAdID($scope.selectedID);
+    });
+
+    $scope.delete = function(ad)
+    {
+        ad.$delete();
+    }
   }
 ]);
 
 //PAYMENTCTRL
 myApp.controller('PaymentCtrl', [
-  '$scope', '$location', function($scope, $location) {
+  '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
+    $scope.paymentParams = AppService.getPaymentParams();
+
     $scope.handleStripe = function(status, response) {
-      console.log('got here')
       console.log(response);
       if(response.error) {
         // there was an error. Fix it.
       } else {
-        // got stripe token, now charge it or smt
-        token = response.id
+        var params = {
+          amount: $scope.paymentParams.amount,
+          token: response.id
+        };
+        AppService.createCharge(params, function(data){
+          if ($scope.paymentParams.classifiedAd) {
+            $upload.upload({
+              url: 'http://localhost:3000/classified_ads',
+              method: 'POST',
+              data: $scope.paymentParams.classifiedAd,
+              photo: $scope.paymentParams.classifiedAd.photo
+            }).success(function(data, status, headers, config) {
+              $scope.success = true;
+            }).error(function(error){
+              $scope.success = false;
+            });
+          }
+        }, function(error){
+          console.log(error);
+        });
       }
     }
   }

@@ -4,6 +4,7 @@
 myApp.factory('AppService', ['$resource', '$http', 'Auth',
   function($resource, $http, Auth){
     var selectedAdID = null;
+    var paymentParams = null;
     var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
     // var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
     var categories = $resource( HOST+'category',{},{
@@ -55,6 +56,12 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       }
     });
 
+    var charges = $resource( HOST+'charges',{},{
+      create:{
+        method:'POST'
+      }
+    });
+
     return {
       getCategories: function(successCallback, errorCallback) {
         var categoriesArray = categories.get(successCallback, errorCallback);
@@ -85,13 +92,20 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       getTags: function(successCallback, errorCallback) {
         Tags.index(successCallback, errorCallback);
       },
-        setSelectedAdID : function(id)
-        {
-            selectedAdID =  id;
-        },
-        getSelectedAdID : function()
-        {
-            return selectedAdID;
-        }
+      createCharge: function(params, successCallback, errorCallback) {
+        charges.create(params, successCallback, errorCallback);
+      },
+      setSelectedAdID : function(id) {
+        selectedAdID =  id;
+      },
+      getSelectedAdID : function() {
+        return selectedAdID;
+      },
+      setPaymentParams : function(params) {
+        paymentParams = params;
+      },
+      getPaymentParams : function(params) {
+        return paymentParams;
+      }
     }
   }]);

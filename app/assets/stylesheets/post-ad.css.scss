@@ -28,6 +28,14 @@
             width:60%;
             float:right;
         }
+
+        label {
+            font-weight: normal;
+            .red {
+                background: #455266;
+                color: white;
+            }
+        }
 	}
 
 	section{
@@ -45,12 +53,12 @@
     {
         padding:0 !important;
     }
-    
+
     .post-ad-form
     {
         width:100%;
         margin: 10% auto !important;
-        
+
         .attr
         {
             width:100%;
@@ -61,28 +69,28 @@
                 font-size:12px;
                 display:inline-block;
             }
-            
+
             .input
             {
                 width:80%;
                 float:left;
-                
+
                 textarea
                 {
                     width:100%;
                     display:block;
                 }
-                
+
             }
         }
-        
+
         .attr:nth-of-type(7)
         {
             height:120px;
         }
     }
-    
-    section 
+
+    section
     {
         margin-bottom:8%;
     }

@@ -1,25 +1,33 @@
-<form stripe-form="handleStripe" name="myForm">
-  <div class="span3">
-    <label for="">Card number</label>
-    <input type="text" class="input-block-level" ng-model="number" payments-validate="card" payments-format="card" payments-type-model="type" ng-class="myForm.number.$card.type"/>
+<form stripe-form="handleStripe" name="myForm" class="payment-form">
+  <div class="attr">
+    <label class="text" for="">Card Holder's Name:</label>
+    <input type="text" class="input">
   </div>
 
-  <div class="span1">
-    <label for="">Expiry</label>
-    <input type="text" class="input-block-level" ng-model="expiry" payments-validate="expiry" payments-format="expiry" />
+  <div class="attr">
+    <label class="text" for="">Credit Card number:</label>
+    <input type="text" class="input" ng-model="number" payments-validate="card" payments-format="card" payments-type-model="type" ng-class="myForm.number.$card.type"/>
   </div>
 
-  <div class="span3">
-    <label for="">Name on card </label>
-    <input type="text" class="input-block-level">
+  <div class="attr">
+    <label class="text" for="">Expiry Date:</label>
+    <input type="text" class="cvc" ng-model="expiry" payments-validate="expiry" payments-format="expiry" placeholder="MM / YY"/>
   </div>
 
-  <div class="span1">
-    <label for="">CVC</label>
-    <input type="text" class="input-block-level" ng-model="cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type"/>
+  <div class="attr">
+    <label class="text" for="">CVC:</label>
+    <input type="text" class="cvc" ng-model="cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type"/>
   </div>
 
-  <div class="span4">
+  <div class="submit">
     <button type="submit" class="btn btn-primary btn-large">Submit</button>
   </div>
 </form>
+<div class="charge-info">
+  <div class="dotted-border"><b>Your Order</b></div>
+  <div ng-repeat="charge in paymentParams.charges" class="dotted-border">
+    <div><b>{{charge.name}}:</b></div>
+    <div><span>{{paymentParams.classifiedAd.title}}</span><span class="right">{{charge.cost | currency}}</span></div>
+  </div>
+  <div class="right"><b>Total Price: {{paymentParams.amount | currency}}</b></div>
+</div>
