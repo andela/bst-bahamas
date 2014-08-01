@@ -326,7 +326,7 @@ myApp.controller('PostAdCtrl', [
           $scope.loading = true;
           $('#veil').show();
           $upload.upload({
-            url: 'http://bst-bahamas.herokuapp.com/',
+            url: 'http://bst-bahamas.herokuapp.com/classified_ads',
             method: 'POST',
             data: params,
             photo: params.photo // or list of files ($files) for html5 only
@@ -412,7 +412,7 @@ myApp.controller('PaymentCtrl', [
         AppService.createCharge(params, function(data){
           if ($scope.paymentParams.classifiedAd) {
             $upload.upload({
-              url: 'http://localhost:3000/classified_ads',
+              url: 'http://bst-bahamas.herokuapp.com/classified_ads',
               method: 'POST',
               data: $scope.paymentParams.classifiedAd,
               photo: $scope.paymentParams.classifiedAd.photo
@@ -427,9 +427,8 @@ myApp.controller('PaymentCtrl', [
             });
           }
         }, function(error){
-          console.log(error);
           $scope.loading = false;
-          $scope.errorMessage = error.data.message || 'An error occurred while charging you card.';
+          $scope.errorMessage = error.data.message;
           $('#veil').hide();
         });
       }
