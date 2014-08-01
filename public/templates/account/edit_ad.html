@@ -1,0 +1,91 @@
+<form class="post-ad-form" name="postAdForm" ng-submit="submitForm(postAdForm.$valid)" novalidate ng-hide="success">
+	<div>
+		<span><b>Post Your Ad</b></span>
+		<span> - </span>
+		<span>BST Bahamas is absolutely <span class="free">FREE</span> to user</span>
+	</div>
+	<section class="ad-detail">
+		<div><span class="badge">1</span> <span><b>Ad Details</b></span></div>
+		<div class="attr">
+			<div class="text"><b>Location:</b></div>
+			<div class="input">
+				<select name="location" ng-options="location.name for location in locations" ng-model="locations[locations.indexOf({classifiedAd.location_id:locationHash[classifiedAd.location_id]})]" required>
+                </select>
+			</div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Category:</b></div>
+			<div class="input">
+				<select ng-options='category.name for category in categories' ng-model="category" required></select>
+			</div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Sub-Category:</b></div>
+			<div class="input">
+				<select ng-options='subCat.name for subCat in category.sub_category' ng-model="subCat" required></select>
+			</div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Price:</b></div>
+			<div class="input">$ <input type="number" ng-model="classifiedAd.price" min='0' required></div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Title:</b></div>
+			<div class="input"><input type="text" ng-model="classifiedAd.title" required></div>
+		</div>
+		<div class="attr descr">
+			<div class="text"><b>Description:</b></div>
+			<div class="input"><textarea rows="5" cols="50" maxlength="255" ng-model="classifiedAd.description" required></textarea></div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Address:</b></div>
+			<div class="input"><input type="text" ng-model="address"></div>
+		</div>
+	</section>
+	<section class="images">
+		<div><span class="badge">2</span> <span><b>Media</b></span></div>
+		<div class="attr">
+			<div class="text"><b>Image:</b></div>
+			<div class="input"><input type="file" ng-file-select="onFileSelect($files)" required></div>
+		</div>
+	</section>
+	<section class="contact-info">
+		<div><span class="badge">3</span> <span><b>Contact Information</b></span></div>
+		<div class="attr">
+			<div class="text"><b>Name:</b></div>
+			<div class="input"><input type="text" ng-model="classifiedAd.poster_name" required></div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Phone Number:</b></div>
+			<div class="input"><input type="number" ng-model="phoneno"></div>
+		</div>
+		<div class="attr">
+			<div class="text"><b>Email:</b></div>
+			<div class="input"><input type="email" ng-model="classifiedAd.poster_email" ng-disabled="email != null" required></div>
+		</div>
+	</section>
+	<section class="promote-ad">
+		<div><span class="badge">4</span> <span><b>Promote My Ad (optional)</b></span></div>
+		<table class="table">
+			<tr>
+				<th>Features</th>
+				<th>Days</th>
+				<th>Total</th>
+			</tr>
+			<tr ng-repeat="tag in tags">
+				<td>
+					<label>
+					    <input type="radio" ng-model="$parent.selectedTag" value="{{tag}}" />
+					    {{tag.name}}
+					</label>
+				</td>
+				<td>{{tag.duration_in_days}} days</td>
+				<td>{{tag.price | currency}}</td>
+			</tr>
+		</table>
+	</section>
+	<button type="submit" class="btn btn-primary" ng-disabled="postAdForm.$invalid">Post Your Ad</button>
+</form>
+<div ng-show="success">
+	Your ad has been successfully posted!
+</div>

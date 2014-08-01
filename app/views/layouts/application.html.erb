@@ -15,7 +15,7 @@
 <body ng-controller="IndexCtrl">
 <div id="veil"></div>
 <side-menu></side-menu>
-<div class="header fixed-top">
+<div class="header">
     <div class="row">
         <div id="company" class="col-md-2 col-xs-12" ng-click="goToIndex()">
             <h2 id="name">BSTBahamas</h2>
@@ -25,7 +25,7 @@
                 <h4>Create FREE local classified ads</h4>
             </div>
         </div>
-        <div id="accNav" class="col-md-7">
+        <div id="accNav" class="col-md-7 hidden-xs">
             <div class="nav-links">
                 <ul id="nav">
                     <span ng-show='loggedIn == false'>
@@ -65,7 +65,7 @@
     <div id="view" class="col-md-10 col-xs-12" ng-view>
       <%= yield %>
     </div>
-    <div id="adsense" class="col-md-2 hidden-xs" my-ad-sense>
+    <div id="adsense" class="col-md-2 hidden-xs" my-ad-sense ng-if="showGoogleAds">
   <!-- Google AdSense -->
       <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"

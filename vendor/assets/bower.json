@@ -7,8 +7,8 @@
     "flowtype": "latest",
     "angular-bootstrap": "latest",
     "angular-devise": "latest",
-    "bootstrap": "latest",
     "ng-file-upload": "latest",
-    "angular-payments": "latest"
+    "angular-payments": "latest",
+    "angular-carousel": "latest"
   }
 }

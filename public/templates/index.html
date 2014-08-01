@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-md-offset-1" ng-switch on='selected' style="position:relative; top:35px;">
+    <div class="col-md-9 col-md-offset-1" ng-switch on='selected'>
         <div class="breadcrumb">
             <a ng-if="category == null && selectedAd != null" ng-click="clickCategory(null)">All Categories</a>
             <a ng-click="clickCategory(category)">{{category.name}}</a>
@@ -67,7 +67,7 @@
                         <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
                         <div><span class="fa fa-phone"> <p>{{selectedAd.poster_phone_no}}</p></span></div>
                         <div><span class="fa fa-envelope"> <p>{{selectedAd.poster_email}}</p></span></div>
-                        <!--<div><span class="fa fa-globe"> <p></p></span></div>-->
+                        <div><span class="fa fa-globe"> <p>{{locationHash[selectedAd.location_id]}}</p></span></div>
                         <div><span class="fa fa-calendar"> <p>{{selectedAd.created_at | date : 'mediumDate'}}</p></span></div>
                     </div>
                 </div>

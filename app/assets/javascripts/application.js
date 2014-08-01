@@ -21,5 +21,7 @@
 //= require angular-bootstrap/ui-bootstrap.min
 //= require angular-bootstrap/ui-bootstrap-tpls.min
 //= require angular-payments/lib/angular-payments.min
+//= require angular-touch/angular-touch.min
+//= require angular-carousel/dist/angular-carousel.min
 //= require main
 //= require_tree .

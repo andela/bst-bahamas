@@ -3,9 +3,9 @@
 /* Services */
 myApp.factory('AppService', ['$resource', '$http', 'Auth',
   function($resource, $http, Auth){
+    var selectedAdID = null;
     var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
     // var HOST = 'http://localhost:3000/'; /* Can commit this line in develop branch */
-
     var categories = $resource( HOST+'category',{},{
       get:{
         method:'GET',
@@ -32,11 +32,13 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
 
     var myAds = $resource(HOST+'users/:user_id/classified_ads/:id', {}, {
       index:{
-        method:'GET',
-        isArray:true
+        method:'GET'
       },
       show: {
         method: 'GET'
+      },
+      delete:{
+        method:'DELETE'
       }
     });
 
@@ -82,6 +84,14 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       },
       getTags: function(successCallback, errorCallback) {
         Tags.index(successCallback, errorCallback);
-      }
+      },
+        setSelectedAdID : function(id)
+        {
+            selectedAdID =  id;
+        },
+        getSelectedAdID : function()
+        {
+            return selectedAdID;
+        }
     }
   }]);

@@ -1,5 +1,5 @@
 class ClassifiedAd < ActiveRecord::Base
-	before_create :set_expiry_date
+	before_create :set_expiry_date, :set_feature_expiry_date
 	include PgSearch
 	pg_search_scope :search_by_text, :against => [:title, :description, :keywords], :using => {:tsearch => {:any_word => true}}
 	belongs_to :user
@@ -31,5 +31,11 @@ class ClassifiedAd < ActiveRecord::Base
 
 	def set_expiry_date
 	  self.expiry_date = Date.today + 30
+	end
+
+	def feature_expiry_date
+	  if self.is_featured
+	    self.feature_expiry_date = Date.today + 7
+	  end
 	end
 end

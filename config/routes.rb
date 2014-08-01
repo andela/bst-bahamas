@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'classified_ads/search'
   get 'classified_ads/random_pics'
+  get 'classified_ads/featured'
 
   resources :users do
     resources :classified_ads

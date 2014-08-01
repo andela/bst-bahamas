@@ -2,8 +2,23 @@ class ClassifiedAdsController < ApplicationController
   before_action :set_classified_ad, only: [:show, :update, :destroy]
 
   def index
-      @classified_ads = ClassifiedAd.where("expiry_date > ?", Date.today)
-      render json: @classified_ads, status: :ok
+    page = params[:page] ? params[:page].to_i - 1 : 0
+    per = params[:per] ? params[:per].to_i : 25
+    numResults = 0
+    totalPages = 0
+
+    @user = current_user
+    if @user
+      numResults = @user.classified_ad.size()
+      totalPages = (numResults / per.to_f).ceil
+      @classified_ads = @user.classified_ad.order('created_at DESC').offset(page*per).limit(per)
+    else
+      numResults = ClassifiedAd.all.size()
+      totalPages = (numResults / per.to_f).ceil
+      @classified_ads = ClassifiedAd.all.order('created_at DESC').offset(page*per).limit(per)
+    end
+    page = page + 1
+    render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => @classified_ads.as_json}, status: :ok
   end
 
   def show
@@ -43,6 +58,7 @@ class ClassifiedAdsController < ApplicationController
   #  location_id       - filter by location
   #  category_id       - filter by category
   #  sub_category_id   - filter by sub category
+  #  is_featured       - filter featured ads
   #  page              - page number for pagination
   #  per               - num results per page for pagination (default 25)
   def search
@@ -52,13 +68,13 @@ class ClassifiedAdsController < ApplicationController
     totalPages = 0
 
     if params.has_key?("q")
-      numResults = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.search_by_text(params[:q]).where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).order('created_at DESC').offset(page*per).limit(per)
     else
-      numResults = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).size()
+      numResults = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).size()
       totalPages = (numResults / per.to_f).ceil
-      results = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id)).offset(page*per).limit(per)
+      results = ClassifiedAd.where("expiry_date > ?", Date.today).where(params.slice(:location_id, :category_id, :sub_category_id, :is_featured)).order('created_at DESC').offset(page*per).limit(per)
     end
     page = page + 1
     render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
@@ -71,6 +87,20 @@ class ClassifiedAdsController < ApplicationController
     random_id = min_id + rand(id_range).to_i
     result = ClassifiedAd.where("expiry_date > ?", Date.today).where("id >= ?", random_id).limit(10)
     render json: result, status: :ok
+  end
+
+  def featured
+    page = params[:page] ? params[:page].to_i - 1 : 0
+    per = params[:per] ? params[:per].to_i : 25
+    numResults = 0
+    totalPages = 0
+
+    numResults = ClassifiedAd.where("is_featured = ? AND feature_expiry_date > ? AND expiry_date > ?", 'true', Date.today, Date.today).size()
+    totalPages = (numResults / per.to_f).ceil
+    results = ClassifiedAd.where("is_featured = ? AND feature_expiry_date > ? AND expiry_date > ?", 'true', Date.today, Date.today).order('created_at DESC').offset(page*per).limit(per)
+
+    page = page + 1
+    render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
   end
 
   private

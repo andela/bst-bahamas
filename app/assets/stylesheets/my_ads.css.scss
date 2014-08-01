@@ -1,0 +1,38 @@
+#myadsCont
+{
+    width:80%;
+    margin:auto;
+    padding-top:10px;
+    overflow-x:auto;
+    
+    .action
+    {
+        background-color:transparent;
+        text-transform:uppercase;
+        border: 1px solid transparent;
+        border-radius:2px;
+        padding:0px 8px 0px 8px;
+        
+        &#edit
+        {
+            background-color:steelblue;
+        }
+        
+        &#del
+        {
+            background-color:#f00;
+        }
+        
+         
+        a 
+        {
+            color:#fff;
+        }
+    }
+    
+    table tr td
+    {
+        width:15px;
+        vertical-align:middle;
+    }
+}
