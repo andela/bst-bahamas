@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :category,  :only => [:index]
   resources :location,  :only => [:index]
   resources :tags,  :only => [:index]
+  resources :charges
 
   # match "/*path" => redirect("/%{path}"), via: :all
 end

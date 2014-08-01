@@ -46,3 +46,5 @@ gem 'rails_12factor', group: :production
 gem 'aws-sdk'
 
 gem 'pg_search'
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
