@@ -11,9 +11,7 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
-
     $scope.locationHash = {};
-    $scope.categoryHash = {};
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
@@ -36,7 +34,6 @@ myApp.controller('IndexCtrl', [
         category.sub_category.sort(function(a,b){
             return a.id - b.id;
         });
-        $scope.categoryHash[category.id] = category.name;
       });
     },function(error) {
       console.log(error);
