@@ -398,6 +398,7 @@ myApp.controller('MyAdsCtrl', [
 myApp.controller('PaymentCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     $scope.paymentParams = AppService.getPaymentParams();
+    $scope.loading = false;
 
     $scope.handleStripe = function(status, response) {
       console.log(response);
@@ -408,6 +409,8 @@ myApp.controller('PaymentCtrl', [
           amount: $scope.paymentParams.amount,
           token: response.id
         };
+        $scope.loading = true;
+        $('#veil').show();
         AppService.createCharge(params, function(data){
           if ($scope.paymentParams.classifiedAd) {
             $upload.upload({
@@ -417,12 +420,19 @@ myApp.controller('PaymentCtrl', [
               photo: $scope.paymentParams.classifiedAd.photo
             }).success(function(data, status, headers, config) {
               $scope.success = true;
+              $scope.loading = false;
+              $('#veil').hide();
             }).error(function(error){
-              $scope.success = false;
+              $scope.loading = false;
+              $scope.errorMessage = "An error occurred while posting your ad.";
+              $('#veil').hide();
             });
           }
         }, function(error){
           console.log(error);
+          $scope.loading = false;
+          $scope.errorMessage = error.data.message || 'An error occurred while charging you card.';
+          $('#veil').hide();
         });
       }
     }

@@ -32,11 +32,16 @@ class ClassifiedAdsController < ApplicationController
     else
       @classified_ad = ClassifiedAd.create(classified_ad_params)
     end
-    Rails.logger.info(@classified_ad.errors.inspect)
+
     if @classified_ad.id
       ClassifiedAdNotifier.send_active_ad_email(@classified_ad).deliver
     end
-    render json: @classified_ad, status: :ok
+
+    if @classified_ad.errors.any?
+      render json: {:errors => @classified_ad.errors}, status: 500
+    else
+      render json: @classified_ad, status: :ok
+    end
   end
 
   def update
