@@ -5,6 +5,7 @@ myApp.controller('IndexCtrl', [
     $scope.classifiedAds = [];
     $scope.locations = [];
     $scope.loggedIn = false;
+    $scope.showGoogleAds = true;
     $scope.showSpinner = true;
     $scope.pagination = {};
     $scope.pagination.currentPage = 1;
@@ -30,21 +31,19 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
-<<<<<<< HEAD
       $scope.categoryNames = [];
       angular.forEach($scope.categories, function(category){
         $scope.categoryHash[category.id] = category.name;
         $scope.categoryNames.push(category.name);
-=======
-      $scope.categories.sort(function(a,b){
+        $scope.categories.sort(function(a,b){
           return a.id - b.id;
+        });
       });
       angular.forEach($scope.categories, function(category){
         category.sub_category.sort(function(a,b){
             return a.id - b.id;
         });
         $scope.categoryHash[category.id] = category.name;
->>>>>>> bb0a8b3f288a696321d5cd8ed0ea137b269f52a1
       });
     },function(error) {
       console.log(error);
@@ -53,12 +52,9 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
-<<<<<<< HEAD
-=======
       $scope.locations.sort(function(a,b){
         return a.id - b.id;
       });
->>>>>>> bb0a8b3f288a696321d5cd8ed0ea137b269f52a1
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
         $scope.locationNames.push(location.name);
@@ -165,8 +161,8 @@ myApp.controller('IndexCtrl', [
       $scope.selected = "";
     }
 
-    $scope.goToIndex = function() {
-      $location.path('/index');
+    $scope.goToHome = function() {
+      $location.path('/home');
     };
 }]);
 
@@ -266,18 +262,12 @@ myApp.controller('SignUpCtrl', [
       };
 
       Auth.register(credentials).then(function(registeredUser) {
-          console.log(registeredUser);
-            $scope.$emit('login');
-<<<<<<< HEAD
-          $location.path('/home');
-      }, function(error) {
-          console.log(error);
-=======
-  		    $location.path('/home');
+        console.log(registeredUser);
+        $scope.$emit('login');
+        $location.path('/home');
   		}, function(error) {
-  		    console.log(error);
->>>>>>> bb0a8b3f288a696321d5cd8ed0ea137b269f52a1
-          $scope.errors = error.data.errors;
+  		  console.log(error);
+        $scope.errors = error.data.errors;
       });
     }
   }
@@ -360,18 +350,10 @@ myApp.controller('PostAdCtrl', [
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     //var params = {id: $location.search()['id']}
-<<<<<<< HEAD
-
     var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
-=======
-
-    var params = {id: AppService.getSelectedAdID()}
-    AppService.getClassifiedAd(params, function(data){
-      $scope.classifiedAd = data;
-        console.log($scope.classifiedAd);
->>>>>>> bb0a8b3f288a696321d5cd8ed0ea137b269f52a1
+      console.log($scope.classifiedAd);
     }, function(error){
       console.log(error);
     })
@@ -394,19 +376,11 @@ myApp.controller('MyAdsCtrl', [
     {
       AppService.setSelectedAdID(id);
     }
-<<<<<<< HEAD
 
     $scope.$watch('selectedID', function(newValue, oldValue){
         AppService.setSelectedAdID($scope.selectedID);
     });
 
-=======
-
-    $scope.$watch('selectedID', function(newValue, oldValue){
-        AppService.setSelectedAdID($scope.selectedID);
-    });
-
->>>>>>> bb0a8b3f288a696321d5cd8ed0ea137b269f52a1
     $scope.delete = function(ad)
     {
         ad.$delete();
