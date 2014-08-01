@@ -219,7 +219,6 @@ myApp.controller('HomeCtrl', [
     }
 
     $scope.range = function(max) {
-      console.log('range');
       var input = [];
       for (var i = 0; i < max; i += 1) input.push(i);
       return input;
@@ -278,6 +277,7 @@ myApp.controller('PostAdCtrl', [
   '$scope', '$location', '$upload', 'Auth', 'AppService', function($scope, $location, $upload, Auth, AppService) {
     $scope.tags = [];
     $scope.success = false;
+    $scope.loading = false;
     $scope.selectedTag = null;
     $scope.isFeatured = false;
     $scope.totalPrice = 0;
@@ -325,15 +325,21 @@ myApp.controller('PostAdCtrl', [
           AppService.setPaymentParams(paymentParams);
           $location.path('/payment_form');
         } else {
+          $scope.loading = true;
+          $('#veil').show();
           $upload.upload({
-            url: 'http://bst-bahamas.herokuapp.com/classified_ads',
+            url: 'http://bst-bahamas.herokuapp.com/',
             method: 'POST',
             data: params,
             photo: params.photo // or list of files ($files) for html5 only
           }).success(function(data, status, headers, config) {
             $scope.success = true;
+            $scope.loading = false;
+            $('#veil').hide();
           }).error(function(error){
-            $scope.success = false;
+            $scope.showError = true;
+            $scope.loading = false;
+            $('#veil').hide();
           });
         }
       }

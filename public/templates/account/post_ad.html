@@ -98,7 +98,11 @@
 		</table>
 	</section>
 	<button type="submit" class="btn btn-primary" ng-disabled="postAdForm.$invalid">Post Your Ad</button>
+	<div class="error-msg" ng-if="showError">An error occurred while attempting to post your ad.</div>
 </form>
-<div ng-show="success">
+<div class="post-ad-spinner" ng-if="loading">
+    <i class="fa fa-spinner fa-spin fa-3x"></i>
+</div>
+<div class="success-msg" ng-if="success">
 	Your ad has been successfully posted!
 </div>
