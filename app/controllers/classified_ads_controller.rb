@@ -2,8 +2,23 @@ class ClassifiedAdsController < ApplicationController
   before_action :set_classified_ad, only: [:show, :update, :destroy]
 
   def index
-      @classified_ads = ClassifiedAd.where("expiry_date > ?", Date.today)
-      render json: @classified_ads, status: :ok
+    page = params[:page] ? params[:page].to_i - 1 : 0
+    per = params[:per] ? params[:per].to_i : 25
+    numResults = 0
+    totalPages = 0
+
+    @user = current_user
+    if @user
+      numResults = @user.classified_ad.size()
+      totalPages = (numResults / per.to_f).ceil
+      @classified_ads = @user.classified_ad.order('created_at DESC').offset(page*per).limit(per)
+    else
+      numResults = ClassifiedAd.all.size()
+      totalPages = (numResults / per.to_f).ceil
+      @classified_ads = ClassifiedAd.all.order('created_at DESC').offset(page*per).limit(per)
+    end
+    page = page + 1
+    render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => @classified_ads.as_json}, status: :ok
   end
 
   def show
@@ -72,6 +87,20 @@ class ClassifiedAdsController < ApplicationController
     random_id = min_id + rand(id_range).to_i
     result = ClassifiedAd.where("expiry_date > ?", Date.today).where("id >= ?", random_id).limit(10)
     render json: result, status: :ok
+  end
+
+  def featured
+    page = params[:page] ? params[:page].to_i - 1 : 0
+    per = params[:per] ? params[:per].to_i : 25
+    numResults = 0
+    totalPages = 0
+
+    numResults = ClassifiedAd.where("is_featured = ? AND feature_expiry_date > ? AND expiry_date > ?", 'true', Date.today, Date.today).size()
+    totalPages = (numResults / per.to_f).ceil
+    results = ClassifiedAd.where("is_featured = ? AND feature_expiry_date > ? AND expiry_date > ?", 'true', Date.today, Date.today).order('created_at DESC').offset(page*per).limit(per)
+
+    page = page + 1
+    render json: {:per => per, :page => page, :numResults => numResults, :totalPages => totalPages, :ads => results.as_json}, status: :ok
   end
 
   private

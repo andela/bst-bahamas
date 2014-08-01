@@ -21,7 +21,6 @@ myApp.controller('IndexCtrl', [
 
     Auth.currentUser().then(function(user) {
       $scope.currentUser = user;
-      console.log('currentUser found');
       $scope.loggedIn = true;
     }, function(error) {
       $scope.loggedIn = false;
@@ -37,11 +36,11 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
-      
+
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
       });
-    
+
     },function(error) {
       console.log(error);
     });
@@ -319,21 +318,17 @@ myApp.controller('EditAdCtrl', [
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
-    $scope.selectedID = null;
+
     AppService.myAds(function(data){
-      angular.copy(data, $scope.myAds) 
+      angular.copy(data.ads, $scope.myAds)
     }, function(error){
       console.log(error);
     })
-    
+
     $scope.getID = function(id)
     {
-        $scope.selectedID = id;
+      AppService.setSelectedAdID(id);
     }
-    
-    $scope.$watch('selectedID', function(newValue, oldValue){
-        AppService.setSelectedAdID($scope.selectedID);
-    });
   }
 ]);
 

@@ -32,16 +32,14 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
 
     var myAds = $resource(HOST+'users/:user_id/classified_ads/:id', {}, {
       index:{
-        method:'GET',
-        isArray:true
+        method:'GET'
       },
       show: {
         method: 'GET'
       },
-      delete:
-        {
-            method:'DELETE'
-        }
+      delete:{
+        method:'DELETE'
+      }
     });
 
     var searchClassifiedAds = $resource(HOST+'classified_ads/search', {}, {
