@@ -89,6 +89,14 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
           errorCallback(error);
         });
       },
+      deleteMyAd: function(params, successCallback, errorCallback) {
+        Auth.currentUser().then(function(user) {
+          params.user_id = user.id;
+          myAds.delete(params, successCallback, errorCallback);
+        }, function(error) {
+          errorCallback(error);
+        });
+      },
       getTags: function(successCallback, errorCallback) {
         Tags.index(successCallback, errorCallback);
       },

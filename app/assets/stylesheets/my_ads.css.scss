@@ -4,31 +4,26 @@
     margin:auto;
     padding-top:10px;
     overflow-x:auto;
-    
+
     .action
     {
         background-color:transparent;
         border: 1px solid transparent;
         border-radius:2px;
         padding:3px 8px 3px 8px;
-        
+        color:#fff;
+
         &#edit
         {
             background-color:steelblue;
         }
-        
+
         &#del
         {
             background-color:#f00;
         }
-        
-         
-        a 
-        {
-            color:#fff;
-        }
     }
-    
+
     table tr td
     {
         width:15px;

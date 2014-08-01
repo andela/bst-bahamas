@@ -369,25 +369,28 @@ myApp.controller('EditAdCtrl', [
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
+    $scope.loading = true;
 
     AppService.myAds(function(data){
-      angular.copy(data.ads, $scope.myAds)
+      $scope.myAds = data.ads;
+      $scope.loading = false;
     }, function(error){
-      console.log(error);
+      $scope.loading = false;
     })
 
     $scope.getID = function(id)
     {
       AppService.setSelectedAdID(id);
+      $location.path('/edit_ad');
     }
-
-    $scope.$watch('selectedID', function(newValue, oldValue){
-        AppService.setSelectedAdID($scope.selectedID);
-    });
 
     $scope.delete = function(ad)
     {
-        ad.$delete();
+      AppService.deleteMyAd({id: ad.id}, function(data){
+        ad.isDeleted = true;
+      }, function(error){
+        console.log(error);
+      });
     }
   }
 ]);
