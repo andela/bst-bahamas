@@ -45,6 +45,12 @@
     .descr {
         padding-bottom: 12%;
     }
+
+    .btn-delete {
+        background-color: red;
+        border-color: red;
+        float: right;
+    }
 }
 
 @media (max-width:768px), (max-width:1024px)
@@ -94,4 +100,21 @@
     {
         margin-bottom:8%;
     }
+}
+.post-ad-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    color: white;
+}
+.success-msg {
+    margin: 2%;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0.5%;
+    background: #C3E779;
+}
+.error-msg {
+    color: red;
 }

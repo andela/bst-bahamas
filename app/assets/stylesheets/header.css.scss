@@ -124,7 +124,59 @@
     display:none; //sideMenu shows on pc if this is not there.
 }
 
+//Chris Coyier ribbon
+.ribbon-wrapper-green {
+  width: 95%;
+  height: 95px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
 
+.ribbon-green {
+  position:relative;
+  font: bold 8px Sans-Serif;
+  text-transform:uppercase;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(50deg);
+  -moz-transform:    rotate(50deg);
+  -ms-transform:     rotate(50deg);
+  -o-transform:      rotate(50deg);
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45);
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+  left:50%;
+}
+
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}
 @media (max-width:768px)
 {
     #veil

@@ -14,7 +14,7 @@ myApp.directive('myAdSense', function() {
         replace:true,
         templateUrl:'classified_ad',
         link:function(scope,element,attrs){
-
+            
         }
     };
 })

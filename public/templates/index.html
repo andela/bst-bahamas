@@ -35,10 +35,12 @@
     </div>
 
     <script type="text/ng-template" id="classified_ad">
+
             <div id="adCont">
                 <div class="adInfo">
                     <div ng-repeat="ad in classifiedAds" ng-click="showAd(ad.id)" >
-                        <div id="adDesc">
+                        <div class="adDesc">
+                            <div class="ribbon-wrapper-green" ng-if="ad.tag"><div class = "ribbon-green">{{ad.tag}}</div></div>
                             <div id="header">
                                 <h5>{{ad.title}}</h5>
                             </div>
@@ -48,13 +50,15 @@
                             </div>
                             <span id="price">{{ad.price|currency}}</span>
                         </div>
-                        <div id="adImg">
+                        <div class="adImg">
                             <img src={{ad.photo_medium_url}}/>
                         </div>
                     </div>
+
                 </div>
                 <pagination ng-show="classifiedAds.length > 0" total-items="totalItems" ng-model="pagination.currentPage" ng-change="pageChanged()" items-per-page="$scope.pagination.per"></pagination>
             </div>
+
         </script>
 
         <script type="text/ng-template" id="selected_ad">

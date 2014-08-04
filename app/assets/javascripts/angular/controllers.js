@@ -12,10 +12,8 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
-    $scope.locationNames = [];
 
     $scope.locationHash = {};
-    $scope.categoryHash = {};
     $scope.toggle = function()
     {
         $scope.menuOpened = !$scope.menuOpened;
@@ -31,20 +29,12 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
-      $scope.categoryNames = [];
-      angular.forEach($scope.categories, function(category){
-        $scope.categoryHash[category.id] = category.name;
-        $scope.categoryNames.push(category.name);
-        $scope.categories.sort(function(a,b){
-          return a.id - b.id;
-        });
-      });
       angular.forEach($scope.categories, function(category){
         category.sub_category.sort(function(a,b){
             return a.id - b.id;
         });
-        $scope.categoryHash[category.id] = category.name;
       });
+
     },function(error) {
       console.log(error);
     });
@@ -52,12 +42,13 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
+
       $scope.locations.sort(function(a,b){
         return a.id - b.id;
       });
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
-        $scope.locationNames.push(location.name);
+
       });
 
     },function(error) {
@@ -96,7 +87,15 @@ myApp.controller('IndexCtrl', [
       });
     };
 
+    $scope.doSearch = function() {
+      if ($location.path() != '/index') $location.path('/index');
+      $scope.search();
+      $scope.selectedAd = null;
+      $scope.selected = "";
+    }
+
     $scope.selectCategory = function() {
+      if ($location.path() != '/index') $location.path('/index');
       $scope.subCategory = null;
       $scope.search();
       $scope.selectedAd = null;
@@ -104,6 +103,7 @@ myApp.controller('IndexCtrl', [
     };
 
     $scope.selectLocation = function() {
+      if ($location.path() != '/index') $location.path('/index');
       $scope.search();
       $scope.selectedAd = null;
       $scope.selected = "";
@@ -135,11 +135,6 @@ myApp.controller('IndexCtrl', [
     $scope.$on('logout',function(){
         $scope.loggedIn = false;
     });
-
-    $scope.$watch('loggedIn', function(newValue, oldValue){
-        console.log(newValue);
-    });
-
 
     $scope.showAd = function(id)
     {
@@ -219,7 +214,6 @@ myApp.controller('HomeCtrl', [
     }
 
     $scope.range = function(max) {
-      console.log('range');
       var input = [];
       for (var i = 0; i < max; i += 1) input.push(i);
       return input;
@@ -278,6 +272,7 @@ myApp.controller('PostAdCtrl', [
   '$scope', '$location', '$upload', 'Auth', 'AppService', function($scope, $location, $upload, Auth, AppService) {
     $scope.tags = [];
     $scope.success = false;
+    $scope.loading = false;
     $scope.selectedTag = null;
     $scope.isFeatured = false;
     $scope.totalPrice = 0;
@@ -325,6 +320,8 @@ myApp.controller('PostAdCtrl', [
           AppService.setPaymentParams(paymentParams);
           $location.path('/payment_form');
         } else {
+          $scope.loading = true;
+          $('#veil').show();
           $upload.upload({
             url: 'http://bst-bahamas.herokuapp.com/classified_ads',
             method: 'POST',
@@ -332,8 +329,12 @@ myApp.controller('PostAdCtrl', [
             photo: params.photo // or list of files ($files) for html5 only
           }).success(function(data, status, headers, config) {
             $scope.success = true;
+            $scope.loading = false;
+            $('#veil').hide();
           }).error(function(error){
-            $scope.success = false;
+            $scope.showError = true;
+            $scope.loading = false;
+            $('#veil').hide();
           });
         }
       }
@@ -349,14 +350,123 @@ myApp.controller('PostAdCtrl', [
 //EDITCTRL
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
-    //var params = {id: $location.search()['id']}
-    var params = {id: AppService.getSelectedAdID()}
-    AppService.getClassifiedAd(params, function(data){
-      $scope.classifiedAd = data;
-      console.log($scope.classifiedAd);
+    $scope.tags = [];
+    $scope.selectedTag = null;
+    $scope.successMsg = null;
+    $scope.errorMsg = null;
+
+    AppService.getTags(function(data){
+      $scope.tags = data;
     }, function(error){
       console.log(error);
-    })
+    });
+
+    var params = {
+      id: AppService.getSelectedAdID() ? AppService.getSelectedAdID() : $location.search()['id']
+    }
+    AppService.getClassifiedAd(params, function(data){
+      $scope.classifiedAd = data;
+      $scope.isFeatured = data.is_featured;
+
+      for(var i = 0; i < $scope.$parent.locations.length; i++) {
+        if ($scope.$parent.locations[i].id == $scope.classifiedAd.location_id){
+          $scope.location = $scope.$parent.locations[i];
+          break;
+        }
+      }
+
+      for(var i = 0; i < $scope.$parent.categories.length; i++) {
+        if ($scope.$parent.categories[i].id == $scope.classifiedAd.category_id){
+          $scope.category = $scope.$parent.categories[i];
+          for(var j = 0; j < $scope.category.sub_category.length; j++) {
+            if ($scope.category.sub_category[j].id == $scope.classifiedAd.sub_category_id){
+              $scope.subCat = $scope.category.sub_category[j];
+              break;
+            }
+          }
+        }
+      }
+
+      for(var i = 0; i < $scope.tags.length; i++) {
+        if ($scope.tags[i].name == $scope.classifiedAd.tag){
+          $scope.selectedTag = $scope.tags[i];
+          break;
+        }
+      }
+    }, function(error){
+      console.log(error);
+    });
+
+    $scope.submitForm = function(isValid) {
+      if (isValid) {
+        params.id = $scope.classifiedAd.id;
+        params.location_id = $scope.location.id;
+        params.category_id = $scope.category.id;
+        params.sub_category_id = $scope.subCat.id;
+        params.price = $scope.classifiedAd.price;
+        params.title = $scope.classifiedAd.title;
+        params.description = $scope.classifiedAd.description;
+        params.poster_name = $scope.classifiedAd.poster_name;
+        params.poster_email = $scope.classifiedAd.poster_email;
+        params.poster_phone_no = $scope.classifiedAd.poster_phone_no;
+        params.is_featured = $scope.isFeatured;
+        if ($scope.selectedTag) params.tag = $scope.selectedTag.name;
+
+        if (($scope.isFeatured && !$scope.classifiedAd.is_featured) || ($scope.selectedTag && ($scope.selectedTag.name != $scope.classifiedAd.tag))) {
+          var price = 0;
+          var charges = [];
+          if ($scope.isFeatured && !$scope.classifiedAd.is_featured) {
+            price = price + 5;
+            charges.push({name: 'Featured', cost: 5});
+          }
+          if ($scope.selectedTag && ($scope.selectedTag.name != $scope.classifiedAd.tag)) {
+            price = price + $scope.selectedTag.price;
+            charges.push({name: $scope.selectedTag.name, cost: $scope.selectedTag.price});
+          }
+          var paymentParams = {
+            classifiedAd: params,
+            charges: charges,
+            amount: price
+          }
+          AppService.setPaymentParams(paymentParams);
+          $location.path('/payment_form');
+        } else {
+          $scope.loading = true;
+          $('#veil').show();
+          AppService.updateAd(params, function(data){
+            $scope.success = true;
+            $scope.loading = false;
+            $('#veil').hide();
+            $scope.successMsg = "Your ad has been successfully updated!";
+          }, function(error){
+            $scope.showError = true;
+            $scope.loading = false;
+            $('#veil').hide();
+            $scope.errorMsg = "An error occurred while attempting to update your ad.";
+          });
+        }
+      }
+    };
+
+    $scope.onFileSelect = function($files) {
+      params.photo = $files[0];
+    };
+
+    $scope.delete = function() {
+      $scope.loading = true;
+      $('#veil').show();
+      AppService.deleteAd({id: $scope.classifiedAd.id}, function(data){
+        $scope.success = true;
+        $scope.loading = false;
+        $('#veil').hide();
+        $scope.successMsg = "Your ad has been successfully deleted.";
+      }, function(error){
+        $scope.showError = true;
+        $scope.loading = false;
+        $('#veil').hide();
+        $scope.errorMsg = "An error occurred while attempting to delete your ad.";
+      });
+    }
   }
 ]);
 
@@ -365,25 +475,29 @@ myApp.controller('EditAdCtrl', [
 myApp.controller('MyAdsCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.myAds = [];
+    $scope.loading = true;
 
     AppService.myAds(function(data){
-      angular.copy(data.ads, $scope.myAds)
+      $scope.myAds = data.ads;
+      $scope.loading = false;
     }, function(error){
-      console.log(error);
+      $scope.loading = false;
     })
 
     $scope.getID = function(id)
     {
       AppService.setSelectedAdID(id);
+      $location.path('/edit_ad');
     }
-
-    $scope.$watch('selectedID', function(newValue, oldValue){
-        AppService.setSelectedAdID($scope.selectedID);
-    });
 
     $scope.delete = function(ad)
     {
-        ad.$delete();
+      AppService.deleteAd({id: ad.id}, function(data){
+        ad.isDeleted = true;
+      }, function(error){
+        console.log(error);
+      });
+
     }
   }
 ]);
@@ -392,9 +506,9 @@ myApp.controller('MyAdsCtrl', [
 myApp.controller('PaymentCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     $scope.paymentParams = AppService.getPaymentParams();
+    $scope.loading = false;
 
     $scope.handleStripe = function(status, response) {
-      console.log(response);
       if(response.error) {
         // there was an error. Fix it.
       } else {
@@ -402,21 +516,36 @@ myApp.controller('PaymentCtrl', [
           amount: $scope.paymentParams.amount,
           token: response.id
         };
+        $scope.loading = true;
+        $('#veil').show();
         AppService.createCharge(params, function(data){
           if ($scope.paymentParams.classifiedAd) {
-            $upload.upload({
-              url: 'http://localhost:3000/classified_ads',
-              method: 'POST',
-              data: $scope.paymentParams.classifiedAd,
-              photo: $scope.paymentParams.classifiedAd.photo
-            }).success(function(data, status, headers, config) {
-              $scope.success = true;
-            }).error(function(error){
-              $scope.success = false;
-            });
+            if ($scope.paymentParams.classifiedAd.id) {
+              AppService.updateAd($scope.paymentParams.classifiedAd, function(data){
+                $scope.success = true;
+                $scope.loading = false;
+                $('#veil').hide();
+              }, function(error){
+                $scope.loading = false;
+                $scope.errorMessage = "An error occurred while updating your ad.";
+                $('#veil').hide();
+              });
+            } else {
+              AppService.createAd($scope.paymentParams.classifiedAd, function(data){
+                $scope.success = true;
+                $scope.loading = false;
+                $('#veil').hide();
+              }, function(error){
+                $scope.loading = false;
+                $scope.errorMessage = "An error occurred while posting your ad.";
+                $('#veil').hide();
+              });
+            }
           }
         }, function(error){
-          console.log(error);
+          $scope.loading = false;
+          $scope.errorMessage = error.data.message;
+          $('#veil').hide();
         });
       }
     }

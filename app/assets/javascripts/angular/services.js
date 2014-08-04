@@ -1,8 +1,8 @@
 'use strict';
 
 /* Services */
-myApp.factory('AppService', ['$resource', '$http', 'Auth',
-  function($resource, $http, Auth){
+myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
+  function($resource, $http, $upload, Auth){
     var selectedAdID = null;
     var paymentParams = null;
     var HOST = 'http://bst-bahamas.herokuapp.com/' /* Production URL, comment out in development */
@@ -28,6 +28,9 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       },
       show: {
         method: 'GET'
+      },
+      delete: {
+        method:'DELETE'
       }
     });
 
@@ -38,7 +41,7 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       show: {
         method: 'GET'
       },
-      delete:{
+      delete_ad:{
         method:'DELETE'
       }
     });
@@ -89,11 +92,38 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
           errorCallback(error);
         });
       },
+      deleteAd: function(params, successCallback, errorCallback) {
+        classifiedAds.delete(params, successCallback, errorCallback);
+      },
       getTags: function(successCallback, errorCallback) {
         Tags.index(successCallback, errorCallback);
       },
       createCharge: function(params, successCallback, errorCallback) {
         charges.create(params, successCallback, errorCallback);
+      },
+      createAd: function(params, successCallback, errorCallback) {
+        $upload.upload({
+          url: HOST+'classified_ads',
+          method: 'POST',
+          data: params,
+          photo: params.photo
+        }).success(function(data, status, headers, config) {
+          successCallback(data)
+        }).error(function(error){
+          errorCallback(error);
+        });
+      },
+      updateAd: function(params, successCallback, errorCallback) {
+        $upload.upload({
+          url: HOST+'classified_ads/'+params.id,
+          method: 'PUT',
+          data: params,
+          photo: params.photo
+        }).success(function(data, status, headers, config) {
+          successCallback(data)
+        }).error(function(error){
+          errorCallback(error);
+        });
       },
       setSelectedAdID : function(id) {
         selectedAdID =  id;

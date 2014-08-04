@@ -1,18 +1,24 @@
 <div id='myadsCont'>
     <table class="table">
-<!--Image-->
-        <th></th>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Price</th>
-<!--Edit Delete-->
-        <th></th> 
-        <tr ng-repeat="ad in myAds" ng-model="ad">
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="ad in myAds" ng-model="ad" ng-if="!ad.isDeleted">
             <td><img src={{ad.photo_thumb_url}}/></td>
             <td>{{ad.title}}</td>
             <td>{{locationHash[ad.location_id]}}</td>
             <td>{{ad.price|currency}}</td>
-            <td><span style="margin-right:10px;" class="action" id="edit"><a ng-click = "getID(ad.id)" href="#edit_ad">Edit</a></span><span class="action" id="del"><a href="" ng-click="delete(ad)">Delete</a></span></td>
+            <td>
+                <span style="margin-right:10px;" class="action" id="edit" ng-click="getID(ad.id)">Edit</span>
+                <span class="action" id="del" ng-click="delete(ad)">Delete</span>
+            </td>
+        </tr>
+        <tr ng-if="!loading && myAds.length == 0">
+            <td colspan="4">You currently have no ads available</td>
         </tr>
     </table>
 </div>
