@@ -93,8 +93,9 @@
                 border-bottom:none;
             }
 
-                #adDesc
+                .adDesc
                 {
+                    position:relative;
                     height:47%;
                     width:100%;
                     text-align:left;
@@ -129,7 +130,7 @@
                     }
                 }
 
-                #adImg
+                .adImg
                 {
                     height: 43%;
                     width:100%;
@@ -259,6 +260,11 @@ a.selected {
     padding:0 !important;
 }
 
+.pagination
+{
+    position:relative;
+    top:90%;
+}
 @media (max-width:768px)
 {
     #mainCnt

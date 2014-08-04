@@ -29,6 +29,12 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
+      angular.forEach($scope.categories, function(category){
+        category.sub_category.sort(function(a,b){
+            return a.id - b.id;
+        });
+      });
+
     },function(error) {
       console.log(error);
     });
@@ -36,6 +42,15 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
+
+      $scope.locations.sort(function(a,b){
+        return a.id - b.id;
+      });
+      angular.forEach($scope.locations, function(location){
+        $scope.locationHash[location.id] = location.name;
+
+      });
+
     },function(error) {
       console.log(error);
     });
@@ -342,7 +357,6 @@ myApp.controller('EditAdCtrl', [
     }
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
-
       for(var i = 0; i < $scope.$parent.locations.length; i++) {
         if ($scope.$parent.locations[i].id == $scope.classifiedAd.location_id){
           $scope.location = $scope.$parent.locations[i];
@@ -369,7 +383,6 @@ myApp.controller('EditAdCtrl', [
           break;
         }
       }
-
     }, function(error){
       console.log(error);
     });
@@ -474,6 +487,7 @@ myApp.controller('MyAdsCtrl', [
       }, function(error){
         console.log(error);
       });
+
     }
   }
 ]);

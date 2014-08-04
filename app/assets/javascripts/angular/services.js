@@ -41,7 +41,7 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
       show: {
         method: 'GET'
       },
-      delete:{
+      delete_ad:{
         method:'DELETE'
       }
     });
