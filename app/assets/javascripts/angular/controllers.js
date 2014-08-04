@@ -357,6 +357,8 @@ myApp.controller('EditAdCtrl', [
     }
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
+      $scope.isFeatured = data.is_featured;
+
       for(var i = 0; i < $scope.$parent.locations.length; i++) {
         if ($scope.$parent.locations[i].id == $scope.classifiedAd.location_id){
           $scope.location = $scope.$parent.locations[i];
@@ -379,7 +381,6 @@ myApp.controller('EditAdCtrl', [
       for(var i = 0; i < $scope.tags.length; i++) {
         if ($scope.tags[i].name == $scope.classifiedAd.tag){
           $scope.selectedTag = $scope.tags[i];
-          console.log('got here', $scope.selectedTag)
           break;
         }
       }
@@ -399,17 +400,17 @@ myApp.controller('EditAdCtrl', [
         params.poster_name = $scope.classifiedAd.poster_name;
         params.poster_email = $scope.classifiedAd.poster_email;
         params.poster_phone_no = $scope.classifiedAd.poster_phone_no;
-        params.is_featured = $scope.classifiedAd.is_featured;
+        params.is_featured = $scope.isFeatured;
         if ($scope.selectedTag) params.tag = $scope.selectedTag.name;
 
-        if ($scope.isFeatured || $scope.selectedTag) {
+        if (($scope.isFeatured && !$scope.classifiedAd.is_featured) || ($scope.selectedTag && ($scope.selectedTag.name != $scope.classifiedAd.tag))) {
           var price = 0;
           var charges = [];
-          if ($scope.isFeatured) {
+          if ($scope.isFeatured && !$scope.classifiedAd.is_featured) {
             price = price + 5;
             charges.push({name: 'Featured', cost: 5});
           }
-          if ($scope.selectedTag) {
+          if ($scope.selectedTag && ($scope.selectedTag.name != $scope.classifiedAd.tag)) {
             price = price + $scope.selectedTag.price;
             charges.push({name: $scope.selectedTag.name, cost: $scope.selectedTag.price});
           }
@@ -499,7 +500,6 @@ myApp.controller('PaymentCtrl', [
     $scope.loading = false;
 
     $scope.handleStripe = function(status, response) {
-      console.log(response);
       if(response.error) {
         // there was an error. Fix it.
       } else {

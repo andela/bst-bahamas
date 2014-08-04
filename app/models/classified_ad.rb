@@ -1,5 +1,7 @@
 class ClassifiedAd < ActiveRecord::Base
 	before_create :set_expiry_date, :set_feature_expiry_date, :set_tag_expiry_date
+	before_update { |classified_ad| classified_ad.set_feature_expiry_date if classified_ad.is_featured_changed? }
+	before_update { |classified_ad| classified_ad.set_tag_expiry_date if classified_ad.tag_changed? }
 	include PgSearch
 	pg_search_scope :search_by_text, :against => [:title, :description, :keywords], :using => {:tsearch => {:any_word => true}}
 	belongs_to :user
