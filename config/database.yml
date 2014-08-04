@@ -25,16 +25,8 @@ development:
   <<: *default
   database: bst-bahamas_development
   username: postgres
-  password: password
-  host: 127.0.0.1
-
-development:
-  <<: *default
-  database: bst-bahamas_development
-  username: postgres
   password: elow1994
   host: 127.0.0.1
-
 
 test:
   <<: *default
@@ -43,5 +35,3 @@ test:
 production:
   <<: *default
   database: bst-bahamas_production
-  # username: bst-bahamas
-  # password: <%= ENV['BST-BAHAMAS_DATABASE_PASSWORD'] %>
