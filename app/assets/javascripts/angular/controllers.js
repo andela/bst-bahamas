@@ -13,7 +13,6 @@ myApp.controller('IndexCtrl', [
     $scope.totalItems = 25;
     $scope.menuOpened = false;
 
-    $scope.locationNames = [];
     $scope.locationHash = {};
     $scope.toggle = function()
     {
@@ -30,19 +29,6 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
-      $scope.categoryNames = [];
-      angular.forEach($scope.categories, function(category){
-        $scope.categoryHash[category.id] = category.name;
-        $scope.categoryNames.push(category.name);
-        $scope.categories.sort(function(a,b){
-          return a.id - b.id;
-        });
-      });
-      angular.forEach($scope.categories, function(category){
-        category.sub_category.sort(function(a,b){
-            return a.id - b.id;
-        });
-      });
     },function(error) {
       console.log(error);
     });
@@ -50,14 +36,6 @@ myApp.controller('IndexCtrl', [
     //get locations
     AppService.getLocations(function(data) {
       angular.copy(data, $scope.locations);
-      $scope.locations.sort(function(a,b){
-        return a.id - b.id;
-      });
-      angular.forEach($scope.locations, function(location){
-        $scope.locationHash[location.id] = location.name;
-        $scope.locationNames.push(location.name);
-      });
-
     },function(error) {
       console.log(error);
     });
@@ -133,11 +111,6 @@ myApp.controller('IndexCtrl', [
     $scope.$on('logout',function(){
         $scope.loggedIn = false;
     });
-
-    $scope.$watch('loggedIn', function(newValue, oldValue){
-        console.log(newValue);
-    });
-
 
     $scope.showAd = function(id)
     {
@@ -354,10 +327,36 @@ myApp.controller('PostAdCtrl', [
 myApp.controller('EditAdCtrl', [
   '$scope', '$location', '$upload', 'AppService', function($scope, $location, $upload, AppService) {
     //var params = {id: $location.search()['id']}
+
+    AppService.getTags(function(data){
+      $scope.tags = data;
+    }, function(error){
+      console.log(error);
+    });
+
     var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
-      console.log($scope.classifiedAd);
+
+      for(var i = 0; i < $scope.$parent.locations.length; i++) {
+        if ($scope.$parent.locations[i].id == $scope.classifiedAd.location_id){
+          $scope.location = $scope.$parent.locations[i];
+          break;
+        }
+      }
+
+      for(var i = 0; i < $scope.$parent.categories.length; i++) {
+        if ($scope.$parent.categories[i].id == $scope.classifiedAd.category_id){
+          $scope.category = $scope.$parent.categories[i];
+          for(var j = 0; j < $scope.category.sub_category.length; j++) {
+            if ($scope.category.sub_category[j].id == $scope.classifiedAd.sub_category_id){
+              $scope.subCat = $scope.category.sub_category[j];
+              break;
+            }
+          }
+        }
+      }
+
     }, function(error){
       console.log(error);
     })
