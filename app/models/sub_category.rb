@@ -9,6 +9,6 @@ class SubCategory < ActiveRecord::Base
 	end
 
 	def num_ads
-		ClassifiedAd.where("sub_category_id = ?", id).size()
+		ClassifiedAd.where("sub_category_id = ? AND expiry_date > ?", id, Date.today).size()
 	end
 end

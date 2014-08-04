@@ -87,7 +87,15 @@ myApp.controller('IndexCtrl', [
       });
     };
 
+    $scope.doSearch = function() {
+      if ($location.path() != '/index') $location.path('/index');
+      $scope.search();
+      $scope.selectedAd = null;
+      $scope.selected = "";
+    }
+
     $scope.selectCategory = function() {
+      if ($location.path() != '/index') $location.path('/index');
       $scope.subCategory = null;
       $scope.search();
       $scope.selectedAd = null;
@@ -95,6 +103,7 @@ myApp.controller('IndexCtrl', [
     };
 
     $scope.selectLocation = function() {
+      if ($location.path() != '/index') $location.path('/index');
       $scope.search();
       $scope.selectedAd = null;
       $scope.selected = "";

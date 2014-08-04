@@ -43,8 +43,8 @@
     </div>
     <div class="row" id="searchbar">
         <div class="col-md-5" id="search">
-            <input type="text" ng-model="query" placeholder="Search" ng-keyup="$event.keyCode == 13 ? search() : null"/>
-            <button class="btn btn-primary btn-md" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+            <input type="text" ng-model="query" placeholder="Search" ng-keyup="$event.keyCode == 13 ? doSearch() : null"/>
+            <button class="btn btn-primary btn-md" ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span></button>
         </div>
         <div class="col-md-1 hidden-xs"></div>
         <div class="col-md-3 customSel" >
