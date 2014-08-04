@@ -13,7 +13,6 @@ myApp.controller('IndexCtrl', [
     $scope.totalItems = 25;
     $scope.menuOpened = false;
 
-    $scope.locationNames = [];
     $scope.locationHash = {};
     $scope.toggle = function()
     {
@@ -30,14 +29,7 @@ myApp.controller('IndexCtrl', [
     //get categories
     AppService.getCategories(function(data) {
       angular.copy(data, $scope.categories);
-      $scope.categoryNames = [];
-      angular.forEach($scope.categories, function(category){
-        $scope.categoryHash[category.id] = category.name;
-        $scope.categoryNames.push(category.name);
-        $scope.categories.sort(function(a,b){
-          return a.id - b.id;
-        });
-      });
+      
       angular.forEach($scope.categories, function(category){
         category.sub_category.sort(function(a,b){
             return a.id - b.id;
@@ -55,7 +47,7 @@ myApp.controller('IndexCtrl', [
       });
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
-        $scope.locationNames.push(location.name);
+        
       });
 
     },function(error) {
@@ -351,7 +343,6 @@ myApp.controller('EditAdCtrl', [
     var params = {id: AppService.getSelectedAdID()}
     AppService.getClassifiedAd(params, function(data){
       $scope.classifiedAd = data;
-      console.log($scope.classifiedAd);
     }, function(error){
       console.log(error);
     })
@@ -373,15 +364,21 @@ myApp.controller('MyAdsCtrl', [
     $scope.getID = function(id)
     {
       AppService.setSelectedAdID(id);
+      $location.path('/edit_ad');
     }
 
     $scope.$watch('selectedID', function(newValue, oldValue){
         AppService.setSelectedAdID($scope.selectedID);
     });
 
-    $scope.delete = function(ad)
-    {
-        ad.$delete();
+    $scope.delete = function(ad){
+        AppService.deleteAd({user_id:$scope.currentUser.id, id:ad.id},
+        function(){
+        console.log('Ad deleted');
+        },
+        function(error){
+        console.log(error);
+    });
     }
   }
 ]);
