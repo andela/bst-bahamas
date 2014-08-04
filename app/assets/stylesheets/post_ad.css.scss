@@ -45,6 +45,12 @@
     .descr {
         padding-bottom: 12%;
     }
+
+    .btn-delete {
+        background-color: red;
+        border-color: red;
+        float: right;
+    }
 }
 
 @media (max-width:768px), (max-width:1024px)
