@@ -38,7 +38,7 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       show: {
         method: 'GET'
       },
-      delete:{
+      delete_ad:{
         method:'DELETE'
       }
     });
@@ -106,6 +106,11 @@ myApp.factory('AppService', ['$resource', '$http', 'Auth',
       },
       getPaymentParams : function(params) {
         return paymentParams;
+      },
+      deleteAd : function(params,successCallback, errorCallback){
+        myAds.delete(params,successCallback, errorCallback);
       }
+        
+      
     }
   }]);
