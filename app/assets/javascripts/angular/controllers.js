@@ -80,6 +80,7 @@ myApp.controller('IndexCtrl', [
 
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
+        $scope.currentUser = null;
         $scope.loggedIn = false;
         $location.path('/index');
       }, function(error) {
@@ -235,7 +236,7 @@ myApp.controller('LoginCtrl', [
 
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
-          console.log(user);
+          $scope.$parent.currentUser = user;
           $location.path('/home');
       }, function(error) {
           console.log(error);
@@ -256,7 +257,7 @@ myApp.controller('SignUpCtrl', [
       };
 
       Auth.register(credentials).then(function(registeredUser) {
-        console.log(registeredUser);
+        $scope.$parent.currentUser = registeredUser;
         $scope.$emit('login');
         $location.path('/home');
   		}, function(error) {
