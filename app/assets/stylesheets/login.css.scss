@@ -102,6 +102,22 @@ body
     }
 }
 
+.forgot-password {
+    height: 20%;
+    width: 25%;
+    margin: auto;
+    border: 4px solid #CECECE;
+    padding: 2%;
+    border-radius: 7px;
+    position: relative;
+    top: 100px;
+    .title, .input {
+        margin-bottom: 5%;
+    }
+    input {
+        width: 100%;
+    }
+}
 
 @media (max-width:768px), (max-width:1024px)
 {

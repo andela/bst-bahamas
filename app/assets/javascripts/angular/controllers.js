@@ -80,6 +80,7 @@ myApp.controller('IndexCtrl', [
 
     $scope.logout = function() {
       Auth.logout().then(function(oldUser) {
+        $scope.currentUser = null;
         $scope.loggedIn = false;
         $location.path('/index');
       }, function(error) {
@@ -222,7 +223,7 @@ myApp.controller('HomeCtrl', [
 ]);
 
 myApp.controller('LoginCtrl', [
-  '$scope', '$location', 'Auth', function($scope, $location, Auth) {
+  '$scope', '$location', 'Auth', 'AppService', function($scope, $location, Auth, AppService) {
     $scope.login = function() {
       var credentials = {
           email: $scope.email,
@@ -235,12 +236,27 @@ myApp.controller('LoginCtrl', [
 
       Auth.login(credentials).then(function(user) {
           $scope.$emit('login');
-          console.log(user);
+          $scope.$parent.currentUser = user;
           $location.path('/home');
       }, function(error) {
-          console.log(error);
           $scope.showError = true;
       });
+    };
+
+    $scope.forgotPassword = function() {
+      $scope.showForgotPassword = true;
+    }
+
+    $scope.resetPassword = function() {
+      var params = {email: $scope.email};
+      AppService.resetPassword(params, function(data){
+        $scope.success = true;
+        $scope.error = false;
+        $scope.showForgotPassword = false;
+      }, function(error){
+        $scope.success = false;
+        $scope.error = true;
+      })
     }
   }
 ]);
@@ -256,7 +272,7 @@ myApp.controller('SignUpCtrl', [
       };
 
       Auth.register(credentials).then(function(registeredUser) {
-        console.log(registeredUser);
+        $scope.$parent.currentUser = registeredUser;
         $scope.$emit('login');
         $location.path('/home');
   		}, function(error) {

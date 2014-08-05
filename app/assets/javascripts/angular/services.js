@@ -65,6 +65,12 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
       }
     });
 
+    var password = $resource( HOST+'users/reset_password',{},{
+      create:{
+        method:'POST'
+      }
+    });
+
     return {
       getCategories: function(successCallback, errorCallback) {
         var categoriesArray = categories.get(successCallback, errorCallback);
@@ -124,6 +130,9 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
         }).error(function(error){
           errorCallback(error);
         });
+      },
+      resetPassword: function(params, successCallback, errorCallback) {
+        password.create(params, successCallback, errorCallback);
       },
       setSelectedAdID : function(id) {
         selectedAdID =  id;
