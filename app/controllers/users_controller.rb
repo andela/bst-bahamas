@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:reset_password]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -73,6 +73,13 @@ class UsersController < ApplicationController
 
       render json: @user.errors, status: :unprocessable_entity
     end
+  end
+
+  def reset_password
+    p params
+    user = User.where(:email => params[:email]).first
+    user.send_reset_password_instructions
+    render json: {:message => "success"}, status: :ok
   end
 
   private

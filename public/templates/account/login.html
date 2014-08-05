@@ -1,8 +1,21 @@
-<div class="form">
+<div class="form" ng-hide="showForgotPassword || success">
     <div id="welcomeCont" class="headerCont"><h3 id="welcome" class="headerText">Welcome Back!</h3></div>
 	<input ng-model="email" type="email" placeholder="Email" id='mail'><br/>
 	<input ng-model="password" type="password" placeholder="Password" id='pwd'><br/>
 	<div class="login-error" ng-show="showError">Invalid username or password</div>
 	<button ng-click="login()">Sign In</button>
-    <div id="forgotPwd"><a href=''>Forgot your password?</a></div>
+    <div id="forgotPwd"><a ng-click="forgotPassword()">Forgot your password?</a></div>
+</div>
+<div ng-if="error" class="success-msg" style="background: #EFD0D0; color: #911;">Can't find that email, sorry.</div>
+<div class="forgot-password" ng-show="showForgotPassword">
+	<div class="title"><b>Forgot password</b></div>
+	<div class="text"><b>Email</b></div>
+	<div class="input"><input type="email" placeholder="Enter your email address" ng-model="email"></div>
+	<button class="btn btn-primary" ng-click="resetPassword()" ng-disabled="email == null">Submit</button>
+</div>
+<div class="forgot-password" ng-if="success">
+	<div class="title">Password reset confirmation sent!</div>
+	<div>
+		We've sent an email to <b>{{email}}</b> containing a temporary link that will allow you to reset your password for the next 24 hours.
+	</div>
 </div>
