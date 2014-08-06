@@ -148,6 +148,8 @@ myApp.controller('IndexCtrl', [
     {
       $scope.showSpinner = true;
       AppService.getClassifiedAd({'id':id}, function(data){
+        $scope.category = null;
+        $scope.sub_category = null;
         $scope.selectedAd = data;
         $scope.showSpinner = false;
         $scope.selected = "selected"
