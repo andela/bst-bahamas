@@ -176,8 +176,8 @@
         .zoomed
         {
             position:absolute;
-            top:0;
-            left:0;
+            top:30px;
+            left:50px;
             width:80%;
             height:300px;
             z-index:505;
@@ -377,6 +377,8 @@ a.selected {
             .zoomed
             {
                 width:100%;
+                top:0;
+                left:0;
             }
         }
         
