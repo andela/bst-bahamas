@@ -12,6 +12,11 @@
                 </div>
             </div>
             <hr>
+            <div class="sort-dropdown">
+                <span>Sort by:</span>
+                <select ng-options='option.name for option in sortByOptions' ng-model="$parent.sortBy" ng-change="search()">
+                </select>
+            </div>
         </div>
     </div>
 

@@ -41,9 +41,7 @@
         padding-top:20px;
         border-right:#E0E1E4;
         font-family:Karla;
-        /*padding:0 10px 0 10px;*/
         padding-left:10px;
-        /* temporary fix*/
         height: 700px;
         background: #E0E1E4;
 
@@ -62,6 +60,11 @@
         hr
         {
             border-color:#999;
+        }
+
+        select {
+            width: 80%;
+            color: #FFF;
         }
     }
 }
@@ -172,7 +175,7 @@
             }
 
         }
-        
+
         .zoomed
         {
             position:absolute;
@@ -182,7 +185,7 @@
             height:300px;
             z-index:505;
 
-            & img 
+            & img
             {
                 z-index:505;
                 position:relative;
@@ -190,7 +193,7 @@
                 width:100%;
             }
         }
-        
+
         #contactInfo
         {
             width:100%;
@@ -279,7 +282,7 @@ a.selected {
     #mainCnt
     {
         margin: 0 !important; //center the ads
-        
+
         .featured
         {
             display:none;
@@ -365,7 +368,7 @@ a.selected {
     {
         display:none;
     }
-    
+
     #container
     {
 
@@ -381,7 +384,7 @@ a.selected {
                 left:0;
             }
         }
-        
+
         #descrCont
         {
             width:90%;

@@ -12,6 +12,13 @@ myApp.controller('IndexCtrl', [
     $scope.pagination.per = 25;
     $scope.totalItems = 25;
     $scope.menuOpened = false;
+    $scope.sortByOptions = [
+      {name: "Date Posted (High)", value: "created_at DESC"},
+      {name: "Date Posted (Low)", value: "created_at ASC"},
+      {name: "Price (High)", value: "price DESC"},
+      {name: "Price (Low)", value: "price ASC"}
+    ];
+    $scope.sortBy = $scope.sortByOptions[0];
 
     $scope.locationHash = {};
     $scope.toggle = function()
@@ -48,7 +55,6 @@ myApp.controller('IndexCtrl', [
       });
       angular.forEach($scope.locations, function(location){
         $scope.locationHash[location.id] = location.name;
-
       });
 
     },function(error) {
@@ -62,6 +68,7 @@ myApp.controller('IndexCtrl', [
       if ($scope.location) params.location_id = $scope.location.id;
       if ($scope.category) params.category_id = $scope.category.id;
       if ($scope.subCategory) params.sub_category_id = $scope.subCategory.id;
+      if ($scope.sortBy) params.sort_by = $scope.sortBy.value;
 
       $scope.showSpinner = true;
       AppService.searchClassifiedAds(params, function(data){
