@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'classified_ads/random_pics'
   get 'classified_ads/featured'
   post 'users/reset_password'
+  put 'users/update_password'
 
   resources :users do
     resources :classified_ads
@@ -21,5 +22,4 @@ Rails.application.routes.draw do
   resources :tags,  :only => [:index]
   resources :charges,  :only => [:create]
 
-  # match "/*path" => redirect("/%{path}"), via: :all
 end

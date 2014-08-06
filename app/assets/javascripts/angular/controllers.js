@@ -245,7 +245,7 @@ myApp.controller('LoginCtrl', [
 
     $scope.forgotPassword = function() {
       $scope.showForgotPassword = true;
-    }
+    };
 
     $scope.resetPassword = function() {
       var params = {email: $scope.email};
@@ -256,6 +256,19 @@ myApp.controller('LoginCtrl', [
       }, function(error){
         $scope.success = false;
         $scope.error = true;
+      })
+    };
+
+    $scope.updatePassword = function() {
+      var params = {
+        reset_password_token: $location.search()['reset_password_token'],
+        password: $scope.password,
+        password_confirmation: $scope.passwordConfirmation
+      }
+      AppService.updatePassword(params, function(data){
+        $scope.success = true;
+      }, function(error){
+        $scope.errors = error.data.errors;
       })
     }
   }

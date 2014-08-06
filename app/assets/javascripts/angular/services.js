@@ -65,7 +65,13 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
       }
     });
 
-    var password = $resource( HOST+'users/reset_password',{},{
+    var password = $resource( HOST+'users/update_password',{},{
+      update:{
+        method:'PUT'
+      }
+    });
+
+    var resetPassword = $resource( HOST+'users/reset_password',{},{
       create:{
         method:'POST'
       }
@@ -131,8 +137,11 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
           errorCallback(error);
         });
       },
+      updatePassword: function(params, successCallback, errorCallback) {
+        password.update(params, successCallback, errorCallback);
+      },
       resetPassword: function(params, successCallback, errorCallback) {
-        password.create(params, successCallback, errorCallback);
+        resetPassword.create(params, successCallback, errorCallback);
       },
       setSelectedAdID : function(id) {
         selectedAdID =  id;
