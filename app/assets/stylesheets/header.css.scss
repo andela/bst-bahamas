@@ -193,6 +193,11 @@
         #banner
         {
             padding:0 !important;
+            
+            & h4
+            {
+                text-align:center;
+            }
         }
 
         #accNav //hidden from view
@@ -236,5 +241,4 @@
     {
         display:none; //don't want to see on page. Put on side bar
     }
-
 }

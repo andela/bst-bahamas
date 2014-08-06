@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-2 hidden-xs">
+    <div class="col-md-2 col-sm-2 hidden-xs">
         <div class="featured">
             <h4 class="sidePanelTitle">{{category.name}}</h4>
             <div ng-repeat="_subCategory in category.sub_category">
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-md-offset-1" ng-switch on='selected'>
+    <div class="col-md-9 col-sm-9 col-sm-offset-1 col-md-offset-1" ng-switch on='selected'>
         <div class="breadcrumb">
             <a ng-if="category == null && selectedAd != null" ng-click="clickCategory(null)">All Categories</a>
             <a ng-click="clickCategory(category)">{{category.name}}</a>
@@ -64,7 +64,7 @@
         <script type="text/ng-template" id="selected_ad">
             <div id="container" ng-model="selectedAd">
                 <div id="infoCont">
-                    <div id="itemImg">
+                    <div class="itemImg" id="imgCont">
                         <img src={{selectedAd.photo_medium_url}} id="default"/>
                     </div>
                     <div id="contactInfo">

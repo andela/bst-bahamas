@@ -17,15 +17,15 @@
 <side-menu></side-menu>
 <div class="header">
     <div class="row">
-        <div id="company" class="col-md-2 col-xs-12" ng-click="goToHome()">
+        <div id="company" class="col-md-2 col-sm-2" ng-click="goToHome()">
             <h2 id="name">BSTBahamas</h2>
         </div>
-        <div class="col-md-3  col-xs-12">
+        <div class="col-md-3  col-sm-offset-1 col-sm-3">
             <div id="banner">
                 <h4>Create FREE local classified ads</h4>
             </div>
         </div>
-        <div id="accNav" class="col-md-7 hidden-xs">
+        <div id="accNav" class="col-md-6 col-sm-6 hidden-xs">
             <div class="nav-links">
                 <ul id="nav">
                     <span ng-show='loggedIn == false'>
@@ -42,17 +42,17 @@
         </div>
     </div>
     <div class="row" id="searchbar">
-        <div class="col-md-5" id="search">
+        <div class="col-md-5 col-sm-5" id="search">
             <input type="text" ng-model="query" placeholder="Search" ng-keyup="$event.keyCode == 13 ? doSearch() : null"/>
             <button class="btn btn-primary btn-md" ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span></button>
         </div>
-        <div class="col-md-1 hidden-xs"></div>
-        <div class="col-md-3 customSel" >
+        <div class="col-md-1 col-sm-1 hidden-xs"></div>
+        <div class="col-md-3 col-sm-3 customSel" >
             <select ng-options='category.name for category in categories' ng-model="category" id="category" ng-change="selectCategory()">
                 <option value="" selected>All Categories</option>
             </select>
         </div>
-        <div class="col-md-3 customSel">
+        <div class="col-md-3 col-sm-3 customSel">
             <select ng-options="location.name for location in locations" ng-model="location" ng-change="selectLocation()">
                 <option value="" selected>All Locations</option>
             </select>
@@ -62,10 +62,10 @@
 
 <div class="row" id="mainCnt">
 
-    <div id="view" class="col-md-10 col-xs-12" ng-view>
+    <div id="view" class="col-md-10 col-sm-10" ng-view>
       <%= yield %>
     </div>
-    <div id="adsense" class="col-md-2 hidden-xs" my-ad-sense ng-if="showGoogleAds">
+    <div id="adsense" class="col-md-2 col-sm-2 hidden-xs" my-ad-sense ng-if="showGoogleAds">
   <!-- Google AdSense -->
       <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"

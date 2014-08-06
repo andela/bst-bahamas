@@ -79,7 +79,7 @@
         {
             float:left;
             height:30%;
-            width:22%;
+            width:180px;
             text-align:center;
             margin: 10px 10px 10px 0;
             border:1px solid #cecece;
@@ -150,7 +150,7 @@
 /* when specific ad is selected */
 #container
 {
-    width:85%;
+    width:100%;
     height:auto;
 
     #infoCont
@@ -158,30 +158,39 @@
         width:40%;
         float:left;
 
-        #itemImg
+        .itemImg
         {
-            height:65%;
+            height:200px;
             width:100%;
             margin-bottom:4%;
             img
             {
                 cursor:pointer;
-                height:25%;
+                height:100%;
                 width:100%;
                 border-radius:5px;
             }
-            .zoomed
-            {
-                position:absolute;
-                height:400px;
-                width:600px;
-                z-index:505;
-                top:10px;
-                left:100px;
-            }
 
         }
+        
+        .zoomed
+        {
+            position:absolute;
+            top:0;
+            left:0;
+            width:80%;
+            height:300px;
+            z-index:505;
 
+            & img 
+            {
+                z-index:505;
+                position:relative;
+                height:100%;
+                width:100%;
+            }
+        }
+        
         #contactInfo
         {
             width:100%;
@@ -256,7 +265,7 @@ a.selected {
 #adsense
 {
     position:relative;
-    top:100px;
+    top:110px;
     padding:0 !important;
 }
 
@@ -270,6 +279,11 @@ a.selected {
     #mainCnt
     {
         margin: 0 !important; //center the ads
+        
+        .featured
+        {
+            display:none;
+        }
     }
 
     #sideMenu
@@ -342,7 +356,7 @@ a.selected {
     #adCont .adInfo > div
     {
         float:none;
-        width:80%;
+        width:180px;
         margin:auto;
         margin-bottom:10px;
     }
@@ -351,36 +365,26 @@ a.selected {
     {
         display:none;
     }
-
+    
     #container
     {
-        width:95%;
 
         #infoCont
         {
-            display:block;
-            width:100%;
-
-            #itemImg
+            width:90%;
+            margin:auto;
+            float:none;
+            .zoomed
             {
-                & img
-                {
-                    height:225px;
-                }
-
-                .zoomed
-                {
-                    height:300px;
-                    width:310px;
-                    left:0;
-                    border-radius:0;
-                }
+                width:100%;
             }
         }
-
+        
         #descrCont
         {
-            width:100%;
+            width:90%;
+            float:none;
+            margin:auto;
         }
     }
 }

@@ -25,17 +25,18 @@ myApp.directive('myAdSense', function() {
         templateUrl:'selected_ad',
         link:function(scope,element,attrs)
         {
-            var adImg = document.querySelector('#default');
+            var adImg = document.querySelector('#imgCont');
             var veil = document.querySelector('#veil');
             
             adImg.addEventListener('click', function(event){
                 adImg.classList.add('zoomed');
+                adImg.classList.remove('itemImg');
                 veil.style.display = 'block';
             });
             
             veil.addEventListener('click', function(event){
                 adImg.classList.remove('zoomed');
-                
+                adImg.classList.add('itemImg');
                 if(veil.style.display !== 'none')
                 {
                     veil.style.display = 'none';
