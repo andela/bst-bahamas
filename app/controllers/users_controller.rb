@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:reset_password, :update_password]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users
   # GET /users.json
   def index
@@ -52,26 +51,28 @@ class UsersController < ApplicationController
     render json: {}, status: :ok
   end
 
-  def log_in
-    @user = User.find_by_email(params[:user][:email])
-    if @user != nil && @user.valid_password?(params[:user][:password])
-      sign_in @user, :bypass => true
-      render json: @user, status: :ok
-    else
-      render json: {}, status: 401
-    end
+  def reset_password
+    user = User.where(:email => params[:email]).first
+    user.send_reset_password_instructions
+    render json: {:message => "success"}, status: :ok
   end
 
-  def register
-    @user = User.new()
-    @user.username
-
-    if @user.save
-      sign_in @user, :bypass => true
-      render json: @user, status: 201
+  def update_password
+    encrypted_token = Devise.token_generator.digest(self, :reset_password_token, params[:reset_password_token])
+    user = User.where(:reset_password_token => encrypted_token).first
+    if user
+      user.password = params[:password];
+      user.password_confirmation = params[:password_confirmation]
+      if user.valid?
+        user.reset_password_token = nil;
+        user.reset_password_sent_at = nil;
+        user.save
+        render json: {:message => "success"}, status: :ok
+      else
+        render json: {:errors => user.errors}, status: 500
+      end
     else
-
-      render json: @user.errors, status: :unprocessable_entity
+      render json: {:error => "User not found"}, status: 404
     end
   end
 

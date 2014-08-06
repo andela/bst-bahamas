@@ -28,15 +28,18 @@
         <div id="accNav" class="col-md-6 col-sm-6 hidden-xs">
             <div class="nav-links">
                 <ul id="nav">
-                    <span ng-show='loggedIn == false'>
+                    <span ng-if='!loggedIn'>
                         <li id="login"><a href="#login">Login</a></li>
                         <li id="signup"><a href="#sign_up">Register</a></li>
                     </span>
-                    <span ng-show='loggedIn ==  true'>
-                      <li id="my_ads"><a href="#my_ads">My Ads</a></li>
+                    <span ng-if='loggedIn'>
+                      <li class="username">{{currentUser.email}}</li>
                       <li id="logout" ng-click="logout()"><a href="#">Logout</a></li>
                     </span>
-                    <p><li id="postAd"><a href="#post_ad">Post Ad Free</a></li></p>
+                    <p>
+                      <li id="postAd" ng-class="{right: !loggedIn}"><a href="#post_ad">Post Ad Free</a></li>
+                      <li id="postAd" ng-if="loggedIn"><a href="#my_ads">My Ads</a></li>
+                    </p>
                 </ul>
             </div>
         </div>

@@ -39,6 +39,10 @@ myApp.config([
       templateUrl: '../templates/stripe/payment_form.html',
       controller: 'PaymentCtrl'
     }).
+    when('/reset_password', {
+      templateUrl: '../templates/account/reset_password.html',
+      controller: 'LoginCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     });
