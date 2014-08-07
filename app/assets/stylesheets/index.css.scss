@@ -65,6 +65,21 @@
         select {
             width: 80%;
             color: #FFF;
+            outline:none;
+            border:none;
+            height:35px;
+            border-radius:2px;
+            padding-left:15px;
+            background-color:#1C9CBA;
+            background-image:url('ficons/arrow-down.png');
+            background-repeat:no-repeat;
+            background-size:20px;
+            padding-right:5px;
+            background-position:right;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            -ms-appearance:none;
+            cursor:pointer;
         }
     }
 }
