@@ -360,16 +360,11 @@ myApp.controller('PostAdCtrl', [
         } else {
           $scope.loading = true;
           $('#veil').show();
-          $upload.upload({
-            url: 'http://bst-bahamas.herokuapp.com/classified_ads',
-            method: 'POST',
-            data: params,
-            photo: params.photo // or list of files ($files) for html5 only
-          }).success(function(data, status, headers, config) {
-            $scope.success = true;
+          AppService.createAd(params, function(data){
+            scope.success = true;
             $scope.loading = false;
             $('#veil').hide();
-          }).error(function(error){
+          }, function(error){
             $scope.showError = true;
             $scope.loading = false;
             $('#veil').hide();
@@ -380,6 +375,8 @@ myApp.controller('PostAdCtrl', [
 
     $scope.onFileSelect = function($files) {
       params.photo = $files[0];
+      if ($files[1]) params.photo_1 = $files[1];
+      if ($files[2]) params.photo_2 = $files[2];
     };
   }
 ]);
@@ -488,6 +485,8 @@ myApp.controller('EditAdCtrl', [
 
     $scope.onFileSelect = function($files) {
       params.photo = $files[0];
+      if ($files[1]) params.photo_1 = $files[1];
+      if ($files[2]) params.photo_2 = $files[2];
     };
 
     $scope.delete = function() {
