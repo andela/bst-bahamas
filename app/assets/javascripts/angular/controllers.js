@@ -144,14 +144,30 @@ myApp.controller('IndexCtrl', [
         $scope.loggedIn = false;
     });
 
+    $scope.checkImgLinks = function(link_names)
+    {
+        $scope.selectedAdImgs = [];
+        var regex = new RegExp('missing');
+        //link_name corresponds to photo_medium_url, photo_1_medium_url
+        link_names.forEach(function(link_name){
+            var link = $scope.selectedAd[link_name] ? $scope.selectedAd[link_name] : undefined;
+            if(!regex.test(link))
+            {
+                $scope.selectedAdImgs.push(link);
+            }
+        });
+    }
+    
     $scope.showAd = function(id)
     {
+      
       $scope.showSpinner = true;
       AppService.getClassifiedAd({'id':id}, function(data){
         $scope.category = null;
         $scope.sub_category = null;
         $scope.selectedAd = data;
         $scope.showSpinner = false;
+        $scope.checkImgLinks.call(null, ['photo_medium_url','photo_1_medium_url','photo_2_medium_url']);
         $scope.selected = "selected"
       }, function(error){
         console.error(error);
