@@ -118,7 +118,7 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
           url: HOST+'classified_ads',
           method: 'POST',
           data: params,
-          photo: params.photo
+          photo: [params.photo, params.photo_1, params.photo_2]
         }).success(function(data, status, headers, config) {
           successCallback(data)
         }).error(function(error){
@@ -130,7 +130,7 @@ myApp.factory('AppService', ['$resource', '$http', '$upload', 'Auth',
           url: HOST+'classified_ads/'+params.id,
           method: 'PUT',
           data: params,
-          photo: params.photo
+          photo: [params.photo, params.photo_1, params.photo_2]
         }).success(function(data, status, headers, config) {
           successCallback(data)
         }).error(function(error){

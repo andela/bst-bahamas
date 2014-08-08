@@ -157,10 +157,10 @@ myApp.controller('IndexCtrl', [
             }
         });
     }
-    
+
     $scope.showAd = function(id)
     {
-      
+
       $scope.showSpinner = true;
       AppService.getClassifiedAd({'id':id}, function(data){
         $scope.category = null;
@@ -377,10 +377,11 @@ myApp.controller('PostAdCtrl', [
           $scope.loading = true;
           $('#veil').show();
           AppService.createAd(params, function(data){
-            scope.success = true;
+            $scope.success = true;
             $scope.loading = false;
             $('#veil').hide();
           }, function(error){
+            $scope.errors = error.errors;
             $scope.showError = true;
             $scope.loading = false;
             $('#veil').hide();
@@ -494,6 +495,7 @@ myApp.controller('EditAdCtrl', [
             $scope.loading = false;
             $('#veil').hide();
             $scope.errorMsg = "An error occurred while attempting to update your ad.";
+            $scope.errors = error.errors;
           });
         }
       }
