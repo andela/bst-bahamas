@@ -28,7 +28,7 @@ myApp.directive('myAdSense', function() {
             var adImg = document.querySelector('#imgCont');
             var veil = document.querySelector('#veil');
             
-            adImg.addEventListener('click', function(event){
+            adImg.addEventListener('dblclick', function(event){
                 adImg.classList.add('zoomed');
                 adImg.classList.remove('itemImg');
                 veil.style.display = 'block';
