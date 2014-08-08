@@ -4,7 +4,7 @@
 	<div class="login-error" ng-repeat="error in errors.email">Email {{error}}</div>
 	<input ng-model="password" type="password" placeholder="Password" id='pwd'>
 	<div class="login-error" ng-repeat="error in errors.password">Password {{error}}</div>
-	<input ng-model="passwordConfirmation" type="password" placeholder="Confirm Password">
+	<input ng-model="passwordConfirmation" type="password" placeholder="Confirm Password" class="pwdConf">
 	<div class="login-error" ng-repeat="error in errors.password_confirmation">Confirmation {{error}}</div>
 	<button ng-click="signUp()">Register</button>
 </div>

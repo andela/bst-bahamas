@@ -56,7 +56,7 @@
                             <span id="price">{{ad.price|currency}}</span>
                         </div>
                         <div class="adImg">
-                            <img src={{ad.photo_medium_url}}/>
+                            <img ng-src={{ad.photo_medium_url}}/>
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
             <div id="container" ng-model="selectedAd">
                 <div id="infoCont">
                     <div class="itemImg" id="imgCont">
-                        <img src={{selectedAd.photo_medium_url}} id="default"/>
+                        <img ng-src={{selectedAd.photo_medium_url}} id="default"/>
                     </div>
                     <div id="contactInfo">
                         <div><span class="fa fa-user"> <p>{{selectedAd.poster_name}}</p></span></div>
