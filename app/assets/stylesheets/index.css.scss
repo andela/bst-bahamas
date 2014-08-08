@@ -26,6 +26,18 @@
     display:none;
 }
 
+#stage
+{
+    position:absolute;
+    height:400px;
+    width:60%;
+    z-index:501;
+    left:20%;
+    top:20%;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+
 #mainCnt
 {
     position:relative;
@@ -236,27 +248,6 @@
             width:80%;
             height:300px;
             z-index:505;
-            
-            .rn-carousel-controls
-            {
-                display:none !important;
-            }
-            & .imgWrap
-            {
-                z-index:505;
-                position:relative;
-                height:100%;
-                width:100%;
-                
-                img 
-                {
-                    width:100%;
-                    height:100%;
-                    float:left;
-                }
-                
-
-            }
         }
 
         #contactInfo
@@ -346,6 +337,12 @@ a.selected {
 }
 @media (max-width:768px)
 {
+    #stage
+    {
+        width:100%;   
+        left:0;
+    }
+    
     #mainCnt
     {
         margin: 0 !important; //center the ads
