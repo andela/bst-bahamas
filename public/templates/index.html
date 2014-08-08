@@ -56,7 +56,7 @@
                             <span id="price">{{ad.price|currency}}</span>
                         </div>
                         <div class="adImg">
-                            <img ng-src={{ad.photo_medium_url}}/>
+                            <img ng-src={{ad.photo_medium_url}} />
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                         <ul rn-carousel rn-carousel-control = "true">
                           <li ng-repeat="image in selectedAdImgs">
                             <div class="imgWrap">
-                                <img ng-src={{image}} >
+                                <img ng-src={{image}} class='adpic'>
                             </div>
                           </li>
                         </ul>
