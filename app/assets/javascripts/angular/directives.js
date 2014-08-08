@@ -18,30 +18,46 @@ myApp.directive('myAdSense', function() {
         }
     };
 })
-.directive('selectedAd', function(){
+.directive('selectedAd', function($timeout){
+    function attachListenersTo(els)
+    {
+        var _els = Array.prototype.slice.call(els);
+    
+        if(_els.length > 0)
+        {
+            _els.forEach(function(el){
+                el.addEventListener('click', function(){
+                    zoomImage(el.src);
+                });
+            });
+        }
+    }
+    
+    function zoomImage(src)
+    {
+        var veil = document.querySelector('#veil');
+        var stage = document.querySelector('#stage');
+        veil.style.display = 'inline-block';
+        stage.style.backgroundImage = 'url('+src+')';
+        
+        veil.addEventListener('click', function(){
+            //hide veil when clicked and remove pic
+            veil.style.display = "none";
+            stage.style.backgroundImage = "";
+        });
+    }
+    
     return {
         restrict:'EAC',
         replace:true,
         templateUrl:'selected_ad',
         link:function(scope,element,attrs)
         {
-            var adImg = document.querySelector('#imgCont');
-            var veil = document.querySelector('#veil');
-            
-            adImg.addEventListener('dblclick', function(event){
-                adImg.classList.add('zoomed');
-                adImg.classList.remove('itemImg');
-                veil.style.display = 'block';
-            });
-            
-            veil.addEventListener('click', function(event){
-                adImg.classList.remove('zoomed');
-                adImg.classList.add('itemImg');
-                if(veil.style.display !== 'none')
-                {
-                    veil.style.display = 'none';
-                }
-            });
+            //timeout to trigger another digest cycle b/c adpic was returning null
+            $timeout(function(){
+                var adpic = document.querySelectorAll('.adpic');
+                attachListenersTo(adpic);
+            },0);
         }
     };
 })
@@ -52,6 +68,7 @@ myApp.directive('myAdSense', function() {
         templateUrl:'sideMenuDir',
         replace:true,
         link:function(scope,element,attrs){
+
             var trigger = document.querySelector('#trigger');
             var sideMenu = document.querySelector('#sideMenu');
             trigger.addEventListener('click', function(event){
