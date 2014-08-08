@@ -58,7 +58,8 @@
 
         hr
         {
-            border-color:#999;
+            margin-right: 20px;
+            border-top: 1px dotted #FFFFFF;
         }
 
         select {
@@ -126,6 +127,9 @@
                         {
                             font-size: 12px;
                             font-weight: bold;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
                         }
                     }
 
