@@ -1,5 +1,5 @@
 myApp.controller('IndexCtrl', [
-  '$scope', '$location', 'AppService', 'Auth', function($scope, $location, AppService, Auth) {
+  '$scope', '$location', 'AppService', 'Auth',function($scope, $location, AppService, Auth) {
     $scope.categories =  [];
     $scope.suggestions = [];
     $scope.classifiedAds = [];
@@ -147,7 +147,7 @@ myApp.controller('IndexCtrl', [
     $scope.checkImgLinks = function(link_names)
     {
         $scope.selectedAdImgs = [];
-        var regex = new RegExp('missing');
+        var regex = new RegExp('missing.png');
         //link_name corresponds to photo_medium_url, photo_1_medium_url
         link_names.forEach(function(link_name){
             var link = $scope.selectedAd[link_name] ? $scope.selectedAd[link_name] : undefined;
