@@ -192,9 +192,16 @@ myApp.controller('HomeCtrl', [
   '$scope', '$location', 'AppService', function($scope, $location, AppService) {
     $scope.featuredAds = [];
     $scope.currentPage = 1;
-    $scope.$parent.showGoogleAds = false;
     $scope.numSlides = 0;
     $scope.loading = true;
+    $scope.categoryIcons = {
+      Vehicles: "fa fa-car",
+      Electronics: "fa fa-mobile",
+      Jewellery: "fa fa-trophy",
+      Services: "fa fa-wrench",
+      Housing: "fa fa-home",
+      Miscellaneous: "fa fa-suitcase"
+    }
 
     var getFeaturedAds = function() {
       var params = {
