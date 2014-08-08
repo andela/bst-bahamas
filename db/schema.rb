@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730194038) do
+ActiveRecord::Schema.define(version: 20140807173500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140730194038) do
     t.integer  "user_id"
     t.integer  "location_id"
     t.string   "description"
-    t.string   "keywords",            default: [], array: true
+    t.string   "keywords",             default: [], array: true
     t.string   "poster_name"
     t.string   "poster_phone_no"
     t.date     "expiry_date"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 20140730194038) do
     t.string   "type"
     t.integer  "price"
     t.string   "category_id"
+    t.string   "photo_1_file_name"
+    t.string   "photo_1_content_type"
+    t.integer  "photo_1_file_size"
+    t.datetime "photo_1_updated_at"
+    t.string   "photo_2_file_name"
+    t.string   "photo_2_content_type"
+    t.integer  "photo_2_file_size"
+    t.datetime "photo_2_updated_at"
   end
 
   create_table "locations", force: true do |t|
