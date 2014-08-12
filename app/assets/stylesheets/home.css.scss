@@ -60,6 +60,19 @@ html, body {
 			vertical-align: top;
 			text-decoration: underline;
 			cursor: pointer;
+            
+            #iconwrap
+            {
+                width:7%;
+                float:left;
+            }
+            
+            #categorywrap
+            {
+                width:88%;
+                float:left;
+            }
+            
 			.sub-category {
 				text-decoration: underline;
 				cursor: pointer;
@@ -76,4 +89,12 @@ html, body {
 			}
 		}
 	}
+}
+
+@media (max-width:768px)
+{
+    .category
+    {
+        width:200px !important;
+    }
 }
