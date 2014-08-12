@@ -68,7 +68,7 @@
 
                     #postAd
                     {
-                        background-color:#455266;
+                        background-color:#F9E04C;
                         width:100%;
                         text-align:center;
                     }
@@ -129,6 +129,10 @@
         -moz-appearance:none;
         -ms-appearance:none;
         cursor:pointer;
+    }
+
+    .logo, .banner {
+      color: #000;
     }
 }
 
