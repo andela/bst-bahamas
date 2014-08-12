@@ -14,15 +14,15 @@ myApp.directive('myAdSense', function() {
         replace:true,
         templateUrl:'classified_ad',
         link:function(scope,element,attrs){
-            
+
         }
     };
 })
-.directive('selectedAd', function($timeout){
+.directive('selectedAd', ['$timeout', function($timeout){
     function attachListenersTo(els)
     {
         var _els = Array.prototype.slice.call(els);
-    
+
         if(_els.length > 0)
         {
             _els.forEach(function(el){
@@ -32,21 +32,21 @@ myApp.directive('myAdSense', function() {
             });
         }
     }
-    
+
     function zoomImage(src)
     {
         var veil = document.querySelector('#veil');
         var stage = document.querySelector('#stage');
         veil.style.display = 'inline-block';
         stage.style.backgroundImage = 'url('+src+')';
-        
+
         veil.addEventListener('click', function(){
             //hide veil when clicked and remove pic
             veil.style.display = "none";
             stage.style.backgroundImage = "";
         });
     }
-    
+
     return {
         restrict:'EAC',
         replace:true,
@@ -60,9 +60,9 @@ myApp.directive('myAdSense', function() {
             },0);
         }
     };
-})
+}])
 .directive('sideMenu',function(){
-    
+
     return {
         restrict:'EAC',
         templateUrl:'sideMenuDir',
@@ -78,14 +78,14 @@ myApp.directive('myAdSense', function() {
                     $(this).animate({left:'60%'},500);
                     $(sideMenu).animate({left:'0'},500);
                 }
-                
+
                 if(scope.menuOpened === false)
                 {
                     $(this).animate({left:'0'},500);
                     $(sideMenu).animate({left:'-60%'},500);
                 }
             });
-            
+
             document.addEventListener('click', function(event){
                 scope.menuOpened = false;
                 $(trigger).animate({left:'0'},500);
