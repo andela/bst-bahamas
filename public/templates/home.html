@@ -1,5 +1,5 @@
 <div class="home-page" ng-if="!loading">
-	<div class="disclaimer">Featured Ads</div>
+	<div class="disclaimer hidden-xs"><h4>FEATURED ADS</h4></div>
 	<ul rn-carousel rn-carousel-control="true" class="hidden-xs">
 	  <li ng-repeat="x in range(numSlides)">
 	  	<div ng-repeat="y in range(10) track by $index" class="item" ng-if="featuredAds[x+y] != null" ng-click="showAd(featuredAds[x+y].id)">
@@ -8,6 +8,8 @@
 	  	</div>
 	  </li>
 	</ul>
+    <br>
+    <div class="panel"></div>
 	<div class="categories">
 		<div class="category" ng-repeat="category in categories">
             <div id="iconwrap">
@@ -15,7 +17,7 @@
             </div>
             <div id="categorywrap">
                 <div class="category-name" ng-click="clickCategory(category)">
-                    <b>{{category.name}}</b>
+                    <span style="font-size:1.5em;"><b>{{category.name}}</b></span>
                 </div>
                 <div class="sub-category" ng-repeat="subCategory in category.sub_category" ng-click="clickSubCategory(category, subCategory)">
                     {{subCategory.name}}

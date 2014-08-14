@@ -5,6 +5,12 @@
 	width: 60%;
 	border: 2px solid #cccccc !important;
 	border-radius: 5px;
+    
+    input
+    {
+        border-radius:4px;
+    }
+    
     .badge
     {
         background-color:#1C9CBA;
@@ -74,7 +80,7 @@
     {
         width:100%;
         margin: 10% auto !important;
-
+        
         .attr
         {
             width:100%;
@@ -90,7 +96,6 @@
             {
                 width:80%;
                 float:left;
-
                 textarea
                 {
                     width:100%;

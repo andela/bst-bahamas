@@ -6,7 +6,7 @@
   <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Karla' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -20,15 +20,15 @@
 <side-menu></side-menu>
 <div class="header">
     <div class="row">
-        <div id="company" class="col-md-2 col-sm-2" ng-click="goToHome()">
+        <div id="company" class="col-md-3 col-sm-4" ng-click="goToHome()">
             <h2 id="logo">BSTBahamas</h2>
         </div>
-        <div class="col-md-3  col-sm-offset-1 col-sm-3">
+        <div class="col-md-5 col-sm-4">
             <div id="banner">
-                <h4>Create FREE local classified ads</h4>
+                <h3>Create <b>FREE</b> Bahamaian classified ads</h3>
             </div>
         </div>
-        <div id="accNav" class="col-md-6 col-sm-6 hidden-xs">
+        <div id="accNav" class="col-md-4 hidden-xs">
             <div class="nav-links">
                 <ul id="nav">
                     <span ng-if='!loggedIn'>

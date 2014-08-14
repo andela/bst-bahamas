@@ -1,8 +1,3 @@
-*
-{
-    /*font-family:Karla;*/
-}
-
 .row
 {
     margin:0 !important; //stop scrolling on x
@@ -22,7 +17,7 @@
     width:100%;
     z-index:500;
     background-color:#222;
-    -webkit-filter:opacity(0.98);
+    -webkit-filter:opacity(0.99);
     display:none;
 }
 
@@ -52,7 +47,6 @@
         background-color: #e5e7e9;
         padding-top: 20px;
         border-right: #e5e7e9;
-        font-family: Karla;
         padding-left: 20px;
         height: 1200px;
 
@@ -81,7 +75,7 @@
             border:none;
             height:35px;
             border-radius:2px;
-            padding-left:15px;
+            padding-left:5px;
             background-color:#1C9CBA;
             background-image:url('ficons/arrow-down.png');
             background-repeat:no-repeat;
@@ -262,6 +256,7 @@
                 p
                 {
                     display:inline;
+                    font-family:Lato,'Helvetica Nueue'
                 }
             }
         }
@@ -357,7 +352,7 @@ a.selected {
     {
         display:inline-block !important;
         position:fixed;
-        top:18%;
+        top:24%;
         padding-top:2%;
         width:60%;
         height:auto;
