@@ -27,12 +27,12 @@ html, body {
 	margin-left: 2%;
 	width: 100%;
 	.rn-carousel-slide {
-		display: inline-flex;
 		padding-left: 2%;
 		padding-right: 5%;
 		.item {
 			margin-right: 2%;
 			cursor: pointer;
+			float: left;
 		}
 		.item:hover {
 			text-decoration: underline;
@@ -61,7 +61,7 @@ html, body {
 			vertical-align: top;
 			text-decoration: underline;
 			cursor: pointer;
-            
+
             #iconwrap
             {
                 width:40px;
@@ -79,18 +79,18 @@ html, body {
                     font-size:25px;
                 }
             }
-            
+
             #categorywrap
             {
                 width:80%;
                 float:right;
-                
-                span 
+
+                span
                 {
                     line-height:1;
                 }
             }
-            
+
 			.sub-category {
 				text-decoration: underline;
 				cursor: pointer;
@@ -115,5 +115,5 @@ html, body {
     {
         width:200px !important;
     }
-    
+
 }
